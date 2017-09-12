@@ -1,0 +1,34 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway:400,500');
+@import "../../../node_modules/normalize-scss/sass/normalize";
+@include normalize();
+@import "./_variable";
+
+
+body{
+  font-family: 'Raleway', sans-serif;
+  font-size: 1em;
+  font-weight: 400;
+  font-color: #22313F;
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  overflow: hidden;
+}
+
+
+a {
+  text-decoration: none;
+
+  &:link {
+    color: inherit;
+  }
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+
+  li {
+    list-style: none;
+  }
+}

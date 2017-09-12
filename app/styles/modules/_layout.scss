@@ -1,0 +1,31 @@
+.layout {
+  padding: 2px;
+  border: 2px solid #eee;
+  height: 660px;
+  box-sizing: border-box;
+  flex-basis: 48%;
+
+  &--setting{
+    padding: .5rem;
+    background: #2C3E50;
+
+    > span {
+      color: white;
+      display: inline-block;
+      padding: 7px;
+      cursor: pointer;
+    }
+  }
+
+  &--embedded {
+
+  }
+  &--row{
+    width: 100%;
+    padding: .3rem;
+
+    & > * {
+      font-weight: 400;
+    }
+  }
+}

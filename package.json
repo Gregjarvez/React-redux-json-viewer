@@ -1,0 +1,51 @@
+{
+  "name": "Json-object-traverser",
+  "version": "1.0.0",
+  "description": "This application parses JSON into an object and provides the ability retrieve the cahin call leading to the key.",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server --open",
+    "lint": "eslint **/*.{js,jsx} --quiet",
+    "lint:fix": "eslint --fix *.js"
+  },
+  "keywords": [],
+  "author": "Gregory Assasie",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-eslint": "^7.2.3",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "css-loader": "^0.28.7",
+    "eslint": "^4.6.1",
+    "eslint-config-airbnb": "^15.1.0",
+    "eslint-config-react": "^1.1.7",
+    "eslint-loader": "^1.9.0",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-jsx-a11y": "^6.0.2",
+    "eslint-plugin-react": "^7.3.0",
+    "extract-text-webpack-plugin": "^3.0.0",
+    "html-loader": "^0.5.1",
+    "html-webpack-plugin": "^2.30.1",
+    "jest": "^21.0.2",
+    "node-sass": "^4.5.3",
+    "sass-loader": "^6.0.6",
+    "style-loader": "^0.18.2",
+    "webpack": "^3.5.6",
+    "webpack-dev-server": "^2.7.1"
+  },
+  "dependencies": {
+    "brace": "^0.10.0",
+    "normalize-scss": "^7.0.0",
+    "prop-types": "^15.5.10",
+    "react": "^15.6.1",
+    "react-ace": "^5.2.0",
+    "react-dom": "^15.6.1",
+    "react-hot-loader": "next",
+    "react-icons": "^2.2.5"
+  }
+}

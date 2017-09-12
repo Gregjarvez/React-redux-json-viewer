@@ -1,0 +1,21 @@
+.navigation {
+  display: flex;
+  flex-direction: row;
+  height: 50px;
+  background-color: #fff;
+  box-shadow: 5px 5px 25px 5px rgba(#000, 0.1);
+  justify-content: flex-end;
+
+  //noinspection SassScssResolvedByNameOnly
+  &--pad {
+    position: relative;
+    align-self: center;
+    margin-right: 15px;
+    letter-spacing: 1.2px;
+    font-size: 1rem;
+    color: $primary-text-heading;
+    font-weight: 400;
+
+  }
+}
+

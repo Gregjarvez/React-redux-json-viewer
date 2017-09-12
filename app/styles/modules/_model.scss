@@ -1,0 +1,49 @@
+@import './isTypeString';
+
+.model {
+  flex-basis: 45%;
+  margin-left: 1.1rem;
+
+  //noinspection SassScssResolvedByNameOnly
+  &--typeCheck {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 30px;
+    background: #eee;
+    margin-right: .3rem;
+  }
+
+  &--key {
+    text-align: center;
+    font-size: $key-value-font;
+
+    &:hover {
+      color: $bright-yellow;
+      cursor: default;
+    }
+  }
+
+  &--value {
+    display: inline-block;
+    text-align: left;
+    font-size: $key-value-font;
+
+    &:focus {
+      padding: .2rem;
+      outline: none;
+      box-sizing: border-box;
+      border: 1px solid $been-edited;
+      border-radius: 3px;
+
+    }
+
+    &-string {
+      color: $isValid;
+    }
+
+    &-number {
+      color: $number-blue;
+    }
+  }
+}

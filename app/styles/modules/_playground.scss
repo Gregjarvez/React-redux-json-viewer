@@ -1,0 +1,11 @@
+.container{
+  width: 100%;
+}
+
+.app {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 20px;
+  width: 80%;
+}
