@@ -1,5 +1,4 @@
 import React from 'react';
-// noinspection JSUnresolvedVariable
 import { string, shape } from 'prop-types';
 import Copy from 'react-icons/lib/md/note-add';
 
