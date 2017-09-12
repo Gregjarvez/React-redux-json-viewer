@@ -16,7 +16,8 @@
     "jsx-a11y/href-no-hash": 0,
     "react/self-closing-comp": 2,
     "react/jsx-filename-extension": 0,
-    "arrow-body-style": 0
+    "arrow-body-style": 0,
+    "react/forbid-prop-types": 2
   }
 }
 

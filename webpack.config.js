@@ -9,7 +9,7 @@ module.exports = {
   devtool  : 'cheap-eval-source-map',
   entry    : [
     'react-hot-loader/patch',
-    'webpack-dev-server/client?http://localhost:8080/',
+    'webpack-dev-server/client?http://localhost:8080',
     'webpack/hot/only-dev-server',
     './app/index.js',
   ],
@@ -35,10 +35,10 @@ module.exports = {
     rules: [
       {
         test: /\.scss$/,
-        use : extractCssPlugins.extract({
+        use : ['css-hot-loader'].concat(extractCssPlugins.extract({
           fallback: 'style-loader',
           use     : ['css-loader', 'sass-loader'],
-        }),
+        })),
       },
       {
         enforce: 'pre',
@@ -63,6 +63,7 @@ module.exports = {
   },
   plugins  : [
     new webpack.HotModuleReplacementPlugin(),
+    new webpack.NamedModulesPlugin(),
     new extractCssPlugins('style.css'),
     new HtmlWebpackPlugin({
       filename: 'index.html',

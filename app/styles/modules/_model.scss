@@ -1,21 +1,32 @@
-@import './isTypeString';
-
 .model {
   flex-basis: 45%;
   margin-left: 1.1rem;
 
-  //noinspection SassScssResolvedByNameOnly
-  &--typeCheck {
+  &--panel {
     position: relative;
     display: inline-block;
     width: 40px;
     height: 30px;
     background: #eee;
     margin-right: .3rem;
+    text-align: center;
+    line-height: 30px;
+  }
+
+
+  &--inline {
+    display: inline-block;
+    width: -30px;
+  }
+
+  &--toggler {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: $primary-text-heading;
   }
 
   &--key {
-    text-align: center;
+    text-align: left;
     font-size: $key-value-font;
 
     &:hover {
@@ -45,5 +56,16 @@
     &-number {
       color: $number-blue;
     }
+
+    &-array {
+      color: $light-silver;
+      font-size: 17px;
+    }
+
+    &-object {
+      @extend   .model--value-array;
+      margin-left: .7rem;
+    }
   }
+
 }
