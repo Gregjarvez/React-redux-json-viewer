@@ -23,9 +23,12 @@ const Dumper = (props) => {
           height="600px"
           focus
           tabsize={2}
-          highlightActiveLine={false}
-          fontSize="15px"
+          highlightActiveLine
+          fontSize="13px"
+          value={props.json}
           onChange={props.setJsonToControllerState}
+          showPrintMargin={!true}
+          wrapEnabled
         />
       </div>
     </div>
@@ -34,6 +37,7 @@ const Dumper = (props) => {
 
 Dumper.propTypes = {
   setJsonToControllerState: PropTypes.func.isRequired,
+  json: PropTypes.string,
 };
 
 export default Dumper;

@@ -13,17 +13,19 @@
     "jest": true,
     "es6": true
   },
+  "extends": ["airbnb", "plugin:react/recommended"],
   "rules": {
-    "react/forbid-prop-types": 1,
+    "react/forbid-prop-types": 0,
     "react/self-closing-comp": "warn",
     "react/prefer-stateless-function": 0,
+    "react/require-default-props": 0,
     "jsx-a11y/href-no-hash": 0,
     "react/jsx-filename-extension": 0,
     "arrow-body-style": 0,
     "padded-blocks": "warn",
     "comma-dangle": 0,
-    "no-unused-vars": 1
-  },
-  "extends": ["airbnb", "plugin:react/recommended"]
+    "no-unused-vars": 1,
+    "no-param-reassign":1
+  }
 }
 

@@ -4,31 +4,37 @@ import Dumper from './containers/dumper';
 import Modeler from './containers/model';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      json: null,
-      isError: false,
-      isValid: true,
-    };
+  state = {
+    json: '',
+    isError: false,
+    isValid: true,
+    errorMessage: '',
+    parsedData: null
+  };
+
+  setJsonToControllerState = (json) => {
+    try {
+      JSON.parse(json);
+    } catch (err) {
+      this.setState({ errorMessage: err });
+    }
+    return this.setState({ json });
+  };
+
+  render() {
+    return (
+      <div className="container">
+        <Navigation />
+        <div className="app">
+          <Dumper
+            setJsonToControllerState={this.setJsonToControllerState}
+            json={this.state.json}
+          />
+          <Modeler />
+        </div>
+      </div>
+    );
   }
-
- setJsonToControllerState = json => this.setState({ json });
-
-
- render() {
-   return (
-     <div className="container">
-       <Navigation />
-       <div className="app">
-         <Dumper
-           setJsonToControllerState={this.setJsonToControllerState}
-         />
-         <Modeler />
-       </div>
-     </div>
-   );
- }
 }
 
 export default App;
