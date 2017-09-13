@@ -3,7 +3,6 @@ const path = require('path');
 const extractCssPlugins = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-
 module.exports = {
   context  : __dirname,
   devtool  : 'cheap-eval-source-map',
@@ -11,25 +10,25 @@ module.exports = {
     'react-hot-loader/patch',
     'webpack-dev-server/client?http://localhost:8080',
     'webpack/hot/only-dev-server',
-    './app/index.js',
+    './app/index.js'
   ],
   output   : {
     path      : path.join(__dirname, 'dist'),
     filename  : 'bundle.js',
-    publicPath: '/',
+    publicPath: '/'
   },
   resolve  : {
-    extensions: ['.js', '.json', '.scss'],
+    extensions: ['.js', '.json', '.scss']
   },
   devServer: {
     hot               : true,
     historyApiFallback: true,
-    contentBase       : '/dist',
+    contentBase       : '/dist'
   },
   stats    : {
     colors : true,
     reasons: true,
-    chunks : false,
+    chunks : false
   },
   module   : {
     rules: [
@@ -37,29 +36,33 @@ module.exports = {
         test: /\.scss$/,
         use : ['css-hot-loader'].concat(extractCssPlugins.extract({
           fallback: 'style-loader',
-          use     : ['css-loader', 'sass-loader'],
-        })),
+          use     : ['css-loader', 'sass-loader']
+        }))
       },
       {
         enforce: 'pre',
         use    : 'eslint-loader',
-        exclude: /node_moduless/,
+        exclude: /node_moduless/
       },
       {
         test   : /\.js$/,
         loader : 'babel-loader',
-        exclude: /node_modules/,
-      },
-      {
-        test: /\.jsx$/,
-        loader: 'babel-loader',
         exclude: /node_modules/
       },
       {
-        test: /\.html$/,
+        test   : /\.jsx$/,
+        loader : 'babel-loader',
+        exclude: /node_modules/
+      },
+      {
+        test  : /\.html$/,
         loader: 'html-loader'
       },
-    ],
+      {
+        test  : /\.json$/,
+        loader: 'json-loader'
+      }
+    ]
   },
   plugins  : [
     new webpack.HotModuleReplacementPlugin(),
@@ -67,7 +70,7 @@ module.exports = {
     new extractCssPlugins('style.css'),
     new HtmlWebpackPlugin({
       filename: 'index.html',
-      template: './app/index.html',
-    }),
-  ],
+      template: './app/index.html'
+    })
+  ]
 };

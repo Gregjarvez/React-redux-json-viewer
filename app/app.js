@@ -18,7 +18,7 @@ class App extends Component {
     } catch (err) {
       this.setState({ errorMessage: err });
     }
-    return this.setState({ json });
+    this.setState({ json });
   };
 
   render() {
