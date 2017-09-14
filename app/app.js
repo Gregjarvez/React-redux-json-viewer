@@ -21,44 +21,59 @@ class App extends Component {
     this.setState({ json });
   };
 
-  setTree = () => {
-    const tree = ParserShell()
-      .getInstance(this.state.json)
-      .buildAbstractTree();
-
-    this.setState({ tree });
-  };
-
-  parseSubsets(array) {
+  // eslint-disable-next-line react/sort-comp
+  static parseObject(array) {
     return ParserShell()
       .getInstance(array)
       .buildAbstractTree();
   }
 
-  isOfTypePrimitive = (each) => {
+  setTree = () => {
+    const tree = App.parseObject(this.state.json);
+    this.setState({ tree });
+  };
+
+
+  isOfTypePrimitive(each) {
     const isPrimitive = ['number', 'string', 'boolean'].includes(each.meta.type);
     return isPrimitive;
   }
 
-  modelBuilder = (each, index) => {
-    const key = each.meta.type.concat(index);
+  appendToTree = (load, nodeRef, margin) => {
+    const subtree = App.parseObject(JSON.stringify(...load)).map((each) => {
+      each.meta.mleft = margin + 20;
+      return each;
+    });
+    subtree.shift();
+    const insertionIndex = this.state.tree.findIndex(each => each.meta.id === nodeRef);
+    const ammended = [
+      ...this.state.tree.slice(0, insertionIndex + 1),
+      ...subtree,
+      ...this.state.tree.slice(insertionIndex + 1)
+    ];
+    console.log(ammended);
+    this.setState({ tree: ammended });
+  }
+
+
+  modelBuilder = (each) => {
     if (this.isOfTypePrimitive(each)) {
       return (
         <Primitive
-          key={key}
+          key={each.meta.id}
           Qey={each.Qey}
           value={each.value}
-          meta={{ type: each.meta.type }}
+          meta={each.meta}
         />
       );
     }
     return (
       <TypeObject
-        key={key}
+        key={each.meta.id}
         type={each.type}
         contentCount={each.contentCount}
         meta={each.meta}
-        parseSubsets={each.meta.payload.length > 0 ? this.parseSubsets : f => f}
+        appendToTree={this.appendToTree}
       />
     );
   }
@@ -75,7 +90,6 @@ class App extends Component {
           />
           <Modeler
             tree={this.state.tree}
-            parseSubsets={this.parseSubsets}
             modelBuilder={this.modelBuilder}
           />
         </div>

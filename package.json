@@ -69,7 +69,8 @@
     "react-hot-loader": "next",
     "react-icons": "^2.2.5",
     "react-redux": "^5.0.6",
-    "redux": "^3.7.2"
+    "redux": "^3.7.2",
+    "shortid": "^2.2.8"
   },
   "quokka": {
     "babel": true

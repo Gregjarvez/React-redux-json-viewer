@@ -1,4 +1,5 @@
 import { size } from 'lodash';
+import shortid from 'shortid';
 // import test from '../testJson.json';
 
 function ParserShell() {
@@ -40,7 +41,9 @@ function ParserShell() {
             Qey: key,
             value,
             meta: {
-              type: typeof value
+              type: typeof value,
+              id: shortid.generate(),
+              mleft: 16
             }
           };
         },
@@ -57,7 +60,10 @@ function ParserShell() {
               isExpandable: !!(
                 type === 'Array' ? value.length : size(value)
               ),
-              payload: []
+              expanded: false,
+              id: shortid.generate(),
+              payload: [],
+              mleft: 16
             }
           };
         }
@@ -83,8 +89,6 @@ function ParserShell() {
       const raw = Parser.compose2(Parser.converter, Parser.toObjectEntries);
       const toTraverse = raw(this.json);
       const structure = this.traverse(toTraverse);
-      console.log(structure);
-
       return structure;
     };
 
@@ -104,7 +108,7 @@ function ParserShell() {
           contentCount: objectEntries.length,
           meta: {
             type: Parser.determineInstance(baseInstance),
-            payload: []
+            payload: [],
           }
         };
       }

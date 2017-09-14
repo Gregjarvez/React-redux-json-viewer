@@ -19,9 +19,11 @@
   }
 
   &--toggler {
-    font-size: 1.1rem;
+    font-size: .878rem;
     font-weight: 500;
     color: $primary-text-heading;
+    vertical-align: middle;
+    transform: translateY(-1.9px);
   }
 
   &--key {
@@ -50,6 +52,7 @@
 
     &-string {
       color: $isValid;
+      text-align: justify;
     }
 
     &-number {
@@ -58,12 +61,12 @@
 
     &-array {
       color: $light-silver;
-      font-size: 17px;
+      font-size: 14px;
     }
 
     &-object {
       @extend .model--value-array;
-      margin-left: .7rem;
+      margin-left: .4rem;
     }
   }
 

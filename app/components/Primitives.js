@@ -1,5 +1,5 @@
 import React from 'react';
-import { string, shape, any } from 'prop-types';
+import PropTypes from 'prop-types';
 import Copy from 'react-icons/lib/md/note-add';
 
 const Primitive = props => (
@@ -10,7 +10,7 @@ const Primitive = props => (
       </span>
     </td>
     <td className="model--key">
-      <table>
+      <table style={{ marginLeft: `${props.meta.mleft}px` }}>
         <tbody>
           <tr className="layout--row">
             <td className="model--key">{ props.Qey }</td>
@@ -29,11 +29,12 @@ const Primitive = props => (
 
 
 Primitive.propTypes = {
-  Qey: string.isRequired,
-  value: any.isRequired,
-  meta: shape({
-    type: string,
-    margin: string,
+  Qey: PropTypes.string.isRequired,
+  value: PropTypes.any.isRequired,
+  meta: PropTypes.shape({
+    type: PropTypes.string,
+    margin: PropTypes.string,
+    mleft: PropTypes.string
   }).isRequired,
 
 };
