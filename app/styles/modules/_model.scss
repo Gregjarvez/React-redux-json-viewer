@@ -13,7 +13,6 @@
     line-height: 30px;
   }
 
-
   &--inline {
     display: inline-block;
     width: -30px;
@@ -63,7 +62,7 @@
     }
 
     &-object {
-      @extend   .model--value-array;
+      @extend .model--value-array;
       margin-left: .7rem;
     }
   }

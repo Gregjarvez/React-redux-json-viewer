@@ -19,6 +19,9 @@
 
   &--embedded {
 
+    tr:nth-of-type(n + 2) td > table{
+      margin-left: 2em;
+    }
   }
   &--row{
     width: 100%;

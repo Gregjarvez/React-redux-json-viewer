@@ -12,7 +12,7 @@ const Dumper = (props) => {
   return (
     <div className="layout">
       <div className="layout--setting">
-        <span title="format"><Format /></span>
+        <span title="format"><Format onClick={props.startParse} /></span>
       </div>
       <div className="layout--embedded">
         <AceEditor
@@ -38,6 +38,7 @@ const Dumper = (props) => {
 Dumper.propTypes = {
   setJsonToControllerState: PropTypes.func.isRequired,
   json: PropTypes.string,
+  startParse: PropTypes.func.isRequired,
 };
 
 export default Dumper;
