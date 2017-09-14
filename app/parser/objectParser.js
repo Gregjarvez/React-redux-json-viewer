@@ -43,7 +43,7 @@ function ParserShell() {
             meta: {
               type: typeof value,
               id: shortid.generate(),
-              mleft: 16
+              mleft: 24
             }
           };
         },
@@ -60,10 +60,10 @@ function ParserShell() {
               isExpandable: !!(
                 type === 'Array' ? value.length : size(value)
               ),
-              expanded: false,
+              isExpanded: false,
               id: shortid.generate(),
               payload: [],
-              mleft: 16
+              mleft: 24
             }
           };
         }
@@ -79,10 +79,6 @@ function ParserShell() {
       return function (value) {
         return fn2(fn1(value));
       };
-    }
-
-    static placeHolder(value) {
-      return Parser.determineInstance(value) === 'Object' ? '{ 0 }' : '[ 0 ]';
     }
 
     buildAbstractTree = () => {
@@ -134,8 +130,6 @@ function ParserShell() {
           const build = Parser.treeInstance('object', processing);
           if (hasLength(value)) {
             build.meta.payload.push(value);
-          } else {
-            build.meta.payload.push(Parser.placeHolder(value));
           }
           model.push(build);
         }

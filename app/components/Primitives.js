@@ -18,7 +18,7 @@ const Primitive = props => (
             <td className={`model--value ${props.meta.type === 'string'
               ? 'model--value-string'
               : 'model--value-number'}`}
-            >{ props.value }
+            >{ props.value.toString() }
             </td>
           </tr>
         </tbody>
@@ -34,7 +34,7 @@ Primitive.propTypes = {
   meta: PropTypes.shape({
     type: PropTypes.string,
     margin: PropTypes.string,
-    mleft: PropTypes.string
+    mleft: PropTypes.number
   }).isRequired,
 
 };

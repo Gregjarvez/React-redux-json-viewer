@@ -40,19 +40,39 @@ class App extends Component {
   }
 
   appendToTree = (load, nodeRef, margin) => {
+    if (load.length === 0) return;
+
     const subtree = App.parseObject(JSON.stringify(...load)).map((each) => {
       each.meta.mleft = margin + 20;
       return each;
     });
     subtree.shift();
+
     const insertionIndex = this.state.tree.findIndex(each => each.meta.id === nodeRef);
     const ammended = [
       ...this.state.tree.slice(0, insertionIndex + 1),
       ...subtree,
       ...this.state.tree.slice(insertionIndex + 1)
     ];
-    console.log(ammended);
-    this.setState({ tree: ammended });
+    // eslint-disable-next-line
+    var ref = ammended[insertionIndex];
+
+    if (!ref.meta.isExpanded) {
+      ref.meta.isExpanded = true;
+      this.setState({ tree: ammended });
+    }
+  }
+
+  removeFromTree = (id, contentCount) => {
+    const refPoint = this.state.tree.findIndex(node => node.meta.id === id);
+    console.log(id, contentCount, refPoint);
+    const modified = [
+      ...this.state.tree.slice(0, refPoint + 1),
+      ...this.state.tree.slice((refPoint + contentCount + 1))
+    ];
+    var ref = modified[refPoint]; // eslint-disable-line
+    ref.meta.isExpanded = false;
+    this.setState({ tree: modified });
   }
 
 
@@ -74,6 +94,7 @@ class App extends Component {
         contentCount={each.contentCount}
         meta={each.meta}
         appendToTree={this.appendToTree}
+        removeFromTree={this.removeFromTree}
       />
     );
   }

@@ -4,13 +4,14 @@
 
   &--panel {
     position: relative;
+    top: 0;
     display: inline-block;
-    width: 40px;
-    height: 30px;
+    width: 30px;
+    height: 25px;
     background: #eee;
     margin-right: .3rem;
     text-align: center;
-    line-height: 30px;
+    line-height: 25px;
   }
 
   &--inline {
@@ -29,6 +30,7 @@
   &--key {
     text-align: left;
     font-size: $key-value-font;
+    font-weight: 600;
 
     &:hover {
       color: $bright-yellow;
@@ -40,9 +42,9 @@
     display: inline-block;
     text-align: left;
     font-size: $key-value-font;
+    font-weight: 400;
 
     &:focus {
-      padding: .2rem;
       outline: none;
       box-sizing: border-box;
       border: 1px solid $been-edited;

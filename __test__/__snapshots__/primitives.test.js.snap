@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Primitives /> renders correctly 1`] = `
+<tr
+  className="layout--row"
+>
+  <td
+    className="model--panel"
+  >
+    <span
+      className="model--copy"
+      title="copy path to key"
+    >
+      <MdNoteAdd />
+    </span>
+  </td>
+  <td
+    className="model--key"
+  >
+    <table
+      style={
+        Object {
+          "marginLeft": "undefinedpx",
+        }
+      }
+    >
+      <tbody>
+        <tr
+          className="layout--row"
+        >
+          <td
+            className="model--key"
+          >
+            String
+          </td>
+          <td>
+            :
+          </td>
+          <td
+            className="model--value model--value-number"
+          >
+            Hello
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </td>
+</tr>
+`;
