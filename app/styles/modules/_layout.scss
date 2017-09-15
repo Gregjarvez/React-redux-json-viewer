@@ -1,4 +1,5 @@
 .layout {
+  position: relative;
   padding: 2px;
   border: 2px solid #eee;
   height: 660px;
@@ -6,9 +7,41 @@
   flex-basis: 48%;
   overflow: scroll;
 
+  &--isError {
+    border: 2px solid $isError;
+  }
+  &--errorhandler {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    z-index: -1;
+    background: $isError;
+    width: 60%;
+    padding: 0.3rem;
+    color: white;
+    font-size: 13px;
+    font-weight: 400;
+    text-align: center;
+    transform: translateX(-30%);
+    transition:  top 400ms ease;
+
+    &:first-of-type {
+      display: none;
+    }
+
+    &-showing {
+      top: 50px;
+    }
+  }
+
+  &--collapse{
+    font-size: 20px;
+  }
+
   &--setting{
     padding: .5rem;
     background: #2C3E50;
+    box-sizing: border-box;
 
     > span {
       color: white;
@@ -18,9 +51,6 @@
     }
   }
 
-  &--embedded {
-
-  }
 
   &--row{
     width: 100%;

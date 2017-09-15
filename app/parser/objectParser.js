@@ -43,7 +43,8 @@ function ParserShell() {
             meta: {
               type: typeof value,
               id: shortid.generate(),
-              mleft: 24
+              mleft: 24,
+              isChildof: ''
             }
           };
         },
@@ -63,7 +64,8 @@ function ParserShell() {
               isExpanded: false,
               id: shortid.generate(),
               payload: [],
-              mleft: 24
+              mleft: 24,
+              isChildof: ''
             }
           };
         }

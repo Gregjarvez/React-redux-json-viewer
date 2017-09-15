@@ -25,6 +25,12 @@
     color: $primary-text-heading;
     vertical-align: middle;
     transform: translateY(-1.9px);
+    cursor: pointer;
+    padding: .1em;
+
+    &:hover {
+     background: #eee;
+    }
   }
 
   &--key {
@@ -32,10 +38,6 @@
     font-size: $key-value-font;
     font-weight: 600;
 
-    &:hover {
-      color: $bright-yellow;
-      cursor: default;
-    }
   }
 
   &--value {

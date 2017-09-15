@@ -29,10 +29,7 @@ const TypeObject = (props) => {
                     /> :
                     <ToggleDown
                       className="model--toggler"
-                      onClick={() => props.removeFromTree(
-                        props.meta.id,
-                        props.contentCount
-                      )}
+                      onClick={() => props.removeFromTree(props.meta.id)}
                     />
                 }
               </td>

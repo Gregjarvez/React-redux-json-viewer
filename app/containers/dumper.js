@@ -12,7 +12,9 @@ const Dumper = (props) => {
   return (
     <div className="layout">
       <div className="layout--setting">
-        <span title="format"><Format onClick={props.startParse} /></span>
+        <span title="format">
+          <Format onClick={props.startParse} />
+        </span>
       </div>
       <div className="layout--embedded">
         <AceEditor
