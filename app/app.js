@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import Perf from 'react-addons-perf';
+import Perf from 'react-addons-perf'; // eslint-disable-line
+
 import Navigation from './components/nav';
 import Dumper from './containers/dumper';
 import Modeler from './containers/model';
@@ -57,7 +58,6 @@ class App extends Component {
 
   appendNodesToTree = (payload, id, margin) => {
     if (payload.length === 0) return;
-    console.log(payload);
 
     const subtree = App.parseJson(JSON.stringify(...payload))
       .map((each) => {
@@ -105,8 +105,8 @@ class App extends Component {
       })
       .filter(node => node.meta.isChildof !== id);
 
-    const prunedNodes = this.state.tree.slice(skipNodes.length, this.state.tree.length
-                                                                - process.length);
+    const prunedNodes = this.state.tree
+      .slice(skipNodes.length, this.state.tree.length - process.length);
     const tree = [...skipNodes, ...process];
     const mess = this.prune(prunedNodes);
 

@@ -23,7 +23,9 @@ module.exports = {
   devServer: {
     hot               : true,
     historyApiFallback: true,
-    contentBase       : '/dist'
+    contentBase       : '/dist',
+    compress          : true,
+    public            : 'https://c6e9e249.ngrok.io/'
   },
   stats    : {
     colors : true,

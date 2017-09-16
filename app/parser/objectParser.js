@@ -136,7 +136,6 @@ function ParserShell() {
           model.push(build);
         }
       }
-
       return model;
     }
   }

@@ -60,9 +60,10 @@
     }
 
     &-string {
-      color: $isValid;
+      color: $dummy-green;
       text-align: justify;
       padding-left: .7rem;
+      word-break: break-all;
     }
 
     &-number {

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import brace from 'brace'; // eslint-disable-line no-unused-vars
 import 'brace/mode/json';
-import 'brace/theme/github';
+import 'brace/theme/textmate';
 
 import Format from 'react-icons/lib/md/format-line-spacing';
 import Parse from 'react-icons/lib/go/mirror';
@@ -19,10 +19,10 @@ const Dumper = (props) => {
           <Parse onClick={props.startParse} title="Parse Json" />
         </span>
       </div>
-      <div className="layout--embedded">
+      <div>
         <AceEditor
           mode="json"
-          theme="github"
+          theme="textmate"
           name="dumper-editor"
           editorProps={{ $blockScrolling: true }}
           height="600px"
@@ -34,7 +34,6 @@ const Dumper = (props) => {
           onChange={props.setJsonToControllerState}
           showPrintMargin={false}
           wrapEnabled
-          style={{ margin: '0' }}
         />
       </div>
     </div>

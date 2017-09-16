@@ -37,8 +37,8 @@ class Modeler extends React.Component {
     });
 
     return (
-      <div className={`layout ${this.props.isError && 'layout--isError'}`}>
-        <div className="layout--setting">
+      <div className={`layout ${this.props.isError ? 'layout--isError' : ''}`}>
+        <div className="layout--setting layout--setting-isabsolute">
           <span title="collapse all">
             <Collapse
               className="layout--collapse"
@@ -47,14 +47,19 @@ class Modeler extends React.Component {
             />
           </span>
         </div>
-        <div className={`layout--errorhandler ${this.props.isError && 'layout--errorhandler-showing'}`}>
+        <div
+          className={`layout--errorhandler
+           ${this.props.isError && 'layout--errorhandler-showing'}`}
+        >
           {'Unable to parser json. '.concat(this.props.errorMessage).concat(' ☹️')}
         </div>
-        <table className="layout--embedded">
-          <tbody>
-            { layout }
-          </tbody>
-        </table>
+        <div className="layout--container">
+          <table className="layout--embedded">
+            <tbody>
+              { layout }
+            </tbody>
+          </table>
+        </div>
       </div>
     );
   }

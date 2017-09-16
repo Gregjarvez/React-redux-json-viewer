@@ -49,7 +49,7 @@ const TypeObject = (props) => {
 
 TypeObject.propTypes = {
   Qey: PropTypes.string.isRequired,
-  contentCount: PropTypes.number.isRequired,
+  contentCount: PropTypes.string,
   meta: PropTypes.object,
   appendNodesToTree: PropTypes.func.isRequired,
   removeNodesFromTree: PropTypes.func.isRequired

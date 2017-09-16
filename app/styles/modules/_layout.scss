@@ -5,11 +5,20 @@
   height: 660px;
   box-sizing: border-box;
   flex-basis: 48%;
-  overflow: scroll;
 
   &--isError {
     border: 2px solid $isError;
   }
+
+  &--embedded {
+    margin-top: 55px;
+  }
+
+  &--container {
+    height: 650px;
+    overflow-y: scroll;
+  }
+
   &--errorhandler {
     position: absolute;
     top: 2px;
@@ -55,6 +64,14 @@
       justify-content: space-between;
       width: 60px;
       font-size: 1.2em;
+    }
+
+    &-isabsolute {
+      position: absolute;
+      z-index: 2;
+      width: 100%;
+      top: 0;
+      right: 0.5px;
     }
   }
 
