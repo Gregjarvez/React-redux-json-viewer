@@ -27,11 +27,11 @@ class Modeler extends React.Component {
       return (
         <TypeObject
           key={each.meta.id}
-          type={each.type}
+          Qey={each.Qey}
           contentCount={each.contentCount}
           meta={each.meta}
-          appendToTree={this.props.appendToTree}
-          removeFromTree={this.props.removeFromTree}
+          appendNodesToTree={this.props.appendNodesToTree}
+          removeNodesFromTree={this.props.removeNodesFromTree}
         />
       );
     });
@@ -40,7 +40,11 @@ class Modeler extends React.Component {
       <div className={`layout ${this.props.isError && 'layout--isError'}`}>
         <div className="layout--setting">
           <span title="collapse all">
-            <Collapse className="layout--collapse" />
+            <Collapse
+              className="layout--collapse"
+              title="collapse all"
+              onClick={this.props.collapseAll}
+            />
           </span>
         </div>
         <div className={`layout--errorhandler ${this.props.isError && 'layout--errorhandler-showing'}`}>
@@ -58,10 +62,11 @@ class Modeler extends React.Component {
 
 Modeler.propTypes = {
   tree: PropTypes.array,
-  appendToTree: PropTypes.func.isRequired,
-  removeFromTree: PropTypes.func.isRequired,
+  appendNodesToTree: PropTypes.func.isRequired,
+  removeNodesFromTree: PropTypes.func.isRequired,
   isError: PropTypes.bool,
-  errorMessage: PropTypes.string
+  errorMessage: PropTypes.string,
+  collapseAll: PropTypes.func.isRequired
 };
 
 export default Modeler;

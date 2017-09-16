@@ -22,8 +22,10 @@
     font-size: 13px;
     font-weight: 400;
     text-align: center;
-    transform: translateX(-30%);
+    transform: translateX(-30%) ;
+    perspective: 1000px;
     transition:  top 400ms ease;
+    opacity: 0;
 
     &:first-of-type {
       display: none;
@@ -31,11 +33,13 @@
 
     &-showing {
       top: 50px;
+      opacity: 1;
+      box-shadow: inset 5px 5px 10px 0px rgba(#000, 0.2)
     }
   }
 
   &--collapse{
-    font-size: 20px;
+    font-size: 1.2em;
   }
 
   &--setting{
@@ -44,10 +48,13 @@
     box-sizing: border-box;
 
     > span {
+      display: flex;
       color: white;
-      display: inline-block;
       padding: 7px;
       cursor: pointer;
+      justify-content: space-between;
+      width: 60px;
+      font-size: 1.2em;
     }
   }
 

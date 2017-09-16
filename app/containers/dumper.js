@@ -7,13 +7,16 @@ import 'brace/mode/json';
 import 'brace/theme/github';
 
 import Format from 'react-icons/lib/md/format-line-spacing';
+import Parse from 'react-icons/lib/go/mirror';
+
 
 const Dumper = (props) => {
   return (
     <div className="layout">
       <div className="layout--setting">
-        <span title="format">
-          <Format onClick={props.startParse} />
+        <span className="layout--icongroup">
+          <Format onClick={props.format} title="format" />
+          <Parse onClick={props.startParse} title="Parse Json" />
         </span>
       </div>
       <div className="layout--embedded">
@@ -29,8 +32,9 @@ const Dumper = (props) => {
           fontSize="13px"
           value={props.json}
           onChange={props.setJsonToControllerState}
-          showPrintMargin={!true}
+          showPrintMargin={false}
           wrapEnabled
+          style={{ margin: '0' }}
         />
       </div>
     </div>
@@ -41,6 +45,7 @@ Dumper.propTypes = {
   setJsonToControllerState: PropTypes.func.isRequired,
   json: PropTypes.string,
   startParse: PropTypes.func.isRequired,
+  format: PropTypes.func.isRequired
 };
 
 export default Dumper;

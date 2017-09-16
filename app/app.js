@@ -1,20 +1,25 @@
 import React, { Component } from 'react';
+import Perf from 'react-addons-perf';
 import Navigation from './components/nav';
 import Dumper from './containers/dumper';
 import Modeler from './containers/model';
 
-
 import ParserShell from './parser/objectParser';
+
+
+window.Perf = Perf;
+Perf.start();
 
 class App extends Component {
   state = {
     json: '',
     isError: false,
     errorMessage: '',
-    tree: []
+    tree: [],
+    cache: []
   };
 
-  verifyValidity(json) { // eslint-disable-line
+  checkJsonValidity(json) { // eslint-disable-line
     try {
       JSON.parse(json);
       return 'isValid';
@@ -28,19 +33,19 @@ class App extends Component {
   };
 
   // eslint-disable-next-line react/sort-comp
-  static parseObject(array) {
-    return ParserShell()
-      .getInstance(array)
-      .buildAbstractTree();
+  static parseJson(array) {
+    return ParserShell().getInstance(array).buildAbstractTree();
   }
 
   setTree = () => {
-    const verify = this.verifyValidity(this.state.json);
+    const verify = this.checkJsonValidity(this.state.json);
     if (verify === 'isValid') {
-      const tree = App.parseObject(this.state.json);
+      const tree = App.parseJson(this.state.json);
       return this.setState({
         tree,
-        isError: false
+        isError: false,
+        errorMessage: '',
+        cache: tree
       });
     }
     return this.setState({
@@ -50,51 +55,75 @@ class App extends Component {
     });
   };
 
-  appendToTree = (load, id, margin) => {
-    if (load.length === 0) return;
+  appendNodesToTree = (payload, id, margin) => {
+    if (payload.length === 0) return;
+    console.log(payload);
 
-    const subtree = App.parseObject(JSON.stringify(...load)).map((each) => {
-      each.meta.mleft = margin + 20;
-      each.meta.isChildof = id;
-      return each;
-    });
-    subtree.shift();
+    const subtree = App.parseJson(JSON.stringify(...payload))
+      .map((each) => {
+        each.meta.mleft = margin + 20;
+        each.meta.isChildof = id;
+        return each;
+      });
 
-    const insertionIndex = this.state.tree.findIndex(
-      each => each.meta.id === id);
-    const ammended = [
-      ...this.state.tree.slice(0, insertionIndex + 1),
+    subtree.shift(); // remove extra subtree headers
+
+    const insertionPoint = this.state.tree.findIndex(each => each.meta.id === id);
+    const construct = [
+      ...this.state.tree.slice(0, insertionPoint + 1),
       ...subtree,
-      ...this.state.tree.slice(insertionIndex + 1)
+      ...this.state.tree.slice(insertionPoint + 1)
     ];
     // eslint-disable-next-line
-    var ref = ammended[insertionIndex];
-    if (!ref.meta.isExpanded) {
-      ref.meta.isExpanded = true;
-      this.setState({ tree: ammended });
+    var insertionNode = construct[insertionPoint];
+    if (!insertionNode.meta.isExpanded) {
+      insertionNode.meta.isExpanded = true;
+      this.setState({ tree: construct });
     }
   };
 
-  removeFromTree = (id) => {
-    const refPoint = this.state.tree.findIndex(node => node.meta.id === id);
-    const skip = this.state.tree.slice(0, refPoint + 1);
-    const process = this.state.tree.slice(refPoint + 2).map((each) => {
-      console.log(each.meta.id, id);
-      if (each.meta.isExpanded) {
-        this.removeFromTree(each.meta.id);
-        each.meta.isExpanded = false;
-        return each;
-      }
-      return each;
-    }).filter(node => node.meta.isChildof !== id);
-    const modified = [...skip, ...process];
+  prune(nodes) {
+    return nodes
+      .filter((each) => {
+        return ['Object', 'Array'].includes(each.meta.type);
+      })
+      .map(each => each.meta.id);
+  }
 
-    var ref = modified[refPoint]; // eslint-disable-line
+  removeNodesFromTree = (id) => {
+    const refPoint = this.state.tree.findIndex(node => node.meta.id === id);
+    const skipNodes = this.state.tree.slice(0, refPoint + 1);
+
+    const process = this.state.tree
+      .slice(refPoint + 2)
+      .map((each) => {
+        if (each.meta.isExpanded) {
+          each.meta.isExpanded = false;
+          return each;
+        }
+        return each;
+      })
+      .filter(node => node.meta.isChildof !== id);
+
+    const prunedNodes = this.state.tree.slice(skipNodes.length, this.state.tree.length
+                                                                - process.length);
+    const tree = [...skipNodes, ...process];
+    const mess = this.prune(prunedNodes);
+
+    var ref = tree[refPoint]; // eslint-disable-line
     ref.meta.isExpanded = false;
 
-    this.setState({ tree: modified });
+    this.setState({ tree: tree.filter(each => !mess.includes(each.meta.isChildof)) });
   };
 
+  format = () => {
+    const json = JSON.stringify(JSON.parse(this.state.json), null, 2);
+    return this.setState({ json });
+  }
+
+  collapseAll = () => {
+    this.setState(prev => ({ tree: prev.cache }));
+  }
 
   render() {
     return (
@@ -102,16 +131,18 @@ class App extends Component {
         <Navigation />
         <div className="app">
           <Dumper
+            format={this.format}
+            json={this.state.json}
             startParse={this.setTree}
             setJsonToControllerState={this.setJsonToControllerState}
-            json={this.state.json}
           />
           <Modeler
             tree={this.state.tree}
             isError={this.state.isError}
+            collapseAll={this.collapseAll}
             errorMessage={this.state.errorMessage}
-            appendToTree={this.appendToTree}
-            removeFromTree={this.removeFromTree}
+            appendNodesToTree={this.appendNodesToTree}
+            removeNodesFromTree={this.removeNodesFromTree}
           />
         </div>
       </div>

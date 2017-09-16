@@ -21,7 +21,7 @@ const TypeObject = (props) => {
                   !props.meta.isExpanded ?
                     <ToggleLeft
                       className="model--toggler"
-                      onClick={() => props.appendToTree(
+                      onClick={() => props.appendNodesToTree(
                         props.meta.payload,
                         props.meta.id,
                         props.meta.mleft
@@ -29,11 +29,11 @@ const TypeObject = (props) => {
                     /> :
                     <ToggleDown
                       className="model--toggler"
-                      onClick={() => props.removeFromTree(props.meta.id)}
+                      onClick={() => props.removeNodesFromTree(props.meta.id)}
                     />
                 }
               </td>
-              <td>{ props.type }</td>
+              <td>{ props.Qey }</td>
               <td
                 className="model--value model--value-object"
                 title="Type array"
@@ -48,11 +48,11 @@ const TypeObject = (props) => {
 };
 
 TypeObject.propTypes = {
-  type: PropTypes.string.isRequired,
+  Qey: PropTypes.string.isRequired,
   contentCount: PropTypes.number.isRequired,
   meta: PropTypes.object,
-  appendToTree: PropTypes.func.isRequired,
-  removeFromTree: PropTypes.func.isRequired
+  appendNodesToTree: PropTypes.func.isRequired,
+  removeNodesFromTree: PropTypes.func.isRequired
 
 };
 

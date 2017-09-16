@@ -1,6 +1,4 @@
-import { size } from 'lodash';
 import shortid from 'shortid';
-// import test from '../testJson.json';
 
 function ParserShell() {
   let instance;
@@ -14,6 +12,11 @@ function ParserShell() {
       return JSON.parse(this.json) instanceof Array ? [] : {};
     };
 
+    static size(value) {
+      if (value === null) return 'null';
+      return Object.keys(value).length;
+    }
+
     static whatType(value) {
       const isPrimitive = ['number', 'string', 'boolean'].includes(
         typeof value);
@@ -21,19 +24,15 @@ function ParserShell() {
     }
 
     static converter(json) {
-      try {
-        return JSON.parse(json);
-      } catch (error) {
-        return error;
-      }
+      return JSON.parse(json);
     }
 
     static determineInstance(value) {
       return value instanceof Array ? 'Array' : 'Object';
     }
 
-    static treeInstance(typeAction, iteratee) {
-      const maker = {
+    static nodeType(type, iteratee) {
+      const types = {
         primitive(iteratee) {
           const [key, value] = iteratee;
 
@@ -43,7 +42,7 @@ function ParserShell() {
             meta: {
               type: typeof value,
               id: shortid.generate(),
-              mleft: 24,
+              mleft: 38,
               isChildof: ''
             }
           };
@@ -54,89 +53,90 @@ function ParserShell() {
           const type = Parser.determineInstance(value);
 
           return {
-            type: key,
-            contentCount: type === 'Array' ? value.length : size(value),
+            Qey: key,
+            contentCount: type === 'Array' ? value.length : Parser.size(value),
             meta: {
               type,
               isExpandable: !!(
-                type === 'Array' ? value.length : size(value)
+                type === 'Array' ? value.length : Parser.size(value)
               ),
               isExpanded: false,
               id: shortid.generate(),
               payload: [],
-              mleft: 24,
+              mleft: 38,
               isChildof: ''
             }
           };
         }
       };
-      return maker[typeAction](iteratee);
+      return types[type](iteratee);
     }
 
     static toObjectEntries(parsedJson) {
       return Object.entries(parsedJson);
     }
 
-    static compose2(fn1, fn2) {
+    compose2(fn1, fn2) {
       return function (value) {
         return fn2(fn1(value));
       };
     }
 
     buildAbstractTree = () => {
-      const raw = Parser.compose2(Parser.converter, Parser.toObjectEntries);
-      const toTraverse = raw(this.json);
-      const structure = this.traverse(toTraverse);
-      return structure;
+      const raw = this.compose2(Parser.converter, Parser.toObjectEntries);
+      const structure = raw(this.json);
+      const tree = this.traverse(structure);
+      return tree;
     };
 
     traverse(objectEntries) {
-      const context = this;
       const model = [];
-      const starter = buildStart();// eslint-disable-line no-use-before-define
-      model.push(starter);
 
-      buildTree(objectEntries); // eslint-disable-line no-use-before-define
-
-      function buildStart() {
-        const baseInstance = context.starter();
+      const buildStart = () => {
+        const baseInstance = this.starter();
 
         return {
-          type: Parser.determineInstance(baseInstance),
+          Qey: Parser.determineInstance(baseInstance),
           contentCount: objectEntries.length,
           meta: {
             type: Parser.determineInstance(baseInstance),
-            payload: [],
+            payload: []
           }
         };
-      }
+      };
+
+      const start = buildStart();// eslint-disable-line no-use-before-define
+      model.push(start);
 
       function hasLength(value) {
-        if (Parser.determineInstance(value) === 'Object') return size(value);
+        if (Parser.determineInstance(value) === 'Object') {
+          return Parser.size(value);
+        }
         return value.length;
       }
 
-      function buildTree(objectEntries) {
-        if (objectEntries.length === 0) return false;
-
-        const [processing, ...rest] = objectEntries;
+      for (let i = 0; i < objectEntries.length; i += 1) {
+        if (objectEntries.length === 0) break;
+        const processing = objectEntries[i];
         const [, value] = processing;
         const whatType = Parser.whatType(value);
 
         if (whatType === 'primitive') {
-          const build = Parser.treeInstance('primitive', processing);
+          const build = Parser.nodeType('primitive', processing);
           model.push(build);
         }
 
         if (whatType === 'object') {
-          const build = Parser.treeInstance('object', processing);
+          const build = Parser.nodeType('object', processing);
           if (hasLength(value)) {
-            build.meta.payload.push(value);
+            if (value !== null) {
+              build.meta.payload.push(value);
+            }
           }
           model.push(build);
         }
-        return buildTree(rest);
       }
+
       return model;
     }
   }
@@ -148,5 +148,6 @@ function ParserShell() {
     }
   };
 }
+
 
 export default ParserShell;

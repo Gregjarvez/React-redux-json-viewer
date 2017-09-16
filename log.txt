@@ -1,0 +1,24 @@
+
+function buildTree(objectEntries) {
+  if (objectEntries.length === 0) return false;
+
+  const [processing, ...rest] = objectEntries;
+  const [, value] = processing;
+  const whatType = Parser.whatType(value);
+
+  if (whatType === 'primitive') {
+    const build = Parser.nodeType('primitive', processing);
+    model.push(build);
+  }
+
+  if (whatType === 'object') {
+    const build = Parser.nodeType('object', processing);
+    if (hasLength(value)) {
+      build.meta.payload.push(value);
+    }
+    model.push(build);
+  }
+  return buildTree(rest);
+}
+
+buildTree(objectEntries);
