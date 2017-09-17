@@ -58,28 +58,36 @@ class App extends Component {
     });
   };
 
-  appendNodesToTree = (payload, id, margin) => {
+  appendNodesToTree = (payload, id, margin, payloadIsParsed, refnumber) => {
     if (payload.length === 0) return;
 
-    const subtree = App.parseJson(JSON.stringify(...payload))
-      .map((each) => {
+    let subtree,    // eslint-disable-line
+      insertionPoint;
+
+    if (!payloadIsParsed) {
+      subtree = App.parseJson(JSON.stringify(...payload)).map((each) => {
         each.meta.mleft = margin + 20;
         each.meta.isChildof = id;
         return each;
       });
+      insertionPoint = this.state.tree.findIndex(each => each.meta.id === id);
+    } else {
+      subtree = payload;
+      insertionPoint = refnumber;
+    }
+    const tree = [...this.state.tree];
+    Array.prototype.splice.apply(tree, [insertionPoint + 1, 0, ...subtree]);
 
-
-    const insertionPoint = this.state.tree.findIndex(each => each.meta.id === id);
-    const construct = [
-      ...this.state.tree.slice(0, insertionPoint + 1),
-      ...subtree,
-      ...this.state.tree.slice(insertionPoint + 1)
-    ];
     // eslint-disable-next-line
-    var insertionNode = construct[insertionPoint];
+      var insertionNode = tree[insertionPoint];
+
     if (!insertionNode.meta.isExpanded) {
       insertionNode.meta.isExpanded = true;
-      this.setState({ tree: construct });
+      insertionNode.meta.payload = subtree;
+      insertionNode.meta.payloadIsParsed = true;
+      insertionNode.meta.insertionPoint = insertionPoint;
+
+      this.setState({ tree });
     }
   };
 

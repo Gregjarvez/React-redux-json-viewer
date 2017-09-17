@@ -67,7 +67,9 @@ function ParserShell() {
               ),
               isExpanded: false,
               id: shortid.generate(),
+              payloadIsParsed: false,
               payload: [],
+              insertionPoint: null,
               mleft: 38,
               isChildof: ''
             }
@@ -91,7 +93,6 @@ function ParserShell() {
       const raw = this.compose2(Parser.converter, Parser.toObjectEntries);
       const structure = raw(this.json);
       const tree = this.traverse(structure);
-      console.log(JSON.stringify(tree, null, 2));
       return tree;
     };
 
@@ -105,9 +106,11 @@ function ParserShell() {
         meta: {
           type,
           id: shortid.generate(),
-          payload: [],
+          payloadIsParsed: true,
           mleft: 4,
+          payload: [],
           isExpanded: true,
+          insertionPoint: 0,
           isChildof: ''
         }
       };
@@ -122,10 +125,9 @@ function ParserShell() {
 
 
     traverse(objectEntries) {
-      const model = [];
-      console.log(this.headers);
+      var model = []; // eslint-disable-line
       if (this.headers) {
-        var start = this.buildStart(objectEntries);// eslint-disable-line
+        const start = this.buildStart(objectEntries);
         model.push(start);
       }
 
@@ -151,8 +153,16 @@ function ParserShell() {
       }
 
       if (this.headers) {
-        model[0].meta.payload.push(model.slice(1));
+        model = model.map((each, index) => {
+          if (index !== 0) {
+            each.meta.isChildof = model[0].meta.id;
+            return each;
+          }
+          return each;
+        });
+        model[0].meta.payload.push(...model.slice(1));
       }
+
 
       return model;
     }
@@ -165,7 +175,5 @@ function ParserShell() {
     }
   };
 }
-
-
 
 export default ParserShell;

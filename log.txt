@@ -22,3 +22,10 @@ function buildTree(objectEntries) {
 }
 
 buildTree(objectEntries);
+
+
+   // const construct = [
+    //   ...this.state.tree.slice(0, insertionPoint + 1),
+    //   ...subtree,
+    //   ...this.state.tree.slice(insertionPoint + 1)
+    // ];

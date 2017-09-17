@@ -24,7 +24,9 @@ const TypeObject = (props) => {
                       onClick={() => props.appendNodesToTree(
                         props.meta.payload,
                         props.meta.id,
-                        props.meta.mleft
+                        props.meta.mleft,
+                        props.meta.payloadIsParsed,
+                        props.meta.insertionPoint
                       )}
                     /> :
                     <ToggleDown
