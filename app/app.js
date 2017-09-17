@@ -34,14 +34,16 @@ class App extends Component {
   };
 
   // eslint-disable-next-line react/sort-comp
-  static parseJson(array) {
-    return ParserShell().getInstance(array).buildAbstractTree();
+  static parseJson(array, headers) {
+    return ParserShell()
+      .getInstance(array, headers)
+      .buildAbstractTree();
   }
 
   setTree = () => {
     const verify = this.checkJsonValidity(this.state.json);
     if (verify === 'isValid') {
-      const tree = App.parseJson(this.state.json);
+      const tree = App.parseJson(this.state.json, true);
       return this.setState({
         tree,
         isError: false,
@@ -66,7 +68,6 @@ class App extends Component {
         return each;
       });
 
-    subtree.shift(); // remove extra subtree headers
 
     const insertionPoint = this.state.tree.findIndex(each => each.meta.id === id);
     const construct = [
@@ -117,6 +118,7 @@ class App extends Component {
   };
 
   format = () => {
+    if (this.state.json.length === 0) return false;
     const json = JSON.stringify(JSON.parse(this.state.json), null, 2);
     return this.setState({ json });
   }

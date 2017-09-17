@@ -25,7 +25,7 @@ module.exports = {
     historyApiFallback: true,
     contentBase       : '/dist',
     compress          : true,
-    public            : 'https://c6e9e249.ngrok.io/'
+    // public            : 'https://89a0941f.ngrok.io/'
   },
   stats    : {
     colors : true,

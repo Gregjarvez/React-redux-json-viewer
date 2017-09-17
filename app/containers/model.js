@@ -28,7 +28,7 @@ class Modeler extends React.Component {
         <TypeObject
           key={each.meta.id}
           Qey={each.Qey}
-          contentCount={each.contentCount}
+          contentCount={each.contentCount.toString()}
           meta={each.meta}
           appendNodesToTree={this.props.appendNodesToTree}
           removeNodesFromTree={this.props.removeNodesFromTree}

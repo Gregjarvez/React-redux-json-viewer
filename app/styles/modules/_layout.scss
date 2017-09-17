@@ -10,13 +10,17 @@
     border: 2px solid $isError;
   }
 
+
   &--embedded {
     margin-top: 55px;
   }
 
   &--container {
     height: 650px;
+    width: 600px;
+    position: absolute;
     overflow-y: scroll;
+    z-index: 8;
   }
 
   &--errorhandler {
@@ -32,7 +36,6 @@
     font-weight: 400;
     text-align: center;
     transform: translateX(-30%) ;
-    perspective: 1000px;
     transition:  top 400ms ease;
     opacity: 0;
 
@@ -41,22 +44,24 @@
     }
 
     &-showing {
-      top: 50px;
+      top: 49px;
       opacity: 1;
       box-shadow: inset 5px 5px 10px 0px rgba(#000, 0.2)
     }
   }
 
   &--collapse{
-    font-size: 1.2em;
+    font-size: 1em;
   }
 
   &--setting{
+    display: flex;
+    flex-direction: row;
     padding: .5rem;
     background: #2C3E50;
     box-sizing: border-box;
 
-    > span {
+    > span:first-of-type {
       display: flex;
       color: white;
       padding: 7px;
@@ -68,12 +73,14 @@
 
     &-isabsolute {
       position: absolute;
-      z-index: 2;
+      z-index: 9;
       width: 100%;
       top: 0;
       right: 0.5px;
     }
   }
+
+
 
 
   &--row{

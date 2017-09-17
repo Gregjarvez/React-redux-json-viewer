@@ -1,11 +1,15 @@
 import shortid from 'shortid';
+import test from '../testJson.json';
+
+const data = JSON.stringify(test);
 
 function ParserShell() {
   let instance;
 
   class Parser {
-    constructor(json) {
+    constructor(json, headers) {
       this.json = json;
+      this.headers = headers || false;
     }
 
     starter = () => {
@@ -18,8 +22,9 @@ function ParserShell() {
     }
 
     static whatType(value) {
-      const isPrimitive = ['number', 'string', 'boolean'].includes(
-        typeof value);
+      const isPrimitive = [
+        'number', 'string', 'boolean'
+      ].includes(typeof value);
       return isPrimitive ? 'primitive' : 'object';
     }
 
@@ -86,34 +91,44 @@ function ParserShell() {
       const raw = this.compose2(Parser.converter, Parser.toObjectEntries);
       const structure = raw(this.json);
       const tree = this.traverse(structure);
+      console.log(JSON.stringify(tree, null, 2));
       return tree;
     };
 
+    buildStart = (objectEntries) => {
+      const baseInstance = this.starter();
+      const type = Parser.determineInstance(baseInstance);
+
+      return {
+        Qey: type,
+        contentCount: objectEntries.length,
+        meta: {
+          type,
+          id: shortid.generate(),
+          payload: [],
+          mleft: 4,
+          isExpanded: true,
+          isChildof: ''
+        }
+      };
+    };
+
+    static hasLength(value) {
+      if (Parser.determineInstance(value) === 'Object') {
+        return Parser.size(value);
+      }
+      return value.length;
+    }
+
+
     traverse(objectEntries) {
       const model = [];
-
-      const buildStart = () => {
-        const baseInstance = this.starter();
-
-        return {
-          Qey: Parser.determineInstance(baseInstance),
-          contentCount: objectEntries.length,
-          meta: {
-            type: Parser.determineInstance(baseInstance),
-            payload: []
-          }
-        };
-      };
-
-      const start = buildStart();// eslint-disable-line no-use-before-define
-      model.push(start);
-
-      function hasLength(value) {
-        if (Parser.determineInstance(value) === 'Object') {
-          return Parser.size(value);
-        }
-        return value.length;
+      console.log(this.headers);
+      if (this.headers) {
+        var start = this.buildStart(objectEntries);// eslint-disable-line
+        model.push(start);
       }
+
 
       for (let i = 0; i < objectEntries.length; i += 1) {
         if (objectEntries.length === 0) break;
@@ -128,25 +143,29 @@ function ParserShell() {
 
         if (whatType === 'object') {
           const build = Parser.nodeType('object', processing);
-          if (hasLength(value)) {
-            if (value !== null) {
-              build.meta.payload.push(value);
-            }
+          if (Parser.hasLength(value) && value !== null) {
+            build.meta.payload.push(value);
           }
           model.push(build);
         }
       }
+
+      if (this.headers) {
+        model[0].meta.payload.push(model.slice(1));
+      }
+
       return model;
     }
   }
 
   return {
-    getInstance(json) {
-      if (!instance) instance = new Parser(json);
+    getInstance(json, header) {
+      if (!instance) instance = new Parser(json, header);
       return instance;
     }
   };
 }
+
 
 
 export default ParserShell;

@@ -25,6 +25,7 @@ const Dumper = (props) => {
           theme="textmate"
           name="dumper-editor"
           editorProps={{ $blockScrolling: true }}
+          width="99%"
           height="600px"
           focus
           tabsize={2}
