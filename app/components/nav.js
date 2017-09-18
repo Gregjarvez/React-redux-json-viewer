@@ -1,5 +1,6 @@
 import React from 'react';
 import ToggleDown from 'react-icons/lib/fa/angle-down';
+import PropTypes from 'prop-types';
 
 
 class Navigation extends React.Component {
@@ -19,8 +20,8 @@ class Navigation extends React.Component {
     return (
       <ul className="navigation">
         <li className="navigation--logo">JSON Viewer Online</li>
-        <li className="navigation--item">New</li>
-        <li className="navigation--item">Save</li>
+        <li className="navigation--item" onClick={this.props.cleanSlate}>New</li>
+        <li className="navigation--item" onClick={this.props.loadDemo}>Demo</li>
         <li className="navigation--item">Open
           <ToggleDown className="navigation--toggler" onClick={this.togglerDropDown} />
           <ul className={`navigation--options ${this.state.isOpen ? 'navigation--options-isOpened' : f => f}`}>
@@ -36,4 +37,10 @@ class Navigation extends React.Component {
     );
   }
 }
+
+Navigation.propTypes = {
+  loadDemo: PropTypes.func.isRequired,
+  cleanSlate: PropTypes.func.isRequired
+};
+
 export default Navigation;

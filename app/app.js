@@ -6,7 +6,7 @@ import Dumper from './containers/dumper';
 import Modeler from './containers/model';
 
 import ParserShell from './parser/objectParser';
-
+import apiJson from './parser/demo';
 
 window.Perf = Perf;
 Perf.start();
@@ -135,10 +135,30 @@ class App extends Component {
     this.setState(prev => ({ tree: prev.cache }));
   }
 
+  loadDemo = () => {
+    apiJson().then((json) => {
+      this.setState({ json: JSON.stringify(json, null, 2) });
+      this.setTree();
+    });
+  }
+
+  cleanSlate = () => {
+    this.setState({
+      json: '',
+      isError: false,
+      errorMessage: '',
+      tree: [],
+      cache: []
+    });
+  }
+
   render() {
     return (
       <div className="container">
-        <Navigation />
+        <Navigation
+          loadDemo={this.loadDemo}
+          cleanSlate={this.cleanSlate}
+        />
         <div className="app">
           <Dumper
             format={this.format}
