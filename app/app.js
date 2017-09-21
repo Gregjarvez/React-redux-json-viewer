@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
-import Perf from 'react-addons-perf'; // eslint-disable-line
+
 
 import Navigation from './components/nav';
 import Dumper from './containers/dumper';
 import Modeler from './containers/model';
+import Modal from './components/url_modal';
 
 import ParserShell from './parser/objectParser';
-import apiJson from './parser/demo';
-
-window.Perf = Perf;
-Perf.start();
+import { getJson, fetchRequestedUrl, validUrl } from './parser/demo';
 
 class App extends Component {
   state = {
@@ -18,7 +16,19 @@ class App extends Component {
     errorMessage: '',
     tree: [],
     cache: [],
+    tabSize: 2,
+    urlModalRequest: false,
+    loadUrlError: ''
   };
+
+  checkJsonValidity(json) { // eslint-disable-line
+    try {
+      JSON.parse(json);
+      return 'isValid';
+    } catch (error) {
+      return error;
+    }
+  }
 
   setJsonToControllerState = (json) => {
     return this.setState({ json });
@@ -39,30 +49,20 @@ class App extends Component {
         tree,
         isError: false,
         errorMessage: '',
-        cache: tree,
+        cache: tree
       });
     }
     return this.setState({
       tree: [],
       isError: true,
-      errorMessage: verify.message,
+      errorMessage: verify.message
     });
   };
-
-  checkJsonValidity(json) {
-    // eslint-disable-line
-    try {
-      JSON.parse(json);
-      return 'isValid';
-    } catch (error) {
-      return error;
-    }
-  }
 
   appendNodesToTree = (payload, id, margin, payloadIsParsed, refnumber) => {
     if (payload.length === 0) return;
 
-    let subtree, // eslint-disable-line
+    let subtree,    // eslint-disable-line
       insertionPoint;
 
     if (!payloadIsParsed) {
@@ -80,7 +80,7 @@ class App extends Component {
     Array.prototype.splice.apply(tree, [insertionPoint + 1, 0, ...subtree]);
 
     // eslint-disable-next-line
-    var insertionNode = tree[insertionPoint];
+      var insertionNode = tree[insertionPoint];
 
     if (!insertionNode.meta.isExpanded) {
       insertionNode.meta.isExpanded = true;
@@ -108,16 +108,15 @@ class App extends Component {
       .slice(refPoint + 2)
       .map((each) => {
         if (each.meta.isExpanded) {
-          return !each.meta.isExpanded;
+          each.meta.isExpanded = false;
+          return each;
         }
         return each;
       })
       .filter(node => node.meta.isChildof !== id);
 
-    const prunedNodes = this.state.tree.slice(
-      skipNodes.length,
-      this.state.tree.length - process.length,
-    );
+    const prunedNodes = this.state.tree
+      .slice(skipNodes.length, this.state.tree.length - process.length);
     const tree = [...skipNodes, ...process];
     const mess = this.prune(prunedNodes);
 
@@ -129,20 +128,20 @@ class App extends Component {
 
   format = () => {
     if (this.state.json.length === 0) return false;
-    const json = JSON.stringify(JSON.parse(this.state.json), null, 2);
+    const json = JSON.stringify(JSON.parse(this.state.json), null, this.state.tabSize);
     return this.setState({ json });
-  };
+  }
 
   collapseAll = () => {
     this.setState(prev => ({ tree: prev.cache }));
-  };
+  }
 
   loadDemo = () => {
-    apiJson().then((json) => {
-      this.setState({ json: JSON.stringify(json, null, 2) });
+    getJson().then((json) => {
+      this.setState({ json: JSON.stringify(json, null, this.state.tabSize) });
       this.setTree();
     });
-  };
+  }
 
   cleanSlate = () => {
     this.setState({
@@ -150,14 +149,50 @@ class App extends Component {
       isError: false,
       errorMessage: '',
       tree: [],
-      cache: [],
+      cache: []
     });
-  };
+  }
+
+  tabSizeChange = (val) => {
+    if (val >= 1 && val <= 5) {
+      this.setState({ tabSize: parseInt(val) }); // eslint-disable-line
+    }
+  }
+
+  loadUrl = (url) => {
+    if (validUrl(url)) {
+      fetchRequestedUrl(url)
+        .then((json) => {
+          this.setState({
+            json: JSON.stringify(json, null, this.state.tabSize),
+            urlModalRequest: false,
+            loadUrlError: ''
+          });
+          this.setTree();
+        }).catch(err => this.setState({ loadUrlError: err.message }));
+    }
+  }
+  modalControll = (state) => {
+    this.setState({ urlModalRequest: state });
+  }
 
   render() {
     return (
       <div className="container">
-        <Navigation loadDemo={this.loadDemo} cleanSlate={this.cleanSlate} />
+        <Modal
+          loadUrl={this.loadUrl}
+          modalIsRequested={this.state.urlModalRequest}
+          urlError={this.state.loadUrlError}
+          closeModal={this.modalControll}
+        />
+        <Navigation
+          tabSize={this.state.tabSize}
+          loadDemo={this.loadDemo}
+          cleanSlate={this.cleanSlate}
+          tabSizeChange={this.tabSizeChange}
+          json={this.state.json}
+          openModal={this.modalControll}
+        />
         <div className="app">
           <Dumper
             format={this.format}

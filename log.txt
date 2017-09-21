@@ -29,3 +29,13 @@ buildTree(objectEntries);
     //   ...subtree,
     //   ...this.state.tree.slice(insertionPoint + 1)
     // ];
+
+
+<li className="navigation--item">Open
+          <ToggleDown className="navigation--toggler" onClick={this.togglerDropDown} />
+          <ul className={`navigation--options ${this.state.isOpen ? 'navigation--options-isOpened' : f => f}`}>
+            <li>Load URL</li>
+            <li>Load URL</li>
+            <li>Load URL</li>
+          </ul>
+        </li>

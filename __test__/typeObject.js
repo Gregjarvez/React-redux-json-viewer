@@ -4,7 +4,13 @@ import TypeObject from '../app/components/isTypeObject';
 
 describe('<TypeObject />', () => {
   it('renders correctly', () => {
-    const component = shallow(<TypeObject Qey="String" appendNodesToTree={f => f} removeNodesFromTree={f => f} />);
+    const component = shallow(<TypeObject
+      Qey="String"
+      appendNodesToTree={f => f}
+      removeNodesFromTree={f => f}
+    />);
     expect(component).toMatchSnapshot();
   });
+
+
 });
