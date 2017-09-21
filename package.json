@@ -16,9 +16,7 @@
       "jest-serializer-enzyme"
     ]
   },
-  "pre-commit": [
-    "lint"
-  ],
+  "pre-commit": "lint",
   "keywords": [],
   "author": "Gregory Assasie",
   "license": "ISC",
