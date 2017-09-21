@@ -1,7 +1,4 @@
 import shortid from 'shortid';
-// import test from '../testJson.json';
-
-// const data = JSON.stringify(test);
 
 function ParserShell() {
   let instance;
@@ -22,9 +19,7 @@ function ParserShell() {
     }
 
     static whatType(value) {
-      const isPrimitive = [
-        'number', 'string', 'boolean'
-      ].includes(typeof value);
+      const isPrimitive = ['number', 'string', 'boolean'].includes(typeof value);
       return isPrimitive ? 'primitive' : 'object';
     }
 
@@ -48,8 +43,8 @@ function ParserShell() {
               type: typeof value,
               id: shortid.generate(),
               mleft: 38,
-              isChildof: ''
-            }
+              isChildof: '',
+            },
           };
         },
 
@@ -62,19 +57,17 @@ function ParserShell() {
             contentCount: type === 'Array' ? value.length : Parser.size(value),
             meta: {
               type,
-              isExpandable: !!(
-                type === 'Array' ? value.length : Parser.size(value)
-              ),
+              isExpandable: !!(type === 'Array' ? value.length : Parser.size(value)),
               isExpanded: false,
               id: shortid.generate(),
               payloadIsParsed: false,
               payload: [],
               insertionPoint: null,
               mleft: 38,
-              isChildof: ''
-            }
+              isChildof: '',
+            },
           };
-        }
+        },
       };
       return types[type](iteratee);
     }
@@ -111,8 +104,8 @@ function ParserShell() {
           payload: [],
           isExpanded: true,
           insertionPoint: 0,
-          isChildof: ''
-        }
+          isChildof: '',
+        },
       };
     };
 
@@ -123,14 +116,12 @@ function ParserShell() {
       return value.length;
     }
 
-
     traverse(objectEntries) {
       var model = []; // eslint-disable-line
       if (this.headers) {
         const start = this.buildStart(objectEntries);
         model.push(start);
       }
-
 
       for (let i = 0; i < objectEntries.length; i += 1) {
         if (objectEntries.length === 0) break;
@@ -163,7 +154,6 @@ function ParserShell() {
         model[0].meta.payload.push(...model.slice(1));
       }
 
-
       return model;
     }
   }
@@ -172,7 +162,7 @@ function ParserShell() {
     getInstance(json, header) {
       if (!instance) instance = new Parser(json, header);
       return instance;
-    }
+    },
   };
 }
 
