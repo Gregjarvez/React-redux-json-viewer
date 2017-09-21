@@ -1,75 +1,74 @@
 const webpack = require('webpack');
 const path = require('path');
-const extractCssPlugins = require('extract-text-webpack-plugin');
+const ExtractCssPlugins = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  context  : __dirname,
-  devtool  : 'cheap-eval-source-map',
-  entry    : [
+  context: __dirname,
+  devtool: 'cheap-eval-source-map',
+  entry: [
     'react-hot-loader/patch',
     'webpack-dev-server/client?http://localhost:8080',
     'webpack/hot/only-dev-server',
     './app/index.js'
   ],
-  output   : {
-    path      : path.join(__dirname, 'dist'),
-    filename  : 'bundle.js',
+  output: {
+    path: path.join(__dirname, 'dist'),
+    filename: 'bundle.js',
     publicPath: '/'
   },
-  resolve  : {
+  resolve: {
     extensions: ['.js', '.json', '.scss']
   },
   devServer: {
-    hot               : true,
+    hot: true,
     historyApiFallback: true,
-    contentBase       : '/dist',
-    compress          : true,
-    public            : 'https://0e6fa732.ngrok.io'
+    contentBase: '/dist',
+    compress: true,
   },
-  stats    : {
-    colors : true,
+  stats: {
+    colors: true,
     reasons: true,
-    chunks : false
+    chunks: false
   },
-  module   : {
+  module: {
     rules: [
       {
         test: /\.scss$/,
-        use : ['css-hot-loader'].concat(extractCssPlugins.extract({
+        use: ['css-hot-loader'].concat(ExtractCssPlugins.extract({
           fallback: 'style-loader',
-          use     : ['css-loader', 'sass-loader']
+          use: ['css-loader', 'sass-loader']
         }))
       },
       {
         enforce: 'pre',
-        use    : 'eslint-loader',
+        use: 'eslint-loader',
         exclude: /node_moduless/
       },
       {
-        test   : /\.js$/,
-        loader : 'babel-loader',
+        test: /\.js$/,
+        loader: 'babel-loader',
         exclude: /node_modules/
       },
       {
-        test   : /\.jsx$/,
-        loader : 'babel-loader',
+        test: /\.jsx$/,
+        loader: 'babel-loader',
         exclude: /node_modules/
       },
       {
-        test  : /\.html$/,
+        test: /\.html$/,
         loader: 'html-loader'
       },
       {
-        test  : /\.json$/,
+        test: /\.json$/,
         loader: 'json-loader'
       }
     ]
   },
-  plugins  : [
+  plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
-    new extractCssPlugins('style.css'),
+    new ExtractCssPlugins('style.css'),
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: './app/index.html'
