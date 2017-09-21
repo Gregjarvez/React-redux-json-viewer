@@ -58,7 +58,7 @@ class Navigation extends React.Component {
             </li>
             <li onClick={() => this.saveToLocalStorage(this.props.json)}>Save Json</li>
             <li onClick={() => this.props.openModal(true)}>Load URL</li>
-            <li>Load localStorage</li>
+            <li onClick={() => this.props.loadLocalStorage()}>Load localStorage</li>
           </ul>
         </li>
       </ul>
@@ -70,6 +70,7 @@ Navigation.propTypes = {
   loadDemo: PropTypes.func.isRequired,
   cleanSlate: PropTypes.func.isRequired,
   tabSizeChange: PropTypes.func.isRequired,
+  loadLocalStorage: PropTypes.func.isRequired,
   openModal: PropTypes.func.isRequired,
   tabSize: PropTypes.number,
   json: PropTypes.string

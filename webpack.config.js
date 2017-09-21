@@ -3,7 +3,7 @@ const path = require('path');
 const extractCssPlugins = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-module.exports = {
+ const config = {
   context  : __dirname,
   devtool  : 'cheap-eval-source-map',
   entry    : [
@@ -13,7 +13,7 @@ module.exports = {
     './app/index.js'
   ],
   output   : {
-    path      : path.join(__dirname, 'dist'),
+    path      : path.join(__dirname, 'docs'),
     filename  : 'bundle.js',
     publicPath: '/'
   },
@@ -23,7 +23,7 @@ module.exports = {
   devServer: {
     hot               : true,
     historyApiFallback: true,
-    contentBase       : '/dist',
+    contentBase       : '/docs',
     compress          : true
   },
   stats    : {
@@ -75,3 +75,17 @@ module.exports = {
     })
   ]
 };
+
+
+if (process.env.NODE_ENV) {
+  config.plugins.push(
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+      }
+    }),
+    new webpack.optimize.UglifyJsPlugin()
+  )
+}
+
+module.exports = config;

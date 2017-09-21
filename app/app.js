@@ -97,7 +97,10 @@ class App extends Component {
       .filter((each) => {
         return ['Object', 'Array'].includes(each.meta.type);
       })
-      .map(each => each.meta.id);
+      .map((each) => {
+        each.meta.isExpanded = false;
+        return each.meta.id;
+      });
   }
 
   removeNodesFromTree = (id) => {
@@ -176,6 +179,12 @@ class App extends Component {
     this.setState({ urlModalRequest: state });
   }
 
+  loadLocalStorage = () => {
+    const json = localStorage.getItem('store') || JSON.stringify([]);
+    this.setState({ json }, this.setTree);
+
+  }
+
   render() {
     return (
       <div className="container">
@@ -192,6 +201,7 @@ class App extends Component {
           tabSizeChange={this.tabSizeChange}
           json={this.state.json}
           openModal={this.modalControll}
+          loadLocalStorage={this.loadLocalStorage}
         />
         <div className="app">
           <Dumper
