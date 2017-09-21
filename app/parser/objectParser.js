@@ -1,7 +1,7 @@
 import shortid from 'shortid';
-import test from '../testJson.json';
+// import test from '../testJson.json';
 
-const data = JSON.stringify(test);
+// const data = JSON.stringify(test);
 
 function ParserShell() {
   let instance;

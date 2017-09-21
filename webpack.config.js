@@ -24,8 +24,7 @@ module.exports = {
     hot               : true,
     historyApiFallback: true,
     contentBase       : '/dist',
-    compress          : true,
-    public            : 'https://0e6fa732.ngrok.io'
+    compress          : true
   },
   stats    : {
     colors : true,

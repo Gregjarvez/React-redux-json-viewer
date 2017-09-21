@@ -1,0 +1,70 @@
+.modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -10;
+  visibility: hidden;
+  opacity: 0;
+
+  &--container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -90%);
+    width: 400px;
+    height: 120px;
+    padding: .5em;
+    box-shadow: 5px 5px 25px 8px rgba(#000, 0.2);
+    background: white;
+  }
+
+  &--text {
+    font-size: 14px;
+    text-align: center;
+    margin-bottom: .5em;
+
+    &-error {
+      @extend .modal--text;
+      color: crimson;
+    }
+  }
+
+  &--input{
+    display: flex;
+    width: 80%;
+    margin: 0 auto;
+
+    > input  {
+      padding: .1em;
+      outline: none;
+      border: none;
+      border-bottom: 1px solid $primary-text-heading;
+      flex: 2;
+
+      &:focus {
+        border-bottom: 1px solid $isValid;
+      }
+    }
+    > button {
+      outline: none;
+      border: none;
+      margin-left: .3em;
+      font-size: 12px;
+      text-align: center;
+      padding: .5em;
+      cursor: pointer;
+      color: $bright-yellow;
+      background: #eee;
+    }
+  }
+
+  &--requested {
+    z-index: 999;
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 400ms ease-in-out;
+  }
+
+}

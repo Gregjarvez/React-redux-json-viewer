@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
-import Perf from 'react-addons-perf'; // eslint-disable-line
+
 
 import Navigation from './components/nav';
 import Dumper from './containers/dumper';
 import Modeler from './containers/model';
+import Modal from './components/url_modal';
 
 import ParserShell from './parser/objectParser';
-import apiJson from './parser/demo';
-
-window.Perf = Perf;
-Perf.start();
+import { getJson, fetchRequestedUrl, validUrl } from './parser/demo';
 
 class App extends Component {
   state = {
@@ -17,7 +15,10 @@ class App extends Component {
     isError: false,
     errorMessage: '',
     tree: [],
-    cache: []
+    cache: [],
+    tabSize: 2,
+    urlModalRequest: false,
+    loadUrlError: ''
   };
 
   checkJsonValidity(json) { // eslint-disable-line
@@ -127,7 +128,7 @@ class App extends Component {
 
   format = () => {
     if (this.state.json.length === 0) return false;
-    const json = JSON.stringify(JSON.parse(this.state.json), null, 2);
+    const json = JSON.stringify(JSON.parse(this.state.json), null, this.state.tabSize);
     return this.setState({ json });
   }
 
@@ -136,8 +137,8 @@ class App extends Component {
   }
 
   loadDemo = () => {
-    apiJson().then((json) => {
-      this.setState({ json: JSON.stringify(json, null, 2) });
+    getJson().then((json) => {
+      this.setState({ json: JSON.stringify(json, null, this.state.tabSize) });
       this.setTree();
     });
   }
@@ -152,12 +153,45 @@ class App extends Component {
     });
   }
 
+  tabSizeChange = (val) => {
+    if (val >= 1 && val <= 5) {
+      this.setState({ tabSize: parseInt(val) }); // eslint-disable-line
+    }
+  }
+
+  loadUrl = (url) => {
+    if (validUrl(url)) {
+      fetchRequestedUrl(url)
+        .then((json) => {
+          this.setState({
+            json: JSON.stringify(json, null, this.state.tabSize),
+            urlModalRequest: false,
+            loadUrlError: ''
+          });
+          this.setTree();
+        }).catch(err => this.setState({ loadUrlError: err.message }));
+    }
+  }
+  modalControll = (state) => {
+    this.setState({ urlModalRequest: state });
+  }
+
   render() {
     return (
       <div className="container">
+        <Modal
+          loadUrl={this.loadUrl}
+          modalIsRequested={this.state.urlModalRequest}
+          urlError={this.state.loadUrlError}
+          closeModal={this.modalControll}
+        />
         <Navigation
+          tabSize={this.state.tabSize}
           loadDemo={this.loadDemo}
           cleanSlate={this.cleanSlate}
+          tabSizeChange={this.tabSizeChange}
+          json={this.state.json}
+          openModal={this.modalControll}
         />
         <div className="app">
           <Dumper

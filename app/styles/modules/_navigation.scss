@@ -49,10 +49,24 @@
     padding-left: 1px;
   }
 
+  &--tabsize{
+    padding: .3em;
+    width: 50px;
+    background: #eee;
+    outline: none;
+    border: 0 solid;
+    margin-right: 20px;
+    text-align: center;
+
+
+    &:focus {
+      outline: $dummy-green;
+    }
+  }
+
   &--options {
     position: absolute;
     width: 150px;
-    height: 150px;
     top: 40px;
     left: -27px;
     border: none;
@@ -62,11 +76,19 @@
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.33);
     z-index: 10;
 
-
     & li {
       padding: 10px;
-      font-size: 13px;
+      font-size: 12px;
+      text-align: left;
       cursor: pointer;
+
+      &:first-child {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        align-content: center;
+        line-height: 20px;
+      }
     }
 
     &-isOpened {
