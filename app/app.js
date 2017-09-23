@@ -8,6 +8,7 @@ import Modal from './components/url_modal';
 
 import ParserShell from './parser/objectParser';
 import { getJson, fetchRequestedUrl, validUrl } from './parser/demo';
+import pathFinder from './parser/pathFinder';
 
 class App extends Component {
   state = {
@@ -87,7 +88,6 @@ class App extends Component {
       insertionNode.meta.payload = subtree;
       insertionNode.meta.payloadIsParsed = true;
       insertionNode.meta.insertionPoint = insertionPoint;
-
       this.setState({ tree });
     }
   };
@@ -182,7 +182,11 @@ class App extends Component {
   loadLocalStorage = () => {
     const json = localStorage.getItem('store') || JSON.stringify([]);
     this.setState({ json }, this.setTree);
+  }
 
+  copyPath = (id) => {
+    console.log(JSON.stringify(this.state.tree, null, 2));
+    return pathFinder().trace(id, [...this.state.tree]);
   }
 
   render() {
@@ -215,6 +219,7 @@ class App extends Component {
             isError={this.state.isError}
             collapseAll={this.collapseAll}
             errorMessage={this.state.errorMessage}
+            copyPath={this.copyPath}
             appendNodesToTree={this.appendNodesToTree}
             removeNodesFromTree={this.removeNodesFromTree}
           />

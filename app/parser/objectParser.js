@@ -48,7 +48,8 @@ function ParserShell() {
               type: typeof value,
               id: shortid.generate(),
               mleft: 38,
-              isChildof: ''
+              isChildof: '',
+              isRoot: false,
             }
           };
         },
@@ -71,7 +72,8 @@ function ParserShell() {
               payload: [],
               insertionPoint: null,
               mleft: 38,
-              isChildof: ''
+              isChildof: '',
+              isRoot: false,
             }
           };
         }
@@ -96,7 +98,7 @@ function ParserShell() {
       return tree;
     };
 
-    buildStart = (objectEntries) => {
+    header = (objectEntries) => {
       const baseInstance = this.starter();
       const type = Parser.determineInstance(baseInstance);
 
@@ -111,7 +113,8 @@ function ParserShell() {
           payload: [],
           isExpanded: true,
           insertionPoint: 0,
-          isChildof: ''
+          isChildof: '',
+          isRoot: true
         }
       };
     };
@@ -127,7 +130,7 @@ function ParserShell() {
     traverse(objectEntries) {
       var model = []; // eslint-disable-line
       if (this.headers) {
-        const start = this.buildStart(objectEntries);
+        const start = this.header(objectEntries);
         model.push(start);
       }
 

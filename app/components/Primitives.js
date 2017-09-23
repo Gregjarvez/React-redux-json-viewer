@@ -6,7 +6,7 @@ const Primitive = props => (
   <tr className="layout--row">
     <td className="model--panel">
       <span className="model--copy" title="copy path to key">
-        <Copy />
+        <Copy onClick={() => props.copyPath(props.meta.id)} />
       </span>
     </td>
     <td className="model--key">
@@ -32,10 +32,13 @@ Primitive.propTypes = {
   Qey: PropTypes.string.isRequired,
   value: PropTypes.any.isRequired,
   meta: PropTypes.shape({
+    id: PropTypes.string,
     type: PropTypes.string,
     margin: PropTypes.string,
-    mleft: PropTypes.number
+    mleft: PropTypes.number,
+    isChildof: PropTypes.string,
   }).isRequired,
+  copyPath: PropTypes.func
 
 };
 export default Primitive;

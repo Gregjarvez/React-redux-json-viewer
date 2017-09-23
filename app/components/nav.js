@@ -19,7 +19,7 @@ class Navigation extends React.Component {
 
   saveToLocalStorage = (json) => {
     if ('localStorage' in window && typeof json === 'string') {
-      return localStorage.setItem('store', json);
+      return localStorage.setItem('store', json || JSON.stringify({ data: null }, null, 2));
     }
     return alert('local storage not supported by your current Browser');
   }

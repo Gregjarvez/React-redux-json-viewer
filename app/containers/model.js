@@ -21,6 +21,7 @@ class Modeler extends React.Component {
             Qey={each.Qey}
             value={each.value}
             meta={each.meta}
+            copyPath={this.props.copyPath}
           />
         );
       }
@@ -32,6 +33,7 @@ class Modeler extends React.Component {
           meta={each.meta}
           appendNodesToTree={this.props.appendNodesToTree}
           removeNodesFromTree={this.props.removeNodesFromTree}
+          copyPath={this.props.copyPath}
         />
       );
     });
@@ -71,7 +73,8 @@ Modeler.propTypes = {
   removeNodesFromTree: PropTypes.func.isRequired,
   isError: PropTypes.bool,
   errorMessage: PropTypes.string,
-  collapseAll: PropTypes.func.isRequired
+  collapseAll: PropTypes.func.isRequired,
+  copyPath: PropTypes.func
 };
 
 export default Modeler;

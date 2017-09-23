@@ -9,7 +9,7 @@ const TypeObject = (props) => {
     <tr className="layout--row">
       <td className="model--panel">
         <span className="model--copy" title="copy path to key">
-          <Copy />
+          <Copy onClick={() => props.copyPath(props.meta.id)} />
         </span>
       </td>
       <td className="model--key model--key-isObject">
@@ -50,9 +50,10 @@ const TypeObject = (props) => {
 };
 
 TypeObject.propTypes = {
-  Qey: PropTypes.string.isRequired,
-  contentCount: PropTypes.string,
   meta: PropTypes.object,
+  contentCount: PropTypes.string,
+  Qey: PropTypes.string.isRequired,
+  copyPath: PropTypes.func.isRequired,
   appendNodesToTree: PropTypes.func.isRequired,
   removeNodesFromTree: PropTypes.func.isRequired
 

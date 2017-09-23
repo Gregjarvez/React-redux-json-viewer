@@ -11,6 +11,4 @@ describe('<TypeObject />', () => {
     />);
     expect(component).toMatchSnapshot();
   });
-
-
 });
