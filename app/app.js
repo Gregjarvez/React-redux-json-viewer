@@ -60,7 +60,7 @@ class App extends Component {
     });
   };
 
-  appendNodesToTree = (payload, id, margin, payloadIsParsed, refnumber) => {
+  appendNodesToTree = (payload, id, margin, payloadIsParsed, refnumber, childof) => {
     if (payload.length === 0) return;
 
     let subtree,    // eslint-disable-line
@@ -69,7 +69,7 @@ class App extends Component {
     if (!payloadIsParsed) {
       subtree = App.parseJson(JSON.stringify(...payload)).map((each) => {
         each.meta.mleft = margin + 20;
-        each.meta.isChildof = id;
+        each.meta.isChildof.push(id, ...childof);
         return each;
       });
       insertionPoint = this.state.tree.findIndex(each => each.meta.id === id);
@@ -81,8 +81,7 @@ class App extends Component {
     Array.prototype.splice.apply(tree, [insertionPoint + 1, 0, ...subtree]);
 
     // eslint-disable-next-line
-      var insertionNode = tree[insertionPoint];
-
+    var insertionNode = tree[insertionPoint];
     if (!insertionNode.meta.isExpanded) {
       insertionNode.meta.isExpanded = true;
       insertionNode.meta.payload = subtree;
@@ -92,40 +91,20 @@ class App extends Component {
     }
   };
 
-  prune(nodes) {
-    return nodes
-      .filter((each) => {
-        return ['Object', 'Array'].includes(each.meta.type);
-      })
-      .map((each) => {
-        each.meta.isExpanded = false;
-        return each.meta.id;
-      });
-  }
-
   removeNodesFromTree = (id) => {
     const refPoint = this.state.tree.findIndex(node => node.meta.id === id);
     const skippedNodesFromStart = this.state.tree.slice(0, refPoint + 1);
     const skippedNodesFromEnd = this.state.tree
       .slice(refPoint + 1)
-      .filter(node => node.meta.isChildof !== id);
-
-    const fStart = skippedNodesFromStart.length;
-    const fEnd = skippedNodesFromEnd.length;
-
-    const removedNodes = this.state.tree.slice(
-      fStart,
-      fEnd < fStart ? undefined : fEnd
-    );
+      .filter(node => !node.meta.isChildof.includes(id));
 
     const tree = [...skippedNodesFromStart, ...skippedNodesFromEnd];
-    const mess = this.prune(removedNodes);
 
     const ref = tree[refPoint]; // eslint-disable-line
     ref.meta.isExpanded = false;
 
     this.setState({
-      tree: tree.filter(each => !mess.includes(each.meta.isChildof))
+      tree
     });
   };
 

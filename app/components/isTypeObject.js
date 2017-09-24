@@ -26,7 +26,8 @@ const TypeObject = (props) => {
                         props.meta.id,
                         props.meta.mleft,
                         props.meta.payloadIsParsed,
-                        props.meta.insertionPoint
+                        props.meta.insertionPoint,
+                        props.meta.isChildof
                       )}
                     /> :
                     <ToggleDown
@@ -56,7 +57,6 @@ TypeObject.propTypes = {
   copyPath: PropTypes.func.isRequired,
   appendNodesToTree: PropTypes.func.isRequired,
   removeNodesFromTree: PropTypes.func.isRequired
-
 };
 
 export default TypeObject;

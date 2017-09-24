@@ -48,7 +48,7 @@ function ParserShell() {
               type: typeof value,
               id: shortid.generate(),
               mleft: 38,
-              isChildof: '',
+              isChildof: [],
               isRoot: false,
             }
           };
@@ -72,7 +72,7 @@ function ParserShell() {
               payload: [],
               insertionPoint: null,
               mleft: 38,
-              isChildof: '',
+              isChildof: [],
               isRoot: false,
             }
           };
@@ -158,7 +158,7 @@ function ParserShell() {
       if (this.headers) {
         model = model.map((each, index) => {
           if (index !== 0) {
-            each.meta.isChildof = model[0].meta.id;
+            each.meta.isChildof.push(model[0].meta.id);
             return each;
           }
           return each;

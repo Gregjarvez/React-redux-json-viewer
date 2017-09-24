@@ -36,7 +36,7 @@ Primitive.propTypes = {
     type: PropTypes.string,
     margin: PropTypes.string,
     mleft: PropTypes.number,
-    isChildof: PropTypes.string,
+    isChildof: PropTypes.array,
   }).isRequired,
   copyPath: PropTypes.func
 
