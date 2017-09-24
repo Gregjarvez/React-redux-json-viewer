@@ -60,7 +60,9 @@ class App extends Component {
     });
   };
 
-  appendNodesToTree = (payload, id, margin, payloadIsParsed, refnumber, childof) => {
+  appendNodesToTree = (payload, id, margin, ...rest) => {
+    const [payloadIsParsed, refnumber, childof] = rest;
+
     if (payload.length === 0) return;
 
     let subtree,    // eslint-disable-line
@@ -77,11 +79,13 @@ class App extends Component {
       subtree = payload;
       insertionPoint = refnumber;
     }
+    // todo reopen objects or array which were previously opened
     const tree = [...this.state.tree];
     Array.prototype.splice.apply(tree, [insertionPoint + 1, 0, ...subtree]);
 
+    console.log(tree);
     // eslint-disable-next-line
-    var insertionNode = tree[insertionPoint];
+    const insertionNode = tree[insertionPoint];
     if (!insertionNode.meta.isExpanded) {
       insertionNode.meta.isExpanded = true;
       insertionNode.meta.payload = subtree;
