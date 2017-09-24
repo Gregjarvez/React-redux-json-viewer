@@ -2,6 +2,7 @@
 import test from '../testJson.json';
 
 function PathFinder() {
+
   function determineReducer({ steps, Qey, type }) {
     const customType = type === 'Object' ||
                        type === 'Array' ?
@@ -28,24 +29,19 @@ function PathFinder() {
     return types[customType](steps, type, Qey);
   }
 
-  function pruneExpandedChildren(includeNodes) {
-    const isChildOf = includeNodes[includeNodes.length - 1].meta.isChildof;
-    const isExpanded = includeNodes.filter((each) => {
-      return ['Object', 'Array'].includes(each.meta.type);
-    })
-      .map((each) => {
-        return each.meta.id;
-      });
-    return includeNodes
-      .filter(each => (!isExpanded.includes(each.meta.isChildof) && each.meta.id === isChildOf));
+  function findRootId(nodes) {
+    return nodes.find(node => node.meta.isRoot).meta.id;
   }
 
+  function findChildOfId(nodes, id) {
+    return nodes.find(node => node.meta.id === id).meta.isChildof;
+  }
 
   function finder(nodes, id) {
     const step = [];
     let tracker = 0;
-    let targetChildOfId = nodes.find(
-      node => node.meta.id === id).meta.isChildof;
+    let targetChildOfId = findChildOfId(nodes, id);
+    const parentNodeId = nodes[0].meta.id;
 
     for (let i = nodes.length - 1; i >= 0; i--) {
       const node = nodes[i];
@@ -62,10 +58,23 @@ function PathFinder() {
         targetChildOfId = nodes[i].meta.isChildof;
         tracker = 0;
       } else {
-        tracker++;
+        const isDirectNode = (node.meta.isChildof === parentNodeId);
+        if (isDirectNode) {
+          tracker++;
+        }
       }
     }
     return step.reverse();
+  }
+
+  function toClosestParent(id, includedNodes) {
+    const rootId = findRootId(includedNodes);
+    const targetChildOf = findChildOfId(includedNodes, id);
+    const targetParent = includedNodes.findIndex((node) => {
+      return node.meta.id === targetChildOf &&
+             node.meta.isChildof === rootId;
+    });
+    return includedNodes.slice(targetParent);
   }
 
   function trunc(id, json) {
@@ -73,14 +82,12 @@ function PathFinder() {
     return json.slice(0, nodeIndex + 1);
   }
 
+
   function trace(id, json) {
     const nodesIncluded = trunc(id, json);
-    const pruned = pruneExpandedChildren(nodesIncluded);
-    const path = finder(nodesIncluded, id).map((each) => {
-      console.log(pruned);
-      return determineReducer(each);
-    });
-    console.log(path.join(''));
+    const workableNodes = toClosestParent(id, nodesIncluded);
+    const path = finder(workableNodes, id);
+    console.log(path);
   }
 
   return {
@@ -88,6 +95,6 @@ function PathFinder() {
   };
 }
 
-PathFinder().trace('SkXeVuf47o-', test);
+PathFinder().trace('S17a_2NEs-', test);
 
 export default PathFinder;
