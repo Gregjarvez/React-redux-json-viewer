@@ -5,10 +5,8 @@ git clone https://github.com/Gregjarvez/json-viewer.git
 ```
 
 - Install dependencies
-
 ```
 yarn
-
 ```
 
 - Start the app

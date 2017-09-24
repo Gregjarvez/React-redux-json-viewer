@@ -1,309 +1,245 @@
 [
   {
-    "Qey": "Array",
+    "Qey": "Object",
     "contentCount": 3,
     "meta": {
-      "type": "Array",
-      "id": "HJodhVNoZ",
+      "type": "Object",
+      "id": "B1cQAOEo-",
       "payloadIsParsed": true,
       "mleft": 4,
       "payload": [
         {
-          "Qey": "0",
-          "contentCount": 6,
+          "Qey": "presets",
+          "contentCount": 2,
           "meta": {
-            "type": "Object",
+            "type": "Array",
             "isExpandable": true,
-            "isExpanded": false,
-            "id": "ryejOnENiW",
-            "payloadIsParsed": false,
+            "isExpanded": true,
+            "id": "SyeqQCd4iW",
+            "payloadIsParsed": true,
             "payload": [
               {
-                "id": "0001",
-                "type": "donut",
-                "name": "Cake",
-                "ppu": 0.55,
-                "batters": {
-                  "batter": [
+                "Qey": "0",
+                "value": "react",
+                "meta": {
+                  "type": "string",
+                  "id": "Bk7E0_4oW",
+                  "mleft": 58,
+                  "isChildof": "SyeqQCd4iW",
+                  "isRoot": false
+                }
+              },
+              {
+                "Qey": "1",
+                "contentCount": 2,
+                "meta": {
+                  "type": "Array",
+                  "isExpandable": true,
+                  "isExpanded": true,
+                  "id": "SkgXEA_EiZ",
+                  "payloadIsParsed": true,
+                  "payload": [
                     {
-                      "id": "1001",
-                      "type": "Regular"
+                      "Qey": "0",
+                      "value": "env",
+                      "meta": {
+                        "type": "string",
+                        "id": "ByS4AdEsb",
+                        "mleft": 78,
+                        "isChildof": "SkgXEA_EiZ",
+                        "isRoot": false
+                      }
                     },
                     {
-                      "id": "1002",
-                      "type": "Chocolate"
-                    },
-                    {
-                      "id": "1003",
-                      "type": "Blueberry"
-                    },
-                    {
-                      "id": "1004",
-                      "type": "Devil's Food"
+                      "Qey": "1",
+                      "contentCount": 3,
+                      "meta": {
+                        "type": "Object",
+                        "isExpandable": true,
+                        "isExpanded": true,
+                        "id": "rygHNAd4sZ",
+                        "payloadIsParsed": true,
+                        "payload": [
+                          {
+                            "Qey": "targets",
+                            "contentCount": 1,
+                            "meta": {
+                              "type": "Object",
+                              "isExpandable": true,
+                              "isExpanded": true,
+                              "id": "ryUVCd4iZ",
+                              "payloadIsParsed": true,
+                              "payload": [
+                                {
+                                  "Qey": "browsers",
+                                  "value": "last 2 version",
+                                  "meta": {
+                                    "type": "string",
+                                    "id": "HJvNAdVsZ",
+                                    "mleft": 118,
+                                    "isChildof": "ryUVCd4iZ",
+                                    "isRoot": false
+                                  }
+                                }
+                              ],
+                              "insertionPoint": 6,
+                              "mleft": 98,
+                              "isChildof": "rygHNAd4sZ",
+                              "isRoot": false
+                            }
+                          },
+                          {
+                            "Qey": "loose",
+                            "value": true,
+                            "meta": {
+                              "type": "boolean",
+                              "id": "B1gIECdVj-",
+                              "mleft": 98,
+                              "isChildof": "rygHNAd4sZ",
+                              "isRoot": false
+                            }
+                          },
+                          {
+                            "Qey": "modules",
+                            "value": false,
+                            "meta": {
+                              "type": "boolean",
+                              "id": "HyZIEC_Nsb",
+                              "mleft": 98,
+                              "isChildof": "rygHNAd4sZ",
+                              "isRoot": false
+                            }
+                          }
+                        ],
+                        "insertionPoint": 5,
+                        "mleft": 78,
+                        "isChildof": "SkgXEA_EiZ",
+                        "isRoot": false
+                      }
                     }
-                  ]
-                },
-                "topping": [
-                  {
-                    "id": "5001",
-                    "type": "None"
-                  },
-                  {
-                    "id": "5002",
-                    "type": "Glazed"
-                  },
-                  {
-                    "id": "5005",
-                    "type": "Sugar"
-                  },
-                  {
-                    "id": "5007",
-                    "type": "Powdered Sugar"
-                  },
-                  {
-                    "id": "5006",
-                    "type": "Chocolate with Sprinkles"
-                  },
-                  {
-                    "id": "5003",
-                    "type": "Chocolate"
-                  },
-                  {
-                    "id": "5004",
-                    "type": "Maple"
-                  }
-                ]
+                  ],
+                  "insertionPoint": 3,
+                  "mleft": 58,
+                  "isChildof": "SyeqQCd4iW",
+                  "isRoot": false
+                }
               }
             ],
-            "insertionPoint": null,
+            "insertionPoint": 1,
             "mleft": 38,
-            "isChildof": "HJodhVNoZ",
+            "isChildof": "B1cQAOEo-",
             "isRoot": false
           }
         },
         {
-          "Qey": "1",
-          "contentCount": 6,
+          "Qey": "plugins",
+          "contentCount": 3,
+          "meta": {
+            "type": "Array",
+            "isExpandable": true,
+            "isExpanded": true,
+            "id": "S1Z5XAO4sW",
+            "payloadIsParsed": true,
+            "payload": [
+              {
+                "Qey": "0",
+                "value": "react-hot-loader/babel",
+                "meta": {
+                  "type": "string",
+                  "id": "SyFNR_4ib",
+                  "mleft": 58,
+                  "isChildof": "S1Z5XAO4sW",
+                  "isRoot": false
+                }
+              },
+              {
+                "Qey": "1",
+                "value": "transform-class-properties",
+                "meta": {
+                  "type": "string",
+                  "id": "S1xK4AdNib",
+                  "mleft": 58,
+                  "isChildof": "S1Z5XAO4sW",
+                  "isRoot": false
+                }
+              },
+              {
+                "Qey": "2",
+                "value": "transform-object-rest-spread",
+                "meta": {
+                  "type": "string",
+                  "id": "H1bKNAuEiW",
+                  "mleft": 58,
+                  "isChildof": "S1Z5XAO4sW",
+                  "isRoot": false
+                }
+              }
+            ],
+            "insertionPoint": 10,
+            "mleft": 38,
+            "isChildof": "B1cQAOEo-",
+            "isRoot": false
+          }
+        },
+        {
+          "Qey": "env",
+          "contentCount": 1,
           "meta": {
             "type": "Object",
             "isExpandable": true,
             "isExpanded": true,
-            "id": "BJ-iuh4Esb",
+            "id": "rJMqQ0OEsb",
             "payloadIsParsed": true,
             "payload": [
               {
-                "Qey": "id",
-                "value": "0002",
-                "meta": {
-                  "type": "string",
-                  "id": "BkT_2VEsb",
-                  "mleft": 58,
-                  "isChildof": "BJ-iuh4Esb",
-                  "isRoot": false
-                }
-              },
-              {
-                "Qey": "type",
-                "value": "donut",
-                "meta": {
-                  "type": "string",
-                  "id": "r1g6u2VEiW",
-                  "mleft": 58,
-                  "isChildof": "BJ-iuh4Esb",
-                  "isRoot": false
-                }
-              },
-              {
-                "Qey": "name",
-                "value": "Raised",
-                "meta": {
-                  "type": "string",
-                  "id": "BJZ6un4EsZ",
-                  "mleft": 58,
-                  "isChildof": "BJ-iuh4Esb",
-                  "isRoot": false
-                }
-              },
-              {
-                "Qey": "ppu",
-                "value": 0.55,
-                "meta": {
-                  "type": "number",
-                  "id": "BJGadnNVoZ",
-                  "mleft": 58,
-                  "isChildof": "BJ-iuh4Esb",
-                  "isRoot": false
-                }
-              },
-              {
-                "Qey": "batters",
+                "Qey": "test",
                 "contentCount": 1,
                 "meta": {
                   "type": "Object",
                   "isExpandable": true,
                   "isExpanded": true,
-                  "id": "S17a_2NEs-",
+                  "id": "B1c40ONsW",
                   "payloadIsParsed": true,
                   "payload": [
                     {
-                      "Qey": "batter",
+                      "Qey": "plugins",
                       "contentCount": 1,
                       "meta": {
                         "type": "Array",
                         "isExpandable": true,
                         "isExpanded": true,
-                        "id": "Hk0dnNNjZ",
+                        "id": "rysV0O4oZ",
                         "payloadIsParsed": true,
                         "payload": [
                           {
                             "Qey": "0",
-                            "contentCount": 2,
+                            "value": "transform-es2015-modules-commonjs",
                             "meta": {
-                              "type": "Object",
-                              "isExpandable": true,
-                              "isExpanded": true,
-                              "id": "SyxthV4sZ",
-                              "payloadIsParsed": true,
-                              "payload": [
-                                {
-                                  "Qey": "id",
-                                  "value": "1001",
-                                  "meta": {
-                                    "type": "string",
-                                    "id": "B1-K2NNoW",
-                                    "mleft": 118,
-                                    "isChildof": "SyxthV4sZ",
-                                    "isRoot": false
-                                  }
-                                },
-                                {
-                                  "Qey": "type",
-                                  "value": "Regular",
-                                  "meta": {
-                                    "type": "string",
-                                    "id": "SJgZK24VsW",
-                                    "mleft": 118,
-                                    "isChildof": "SyxthV4sZ",
-                                    "isRoot": false
-                                  }
-                                }
-                              ],
-                              "insertionPoint": 9,
+                              "type": "string",
+                              "id": "r1hN0_4jZ",
                               "mleft": 98,
-                              "isChildof": "Hk0dnNNjZ",
+                              "isChildof": "rysV0O4oZ",
                               "isRoot": false
                             }
                           }
                         ],
-                        "insertionPoint": 8,
+                        "insertionPoint": 16,
                         "mleft": 78,
-                        "isChildof": "S17a_2NEs-",
+                        "isChildof": "B1c40ONsW",
                         "isRoot": false
                       }
                     }
                   ],
-                  "insertionPoint": 7,
+                  "insertionPoint": 15,
                   "mleft": 58,
-                  "isChildof": "BJ-iuh4Esb",
-                  "isRoot": false
-                }
-              },
-              {
-                "Qey": "topping",
-                "contentCount": 5,
-                "meta": {
-                  "type": "Array",
-                  "isExpandable": true,
-                  "isExpanded": false,
-                  "id": "r14pd3EEo-",
-                  "payloadIsParsed": false,
-                  "payload": [
-                    [
-                      {
-                        "id": "5001",
-                        "type": "None"
-                      },
-                      {
-                        "id": "5002",
-                        "type": "Glazed"
-                      },
-                      {
-                        "id": "5005",
-                        "type": "Sugar"
-                      },
-                      {
-                        "id": "5003",
-                        "type": "Chocolate"
-                      },
-                      {
-                        "id": "5004",
-                        "type": "Maple"
-                      }
-                    ]
-                  ],
-                  "insertionPoint": null,
-                  "mleft": 58,
-                  "isChildof": "BJ-iuh4Esb",
+                  "isChildof": "rJMqQ0OEsb",
                   "isRoot": false
                 }
               }
             ],
-            "insertionPoint": 2,
+            "insertionPoint": 14,
             "mleft": 38,
-            "isChildof": "HJodhVNoZ",
-            "isRoot": false
-          }
-        },
-        {
-          "Qey": "2",
-          "contentCount": 6,
-          "meta": {
-            "type": "Object",
-            "isExpandable": true,
-            "isExpanded": false,
-            "id": "ryGou2V4oZ",
-            "payloadIsParsed": false,
-            "payload": [
-              {
-                "id": "0003",
-                "type": "donut",
-                "name": "Old Fashioned",
-                "ppu": 0.55,
-                "batters": {
-                  "batter": [
-                    {
-                      "id": "1001",
-                      "type": "Regular"
-                    },
-                    {
-                      "id": "1002",
-                      "type": "Chocolate"
-                    }
-                  ]
-                },
-                "topping": [
-                  {
-                    "id": "5001",
-                    "type": "None"
-                  },
-                  {
-                    "id": "5002",
-                    "type": "Glazed"
-                  },
-                  {
-                    "id": "5003",
-                    "type": "Chocolate"
-                  },
-                  {
-                    "id": "5004",
-                    "type": "Maple"
-                  }
-                ]
-              }
-            ],
-            "insertionPoint": null,
-            "mleft": 38,
-            "isChildof": "HJodhVNoZ",
+            "isChildof": "B1cQAOEo-",
             "isRoot": false
           }
         }
@@ -315,574 +251,599 @@
     }
   },
   {
-    "Qey": "0",
-    "contentCount": 6,
+    "Qey": "presets",
+    "contentCount": 2,
     "meta": {
-      "type": "Object",
+      "type": "Array",
       "isExpandable": true,
-      "isExpanded": false,
-      "id": "ryejOnENiW",
-      "payloadIsParsed": false,
+      "isExpanded": true,
+      "id": "SyeqQCd4iW",
+      "payloadIsParsed": true,
       "payload": [
         {
-          "id": "0001",
-          "type": "donut",
-          "name": "Cake",
-          "ppu": 0.55,
-          "batters": {
-            "batter": [
+          "Qey": "0",
+          "value": "react",
+          "meta": {
+            "type": "string",
+            "id": "Bk7E0_4oW",
+            "mleft": 58,
+            "isChildof": "SyeqQCd4iW",
+            "isRoot": false
+          }
+        },
+        {
+          "Qey": "1",
+          "contentCount": 2,
+          "meta": {
+            "type": "Array",
+            "isExpandable": true,
+            "isExpanded": true,
+            "id": "SkgXEA_EiZ",
+            "payloadIsParsed": true,
+            "payload": [
               {
-                "id": "1001",
-                "type": "Regular"
+                "Qey": "0",
+                "value": "env",
+                "meta": {
+                  "type": "string",
+                  "id": "ByS4AdEsb",
+                  "mleft": 78,
+                  "isChildof": "SkgXEA_EiZ",
+                  "isRoot": false
+                }
               },
               {
-                "id": "1002",
-                "type": "Chocolate"
-              },
-              {
-                "id": "1003",
-                "type": "Blueberry"
-              },
-              {
-                "id": "1004",
-                "type": "Devil's Food"
+                "Qey": "1",
+                "contentCount": 3,
+                "meta": {
+                  "type": "Object",
+                  "isExpandable": true,
+                  "isExpanded": true,
+                  "id": "rygHNAd4sZ",
+                  "payloadIsParsed": true,
+                  "payload": [
+                    {
+                      "Qey": "targets",
+                      "contentCount": 1,
+                      "meta": {
+                        "type": "Object",
+                        "isExpandable": true,
+                        "isExpanded": true,
+                        "id": "ryUVCd4iZ",
+                        "payloadIsParsed": true,
+                        "payload": [
+                          {
+                            "Qey": "browsers",
+                            "value": "last 2 version",
+                            "meta": {
+                              "type": "string",
+                              "id": "HJvNAdVsZ",
+                              "mleft": 118,
+                              "isChildof": "ryUVCd4iZ",
+                              "isRoot": false
+                            }
+                          }
+                        ],
+                        "insertionPoint": 6,
+                        "mleft": 98,
+                        "isChildof": "rygHNAd4sZ",
+                        "isRoot": false
+                      }
+                    },
+                    {
+                      "Qey": "loose",
+                      "value": true,
+                      "meta": {
+                        "type": "boolean",
+                        "id": "B1gIECdVj-",
+                        "mleft": 98,
+                        "isChildof": "rygHNAd4sZ",
+                        "isRoot": false
+                      }
+                    },
+                    {
+                      "Qey": "modules",
+                      "value": false,
+                      "meta": {
+                        "type": "boolean",
+                        "id": "HyZIEC_Nsb",
+                        "mleft": 98,
+                        "isChildof": "rygHNAd4sZ",
+                        "isRoot": false
+                      }
+                    }
+                  ],
+                  "insertionPoint": 5,
+                  "mleft": 78,
+                  "isChildof": "SkgXEA_EiZ",
+                  "isRoot": false
+                }
               }
-            ]
-          },
-          "topping": [
-            {
-              "id": "5001",
-              "type": "None"
-            },
-            {
-              "id": "5002",
-              "type": "Glazed"
-            },
-            {
-              "id": "5005",
-              "type": "Sugar"
-            },
-            {
-              "id": "5007",
-              "type": "Powdered Sugar"
-            },
-            {
-              "id": "5006",
-              "type": "Chocolate with Sprinkles"
-            },
-            {
-              "id": "5003",
-              "type": "Chocolate"
-            },
-            {
-              "id": "5004",
-              "type": "Maple"
-            }
-          ]
+            ],
+            "insertionPoint": 3,
+            "mleft": 58,
+            "isChildof": "SyeqQCd4iW",
+            "isRoot": false
+          }
         }
       ],
-      "insertionPoint": null,
+      "insertionPoint": 1,
       "mleft": 38,
-      "isChildof": "HJodhVNoZ",
+      "isChildof": "B1cQAOEo-",
+      "isRoot": false
+    }
+  },
+  {
+    "Qey": "0",
+    "value": "react",
+    "meta": {
+      "type": "string",
+      "id": "Bk7E0_4oW",
+      "mleft": 58,
+      "isChildof": "SyeqQCd4iW",
       "isRoot": false
     }
   },
   {
     "Qey": "1",
-    "contentCount": 6,
-    "meta": {
-      "type": "Object",
-      "isExpandable": true,
-      "isExpanded": true,
-      "id": "BJ-iuh4Esb",
-      "payloadIsParsed": true,
-      "payload": [
-        {
-          "Qey": "id",
-          "value": "0002",
-          "meta": {
-            "type": "string",
-            "id": "BkT_2VEsb",
-            "mleft": 58,
-            "isChildof": "BJ-iuh4Esb",
-            "isRoot": false
-          }
-        },
-        {
-          "Qey": "type",
-          "value": "donut",
-          "meta": {
-            "type": "string",
-            "id": "r1g6u2VEiW",
-            "mleft": 58,
-            "isChildof": "BJ-iuh4Esb",
-            "isRoot": false
-          }
-        },
-        {
-          "Qey": "name",
-          "value": "Raised",
-          "meta": {
-            "type": "string",
-            "id": "BJZ6un4EsZ",
-            "mleft": 58,
-            "isChildof": "BJ-iuh4Esb",
-            "isRoot": false
-          }
-        },
-        {
-          "Qey": "ppu",
-          "value": 0.55,
-          "meta": {
-            "type": "number",
-            "id": "BJGadnNVoZ",
-            "mleft": 58,
-            "isChildof": "BJ-iuh4Esb",
-            "isRoot": false
-          }
-        },
-        {
-          "Qey": "batters",
-          "contentCount": 1,
-          "meta": {
-            "type": "Object",
-            "isExpandable": true,
-            "isExpanded": true,
-            "id": "S17a_2NEs-",
-            "payloadIsParsed": true,
-            "payload": [
-              {
-                "Qey": "batter",
-                "contentCount": 1,
-                "meta": {
-                  "type": "Array",
-                  "isExpandable": true,
-                  "isExpanded": true,
-                  "id": "Hk0dnNNjZ",
-                  "payloadIsParsed": true,
-                  "payload": [
-                    {
-                      "Qey": "0",
-                      "contentCount": 2,
-                      "meta": {
-                        "type": "Object",
-                        "isExpandable": true,
-                        "isExpanded": true,
-                        "id": "SyxthV4sZ",
-                        "payloadIsParsed": true,
-                        "payload": [
-                          {
-                            "Qey": "id",
-                            "value": "1001",
-                            "meta": {
-                              "type": "string",
-                              "id": "B1-K2NNoW",
-                              "mleft": 118,
-                              "isChildof": "SyxthV4sZ",
-                              "isRoot": false
-                            }
-                          },
-                          {
-                            "Qey": "type",
-                            "value": "Regular",
-                            "meta": {
-                              "type": "string",
-                              "id": "SJgZK24VsW",
-                              "mleft": 118,
-                              "isChildof": "SyxthV4sZ",
-                              "isRoot": false
-                            }
-                          }
-                        ],
-                        "insertionPoint": 9,
-                        "mleft": 98,
-                        "isChildof": "Hk0dnNNjZ",
-                        "isRoot": false
-                      }
-                    }
-                  ],
-                  "insertionPoint": 8,
-                  "mleft": 78,
-                  "isChildof": "S17a_2NEs-",
-                  "isRoot": false
-                }
-              }
-            ],
-            "insertionPoint": 7,
-            "mleft": 58,
-            "isChildof": "BJ-iuh4Esb",
-            "isRoot": false
-          }
-        },
-        {
-          "Qey": "topping",
-          "contentCount": 5,
-          "meta": {
-            "type": "Array",
-            "isExpandable": true,
-            "isExpanded": false,
-            "id": "r14pd3EEo-",
-            "payloadIsParsed": false,
-            "payload": [
-              [
-                {
-                  "id": "5001",
-                  "type": "None"
-                },
-                {
-                  "id": "5002",
-                  "type": "Glazed"
-                },
-                {
-                  "id": "5005",
-                  "type": "Sugar"
-                },
-                {
-                  "id": "5003",
-                  "type": "Chocolate"
-                },
-                {
-                  "id": "5004",
-                  "type": "Maple"
-                }
-              ]
-            ],
-            "insertionPoint": null,
-            "mleft": 58,
-            "isChildof": "BJ-iuh4Esb",
-            "isRoot": false
-          }
-        }
-      ],
-      "insertionPoint": 2,
-      "mleft": 38,
-      "isChildof": "HJodhVNoZ",
-      "isRoot": false
-    }
-  },
-  {
-    "Qey": "id",
-    "value": "0002",
-    "meta": {
-      "type": "string",
-      "id": "BkT_2VEsb",
-      "mleft": 58,
-      "isChildof": "BJ-iuh4Esb",
-      "isRoot": false
-    }
-  },
-  {
-    "Qey": "type",
-    "value": "donut",
-    "meta": {
-      "type": "string",
-      "id": "r1g6u2VEiW",
-      "mleft": 58,
-      "isChildof": "BJ-iuh4Esb",
-      "isRoot": false
-    }
-  },
-  {
-    "Qey": "name",
-    "value": "Raised",
-    "meta": {
-      "type": "string",
-      "id": "BJZ6un4EsZ",
-      "mleft": 58,
-      "isChildof": "BJ-iuh4Esb",
-      "isRoot": false
-    }
-  },
-  {
-    "Qey": "ppu",
-    "value": 0.55,
-    "meta": {
-      "type": "number",
-      "id": "BJGadnNVoZ",
-      "mleft": 58,
-      "isChildof": "BJ-iuh4Esb",
-      "isRoot": false
-    }
-  },
-  {
-    "Qey": "batters",
-    "contentCount": 1,
-    "meta": {
-      "type": "Object",
-      "isExpandable": true,
-      "isExpanded": true,
-      "id": "S17a_2NEs-",
-      "payloadIsParsed": true,
-      "payload": [
-        {
-          "Qey": "batter",
-          "contentCount": 1,
-          "meta": {
-            "type": "Array",
-            "isExpandable": true,
-            "isExpanded": true,
-            "id": "Hk0dnNNjZ",
-            "payloadIsParsed": true,
-            "payload": [
-              {
-                "Qey": "0",
-                "contentCount": 2,
-                "meta": {
-                  "type": "Object",
-                  "isExpandable": true,
-                  "isExpanded": true,
-                  "id": "SyxthV4sZ",
-                  "payloadIsParsed": true,
-                  "payload": [
-                    {
-                      "Qey": "id",
-                      "value": "1001",
-                      "meta": {
-                        "type": "string",
-                        "id": "B1-K2NNoW",
-                        "mleft": 118,
-                        "isChildof": "SyxthV4sZ",
-                        "isRoot": false
-                      }
-                    },
-                    {
-                      "Qey": "type",
-                      "value": "Regular",
-                      "meta": {
-                        "type": "string",
-                        "id": "SJgZK24VsW",
-                        "mleft": 118,
-                        "isChildof": "SyxthV4sZ",
-                        "isRoot": false
-                      }
-                    }
-                  ],
-                  "insertionPoint": 9,
-                  "mleft": 98,
-                  "isChildof": "Hk0dnNNjZ",
-                  "isRoot": false
-                }
-              }
-            ],
-            "insertionPoint": 8,
-            "mleft": 78,
-            "isChildof": "S17a_2NEs-",
-            "isRoot": false
-          }
-        }
-      ],
-      "insertionPoint": 7,
-      "mleft": 58,
-      "isChildof": "BJ-iuh4Esb",
-      "isRoot": false
-    }
-  },
-  {
-    "Qey": "batter",
-    "contentCount": 1,
+    "contentCount": 2,
     "meta": {
       "type": "Array",
       "isExpandable": true,
       "isExpanded": true,
-      "id": "Hk0dnNNjZ",
+      "id": "SkgXEA_EiZ",
       "payloadIsParsed": true,
       "payload": [
         {
           "Qey": "0",
-          "contentCount": 2,
+          "value": "env",
+          "meta": {
+            "type": "string",
+            "id": "ByS4AdEsb",
+            "mleft": 78,
+            "isChildof": "SkgXEA_EiZ",
+            "isRoot": false
+          }
+        },
+        {
+          "Qey": "1",
+          "contentCount": 3,
           "meta": {
             "type": "Object",
             "isExpandable": true,
             "isExpanded": true,
-            "id": "SyxthV4sZ",
+            "id": "rygHNAd4sZ",
             "payloadIsParsed": true,
             "payload": [
               {
-                "Qey": "id",
-                "value": "1001",
+                "Qey": "targets",
+                "contentCount": 1,
                 "meta": {
-                  "type": "string",
-                  "id": "B1-K2NNoW",
-                  "mleft": 118,
-                  "isChildof": "SyxthV4sZ",
+                  "type": "Object",
+                  "isExpandable": true,
+                  "isExpanded": true,
+                  "id": "ryUVCd4iZ",
+                  "payloadIsParsed": true,
+                  "payload": [
+                    {
+                      "Qey": "browsers",
+                      "value": "last 2 version",
+                      "meta": {
+                        "type": "string",
+                        "id": "HJvNAdVsZ",
+                        "mleft": 118,
+                        "isChildof": "ryUVCd4iZ",
+                        "isRoot": false
+                      }
+                    }
+                  ],
+                  "insertionPoint": 6,
+                  "mleft": 98,
+                  "isChildof": "rygHNAd4sZ",
                   "isRoot": false
                 }
               },
               {
-                "Qey": "type",
-                "value": "Regular",
+                "Qey": "loose",
+                "value": true,
                 "meta": {
-                  "type": "string",
-                  "id": "SJgZK24VsW",
-                  "mleft": 118,
-                  "isChildof": "SyxthV4sZ",
+                  "type": "boolean",
+                  "id": "B1gIECdVj-",
+                  "mleft": 98,
+                  "isChildof": "rygHNAd4sZ",
+                  "isRoot": false
+                }
+              },
+              {
+                "Qey": "modules",
+                "value": false,
+                "meta": {
+                  "type": "boolean",
+                  "id": "HyZIEC_Nsb",
+                  "mleft": 98,
+                  "isChildof": "rygHNAd4sZ",
                   "isRoot": false
                 }
               }
             ],
-            "insertionPoint": 9,
-            "mleft": 98,
-            "isChildof": "Hk0dnNNjZ",
+            "insertionPoint": 5,
+            "mleft": 78,
+            "isChildof": "SkgXEA_EiZ",
             "isRoot": false
           }
         }
       ],
-      "insertionPoint": 8,
-      "mleft": 78,
-      "isChildof": "S17a_2NEs-",
+      "insertionPoint": 3,
+      "mleft": 58,
+      "isChildof": "SyeqQCd4iW",
       "isRoot": false
     }
   },
   {
     "Qey": "0",
-    "contentCount": 2,
+    "value": "env",
+    "meta": {
+      "type": "string",
+      "id": "ByS4AdEsb",
+      "mleft": 78,
+      "isChildof": "SkgXEA_EiZ",
+      "isRoot": false
+    }
+  },
+  {
+    "Qey": "1",
+    "contentCount": 3,
     "meta": {
       "type": "Object",
       "isExpandable": true,
       "isExpanded": true,
-      "id": "SyxthV4sZ",
+      "id": "rygHNAd4sZ",
       "payloadIsParsed": true,
       "payload": [
         {
-          "Qey": "id",
-          "value": "1001",
+          "Qey": "targets",
+          "contentCount": 1,
           "meta": {
-            "type": "string",
-            "id": "B1-K2NNoW",
-            "mleft": 118,
-            "isChildof": "SyxthV4sZ",
+            "type": "Object",
+            "isExpandable": true,
+            "isExpanded": true,
+            "id": "ryUVCd4iZ",
+            "payloadIsParsed": true,
+            "payload": [
+              {
+                "Qey": "browsers",
+                "value": "last 2 version",
+                "meta": {
+                  "type": "string",
+                  "id": "HJvNAdVsZ",
+                  "mleft": 118,
+                  "isChildof": "ryUVCd4iZ",
+                  "isRoot": false
+                }
+              }
+            ],
+            "insertionPoint": 6,
+            "mleft": 98,
+            "isChildof": "rygHNAd4sZ",
             "isRoot": false
           }
         },
         {
-          "Qey": "type",
-          "value": "Regular",
+          "Qey": "loose",
+          "value": true,
           "meta": {
-            "type": "string",
-            "id": "SJgZK24VsW",
-            "mleft": 118,
-            "isChildof": "SyxthV4sZ",
+            "type": "boolean",
+            "id": "B1gIECdVj-",
+            "mleft": 98,
+            "isChildof": "rygHNAd4sZ",
+            "isRoot": false
+          }
+        },
+        {
+          "Qey": "modules",
+          "value": false,
+          "meta": {
+            "type": "boolean",
+            "id": "HyZIEC_Nsb",
+            "mleft": 98,
+            "isChildof": "rygHNAd4sZ",
             "isRoot": false
           }
         }
       ],
-      "insertionPoint": 9,
+      "insertionPoint": 5,
+      "mleft": 78,
+      "isChildof": "SkgXEA_EiZ",
+      "isRoot": false
+    }
+  },
+  {
+    "Qey": "targets",
+    "contentCount": 1,
+    "meta": {
+      "type": "Object",
+      "isExpandable": true,
+      "isExpanded": true,
+      "id": "ryUVCd4iZ",
+      "payloadIsParsed": true,
+      "payload": [
+        {
+          "Qey": "browsers",
+          "value": "last 2 version",
+          "meta": {
+            "type": "string",
+            "id": "HJvNAdVsZ",
+            "mleft": 118,
+            "isChildof": "ryUVCd4iZ",
+            "isRoot": false
+          }
+        }
+      ],
+      "insertionPoint": 6,
       "mleft": 98,
-      "isChildof": "Hk0dnNNjZ",
+      "isChildof": "rygHNAd4sZ",
       "isRoot": false
     }
   },
   {
-    "Qey": "id",
-    "value": "1001",
+    "Qey": "browsers",
+    "value": "last 2 version",
     "meta": {
       "type": "string",
-      "id": "B1-K2NNoW",
+      "id": "HJvNAdVsZ",
       "mleft": 118,
-      "isChildof": "SyxthV4sZ",
+      "isChildof": "ryUVCd4iZ",
       "isRoot": false
     }
   },
   {
-    "Qey": "type",
-    "value": "Regular",
+    "Qey": "loose",
+    "value": true,
     "meta": {
-      "type": "string",
-      "id": "SJgZK24VsW",
-      "mleft": 118,
-      "isChildof": "SyxthV4sZ",
+      "type": "boolean",
+      "id": "B1gIECdVj-",
+      "mleft": 98,
+      "isChildof": "rygHNAd4sZ",
       "isRoot": false
     }
   },
   {
-    "Qey": "topping",
-    "contentCount": 5,
+    "Qey": "modules",
+    "value": false,
+    "meta": {
+      "type": "boolean",
+      "id": "HyZIEC_Nsb",
+      "mleft": 98,
+      "isChildof": "rygHNAd4sZ",
+      "isRoot": false
+    }
+  },
+  {
+    "Qey": "plugins",
+    "contentCount": 3,
     "meta": {
       "type": "Array",
       "isExpandable": true,
-      "isExpanded": false,
-      "id": "r14pd3EEo-",
-      "payloadIsParsed": false,
+      "isExpanded": true,
+      "id": "S1Z5XAO4sW",
+      "payloadIsParsed": true,
       "payload": [
-        [
-          {
-            "id": "5001",
-            "type": "None"
-          },
-          {
-            "id": "5002",
-            "type": "Glazed"
-          },
-          {
-            "id": "5005",
-            "type": "Sugar"
-          },
-          {
-            "id": "5003",
-            "type": "Chocolate"
-          },
-          {
-            "id": "5004",
-            "type": "Maple"
+        {
+          "Qey": "0",
+          "value": "react-hot-loader/babel",
+          "meta": {
+            "type": "string",
+            "id": "SyFNR_4ib",
+            "mleft": 58,
+            "isChildof": "S1Z5XAO4sW",
+            "isRoot": false
           }
-        ]
+        },
+        {
+          "Qey": "1",
+          "value": "transform-class-properties",
+          "meta": {
+            "type": "string",
+            "id": "S1xK4AdNib",
+            "mleft": 58,
+            "isChildof": "S1Z5XAO4sW",
+            "isRoot": false
+          }
+        },
+        {
+          "Qey": "2",
+          "value": "transform-object-rest-spread",
+          "meta": {
+            "type": "string",
+            "id": "H1bKNAuEiW",
+            "mleft": 58,
+            "isChildof": "S1Z5XAO4sW",
+            "isRoot": false
+          }
+        }
       ],
-      "insertionPoint": null,
+      "insertionPoint": 10,
+      "mleft": 38,
+      "isChildof": "B1cQAOEo-",
+      "isRoot": false
+    }
+  },
+  {
+    "Qey": "0",
+    "value": "react-hot-loader/babel",
+    "meta": {
+      "type": "string",
+      "id": "SyFNR_4ib",
       "mleft": 58,
-      "isChildof": "BJ-iuh4Esb",
+      "isChildof": "S1Z5XAO4sW",
+      "isRoot": false
+    }
+  },
+  {
+    "Qey": "1",
+    "value": "transform-class-properties",
+    "meta": {
+      "type": "string",
+      "id": "S1xK4AdNib",
+      "mleft": 58,
+      "isChildof": "S1Z5XAO4sW",
       "isRoot": false
     }
   },
   {
     "Qey": "2",
-    "contentCount": 6,
+    "value": "transform-object-rest-spread",
+    "meta": {
+      "type": "string",
+      "id": "H1bKNAuEiW",
+      "mleft": 58,
+      "isChildof": "S1Z5XAO4sW",
+      "isRoot": false
+    }
+  },
+  {
+    "Qey": "env",
+    "contentCount": 1,
     "meta": {
       "type": "Object",
       "isExpandable": true,
-      "isExpanded": false,
-      "id": "ryGou2V4oZ",
-      "payloadIsParsed": false,
+      "isExpanded": true,
+      "id": "rJMqQ0OEsb",
+      "payloadIsParsed": true,
       "payload": [
         {
-          "id": "0003",
-          "type": "donut",
-          "name": "Old Fashioned",
-          "ppu": 0.55,
-          "batters": {
-            "batter": [
+          "Qey": "test",
+          "contentCount": 1,
+          "meta": {
+            "type": "Object",
+            "isExpandable": true,
+            "isExpanded": true,
+            "id": "B1c40ONsW",
+            "payloadIsParsed": true,
+            "payload": [
               {
-                "id": "1001",
-                "type": "Regular"
-              },
-              {
-                "id": "1002",
-                "type": "Chocolate"
+                "Qey": "plugins",
+                "contentCount": 1,
+                "meta": {
+                  "type": "Array",
+                  "isExpandable": true,
+                  "isExpanded": true,
+                  "id": "rysV0O4oZ",
+                  "payloadIsParsed": true,
+                  "payload": [
+                    {
+                      "Qey": "0",
+                      "value": "transform-es2015-modules-commonjs",
+                      "meta": {
+                        "type": "string",
+                        "id": "r1hN0_4jZ",
+                        "mleft": 98,
+                        "isChildof": "rysV0O4oZ",
+                        "isRoot": false
+                      }
+                    }
+                  ],
+                  "insertionPoint": 16,
+                  "mleft": 78,
+                  "isChildof": "B1c40ONsW",
+                  "isRoot": false
+                }
               }
-            ]
-          },
-          "topping": [
-            {
-              "id": "5001",
-              "type": "None"
-            },
-            {
-              "id": "5002",
-              "type": "Glazed"
-            },
-            {
-              "id": "5003",
-              "type": "Chocolate"
-            },
-            {
-              "id": "5004",
-              "type": "Maple"
-            }
-          ]
+            ],
+            "insertionPoint": 15,
+            "mleft": 58,
+            "isChildof": "rJMqQ0OEsb",
+            "isRoot": false
+          }
         }
       ],
-      "insertionPoint": null,
+      "insertionPoint": 14,
       "mleft": 38,
-      "isChildof": "HJodhVNoZ",
+      "isChildof": "B1cQAOEo-",
+      "isRoot": false
+    }
+  },
+  {
+    "Qey": "test",
+    "contentCount": 1,
+    "meta": {
+      "type": "Object",
+      "isExpandable": true,
+      "isExpanded": true,
+      "id": "B1c40ONsW",
+      "payloadIsParsed": true,
+      "payload": [
+        {
+          "Qey": "plugins",
+          "contentCount": 1,
+          "meta": {
+            "type": "Array",
+            "isExpandable": true,
+            "isExpanded": true,
+            "id": "rysV0O4oZ",
+            "payloadIsParsed": true,
+            "payload": [
+              {
+                "Qey": "0",
+                "value": "transform-es2015-modules-commonjs",
+                "meta": {
+                  "type": "string",
+                  "id": "r1hN0_4jZ",
+                  "mleft": 98,
+                  "isChildof": "rysV0O4oZ",
+                  "isRoot": false
+                }
+              }
+            ],
+            "insertionPoint": 16,
+            "mleft": 78,
+            "isChildof": "B1c40ONsW",
+            "isRoot": false
+          }
+        }
+      ],
+      "insertionPoint": 15,
+      "mleft": 58,
+      "isChildof": "rJMqQ0OEsb",
+      "isRoot": false
+    }
+  },
+  {
+    "Qey": "plugins",
+    "contentCount": 1,
+    "meta": {
+      "type": "Array",
+      "isExpandable": true,
+      "isExpanded": true,
+      "id": "rysV0O4oZ",
+      "payloadIsParsed": true,
+      "payload": [
+        {
+          "Qey": "0",
+          "value": "transform-es2015-modules-commonjs",
+          "meta": {
+            "type": "string",
+            "id": "r1hN0_4jZ",
+            "mleft": 98,
+            "isChildof": "rysV0O4oZ",
+            "isRoot": false
+          }
+        }
+      ],
+      "insertionPoint": 16,
+      "mleft": 78,
+      "isChildof": "B1c40ONsW",
+      "isRoot": false
+    }
+  },
+  {
+    "Qey": "0",
+    "value": "transform-es2015-modules-commonjs",
+    "meta": {
+      "type": "string",
+      "id": "r1hN0_4jZ",
+      "mleft": 98,
+      "isChildof": "rysV0O4oZ",
       "isRoot": false
     }
   }

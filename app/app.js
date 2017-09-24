@@ -105,23 +105,23 @@ class App extends Component {
 
   removeNodesFromTree = (id) => {
     const refPoint = this.state.tree.findIndex(node => node.meta.id === id);
-    const skipNodes = this.state.tree.slice(0, refPoint + 1);
+    const skippedNodesFromStart = this.state.tree.slice(0, refPoint + 1);
 
-    const process = this.state.tree
-      .slice(refPoint + 2)
+    const skippedNodesFromEnd = this.state.tree
+      .slice(refPoint + 1)
       .map((each) => {
-        if (each.meta.isExpanded) {
-          each.meta.isExpanded = false;
-          return each;
-        }
         return each;
       })
       .filter(node => node.meta.isChildof !== id);
 
-    const prunedNodes = this.state.tree
-      .slice(skipNodes.length, this.state.tree.length - process.length);
-    const tree = [...skipNodes, ...process];
-    const mess = this.prune(prunedNodes);
+    const removedNodes = this.state.tree.slice(
+      skippedNodesFromStart.length,
+      skippedNodesFromEnd.length
+    );
+
+
+    const tree = [...skippedNodesFromStart, ...skippedNodesFromEnd];
+    const mess = this.prune(removedNodes);
 
     var ref = tree[refPoint]; // eslint-disable-line
     ref.meta.isExpanded = false;
@@ -186,7 +186,7 @@ class App extends Component {
 
   copyPath = (id) => {
     console.log(JSON.stringify(this.state.tree, null, 2));
-    return pathFinder().trace(id, [...this.state.tree]);
+    return pathFinder.trace(id, [...this.state.tree]);
   }
 
   render() {
