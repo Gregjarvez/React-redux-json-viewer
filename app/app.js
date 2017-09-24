@@ -109,20 +109,17 @@ class App extends Component {
 
     const skippedNodesFromEnd = this.state.tree
       .slice(refPoint + 1)
-      .map((each) => {
-        return each;
-      })
       .filter(node => node.meta.isChildof !== id);
 
     const removedNodes = this.state.tree.slice(
       skippedNodesFromStart.length,
-      skippedNodesFromEnd.length
+      this.state.tree.length - skippedNodesFromEnd.length
     );
-
 
     const tree = [...skippedNodesFromStart, ...skippedNodesFromEnd];
     const mess = this.prune(removedNodes);
 
+    console.log(removedNodes);
     var ref = tree[refPoint]; // eslint-disable-line
     ref.meta.isExpanded = false;
 
