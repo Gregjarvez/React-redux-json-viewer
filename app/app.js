@@ -106,24 +106,27 @@ class App extends Component {
   removeNodesFromTree = (id) => {
     const refPoint = this.state.tree.findIndex(node => node.meta.id === id);
     const skippedNodesFromStart = this.state.tree.slice(0, refPoint + 1);
-
     const skippedNodesFromEnd = this.state.tree
       .slice(refPoint + 1)
       .filter(node => node.meta.isChildof !== id);
 
+    const fStart = skippedNodesFromStart.length;
+    const fEnd = skippedNodesFromEnd.length;
+
     const removedNodes = this.state.tree.slice(
-      skippedNodesFromStart.length,
-      this.state.tree.length - skippedNodesFromEnd.length
+      fStart,
+      fEnd < fStart ? undefined : fEnd
     );
 
     const tree = [...skippedNodesFromStart, ...skippedNodesFromEnd];
     const mess = this.prune(removedNodes);
 
-    console.log(removedNodes);
-    var ref = tree[refPoint]; // eslint-disable-line
+    const ref = tree[refPoint]; // eslint-disable-line
     ref.meta.isExpanded = false;
 
-    this.setState({ tree: tree.filter(each => !mess.includes(each.meta.isChildof)) });
+    this.setState({
+      tree: tree.filter(each => !mess.includes(each.meta.isChildof))
+    });
   };
 
   format = () => {

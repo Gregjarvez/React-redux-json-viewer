@@ -113,7 +113,7 @@ function ParserShell() {
           payload: [],
           isExpanded: true,
           insertionPoint: 0,
-          isChildof: '',
+          isChildof: [],
           isRoot: true
         }
       };
