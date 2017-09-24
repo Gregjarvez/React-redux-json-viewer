@@ -10,6 +10,8 @@ import ParserShell from './parser/objectParser';
 import { getJson, fetchRequestedUrl, validUrl } from './parser/demo';
 import pathFinder from './parser/pathFinder';
 
+const parser = ParserShell.getInstance;
+
 class App extends Component {
   state = {
     json: '',
@@ -37,8 +39,7 @@ class App extends Component {
 
   // eslint-disable-next-line react/sort-comp
   static parseJson(array, headers) {
-    return ParserShell()
-      .getInstance(array, headers)
+    return parser(array, headers)
       .buildAbstractTree();
   }
 
@@ -62,7 +63,6 @@ class App extends Component {
 
   appendNodesToTree = (payload, id, margin, ...rest) => {
     const [payloadIsParsed, refnumber, childof] = rest;
-
     if (payload.length === 0) return;
 
     let subtree,    // eslint-disable-line
@@ -79,7 +79,7 @@ class App extends Component {
       subtree = payload;
       insertionPoint = refnumber;
     }
-    // todo reopen objects or array which were previously opened
+    // todo reopen previously opened objects or array
     const tree = [...this.state.tree];
     Array.prototype.splice.apply(tree, [insertionPoint + 1, 0, ...subtree]);
 

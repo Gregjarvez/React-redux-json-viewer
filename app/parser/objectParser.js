@@ -1,9 +1,7 @@
 import shortid from 'shortid';
-// import test from '../testJson.json';
 
-// const data = JSON.stringify(test);
 
-function ParserShell() {
+const ParserShell = (function () {
   let instance;
 
   class Parser {
@@ -177,6 +175,6 @@ function ParserShell() {
       return instance;
     }
   };
-}
+}());
 
 export default ParserShell;
