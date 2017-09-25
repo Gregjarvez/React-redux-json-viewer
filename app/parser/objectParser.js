@@ -1,6 +1,5 @@
 import shortid from 'shortid';
 
-
 const ParserShell = (function () {
 
   class Parser {
@@ -47,6 +46,7 @@ const ParserShell = (function () {
               mleft: 38,
               isChildof: [],
               isRoot: false,
+              path: ''
             }
           };
         },
@@ -70,7 +70,7 @@ const ParserShell = (function () {
               insertionPoint: null,
               mleft: 38,
               isChildof: [],
-              isRoot: false,
+              path: ''
             }
           };
         }
@@ -111,7 +111,8 @@ const ParserShell = (function () {
           isExpanded: true,
           insertionPoint: 0,
           isChildof: [],
-          isRoot: true
+          isRoot: true,
+          path: ''
         }
       };
     };

@@ -6,7 +6,7 @@ const Primitive = props => (
   <tr className="layout--row">
     <td className="model--panel">
       <span className="model--copy" title="copy path to key">
-        <Copy onClick={() => props.copyPath(props.meta.id)} />
+        <Copy />
       </span>
     </td>
     <td className="model--key">
@@ -19,6 +19,15 @@ const Primitive = props => (
               ? 'model--value-string'
               : 'model--value-number'}`}
             >{ props.value.toString() }
+            </td>
+            <td>
+              <table className="model--path">
+                <tbody>
+                  <tr>
+                    <td className="model--path-value">{props.meta.path}</td>
+                  </tr>
+                </tbody>
+              </table>
             </td>
           </tr>
         </tbody>
@@ -37,8 +46,7 @@ Primitive.propTypes = {
     margin: PropTypes.string,
     mleft: PropTypes.number,
     isChildof: PropTypes.array,
+    path: PropTypes.any
   }).isRequired,
-  copyPath: PropTypes.func
-
 };
 export default Primitive;

@@ -1,6 +1,3 @@
-// eslint-disable
-import test from '../testJson.json';
-import array from '../testJsonArray.json';
 
 const PathFinder = (function () {
   const defaultVarName = 'data';
@@ -14,8 +11,6 @@ const PathFinder = (function () {
 
   function characters(type) {
     switch (type) {
-      case 'Array':
-        return '';
       case 'Object':
         return '%Ob%';
       default:
@@ -25,7 +20,6 @@ const PathFinder = (function () {
 
   function path(template) {
     const object = new RegExp(/%Ob%/, 'g');
-    const array = new RegExp(/%arr%/, 'g');
     return template.replace(object, '.');
   }
 
@@ -38,7 +32,7 @@ const PathFinder = (function () {
       return cur
         .concat(`${!isNaN(+prev.key) ? `[${prev.key}]` : prev.key}${characters(currentDelimiter)}`);
     }, '');
-    console.log(path(template));
+    return path(template);
   }
 
   function trace(tree, targetId) {
@@ -48,14 +42,11 @@ const PathFinder = (function () {
     const includesTarget = [...relationsNodes, targetNode];
     return composePath(includesTarget);
   }
-
   return {
     trace
   };
 }());
 
-
-PathFinder.trace(test, 'SJe_ERDBi-');
 
 export default PathFinder;
 

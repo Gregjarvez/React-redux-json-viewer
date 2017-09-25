@@ -7,7 +7,7 @@ import Modal from './components/url_modal';
 
 import ParserShell from './parser/objectParser';
 import { getJson, fetchRequestedUrl, validUrl } from './parser/demo';
-import pathFinder from './parser/pathFinder';
+import PathFinder from './parser/pathFinder';
 
 class App extends Component {
   state = {
@@ -39,10 +39,17 @@ class App extends Component {
     return ParserShell.getInstance(array, headers).buildAbstractTree();
   }
 
+  static populateWithPath(tree) {
+    return tree.map((node) => {
+      node.meta.path = PathFinder.trace(tree, node.meta.id);
+      return node;
+    });
+  }
+
   setTree = () => {
     const verify = this.checkJsonValidity(this.state.json);
     if (verify === 'isValid') {
-      const tree = App.parseJson(this.state.json, true);
+      const tree = App.populateWithPath(App.parseJson(this.state.json, true));
       return this.setState({
         tree,
         isError: false,
@@ -70,12 +77,14 @@ class App extends Component {
         each.meta.isChildof.push(id, ...childof);
         return each;
       });
+
       insertionPoint = this.state.tree.findIndex(each => each.meta.id === id);
     } else {
       subtree = payload;
       insertionPoint = refnumber;
     }
     // todo reopen previously opened objects or array
+
     const tree = [...this.state.tree];
     Array.prototype.splice.apply(tree, [insertionPoint + 1, 0, ...subtree]);
 
@@ -86,7 +95,7 @@ class App extends Component {
       insertionNode.meta.payload = subtree;
       insertionNode.meta.payloadIsParsed = true;
       insertionNode.meta.insertionPoint = insertionPoint;
-      this.setState({ tree });
+      this.setState({ tree: App.populateWithPath(tree) });
     }
   };
 
@@ -164,9 +173,6 @@ class App extends Component {
     this.setState({ json }, this.setTree);
   };
 
-  copyPath = (id) => {
-    console.log(pathFinder.trace([...this.state.tree], id));
-  };
 
   render() {
     return (

@@ -9,7 +9,7 @@ const TypeObject = (props) => {
     <tr className="layout--row">
       <td className="model--panel">
         <span className="model--copy" title="copy path to key">
-          <Copy onClick={() => props.copyPath(props.meta.id)} />
+          <Copy />
         </span>
       </td>
       <td className="model--key model--key-isObject">
@@ -18,29 +18,38 @@ const TypeObject = (props) => {
             <tr>
               <td>
                 {
-                  !props.meta.isExpanded ?
-                    <ToggleLeft
-                      className="model--toggler"
-                      onClick={() => props.appendNodesToTree(
-                        props.meta.payload,
-                        props.meta.id,
-                        props.meta.mleft,
-                        props.meta.payloadIsParsed,
-                        props.meta.insertionPoint,
-                        props.meta.isChildof
-                      )}
-                    /> :
-                    <ToggleDown
-                      className="model--toggler"
-                      onClick={() => props.removeNodesFromTree(props.meta.id)}
-                    />
+                  !props.meta.isExpanded ? <ToggleLeft
+                    className="model--toggler"
+                    onClick={() => props.appendNodesToTree(
+                      props.meta.payload,
+                      props.meta.id,
+                      props.meta.mleft,
+                      props.meta.payloadIsParsed,
+                      props.meta.insertionPoint,
+                      props.meta.isChildof
+                    )}
+                  /> : <ToggleDown
+                    className="model--toggler"
+                    onClick={() => props.removeNodesFromTree(props.meta.id)}
+                  />
                 }
               </td>
               <td>{ props.Qey }</td>
               <td
                 className="model--value model--value-object"
                 title="Type array"
-              >{ props.meta.type === 'Object' ? `{ ${props.contentCount} }` : `[ ${props.contentCount} ]` }
+              >{ props.meta.type === 'Object'
+                  ? `{ ${props.contentCount} }`
+                  : `[ ${props.contentCount} ]` }
+              </td>
+              <td>
+                <table className="model--path">
+                  <tbody>
+                    <tr>
+                      <td className="model--path-value">{ props.meta.path }</td>
+                    </tr>
+                  </tbody>
+                </table>
               </td>
             </tr>
           </tbody>
@@ -54,7 +63,6 @@ TypeObject.propTypes = {
   meta: PropTypes.object,
   contentCount: PropTypes.string,
   Qey: PropTypes.string.isRequired,
-  copyPath: PropTypes.func.isRequired,
   appendNodesToTree: PropTypes.func.isRequired,
   removeNodesFromTree: PropTypes.func.isRequired
 };
