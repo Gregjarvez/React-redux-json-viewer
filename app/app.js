@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-
 import Navigation from './components/nav';
 import Dumper from './containers/dumper';
 import Modeler from './containers/model';
@@ -9,8 +8,6 @@ import Modal from './components/url_modal';
 import ParserShell from './parser/objectParser';
 import { getJson, fetchRequestedUrl, validUrl } from './parser/demo';
 import pathFinder from './parser/pathFinder';
-
-const parser = ParserShell.getInstance;
 
 class App extends Component {
   state = {
@@ -39,8 +36,7 @@ class App extends Component {
 
   // eslint-disable-next-line react/sort-comp
   static parseJson(array, headers) {
-    return parser(array, headers)
-      .buildAbstractTree();
+    return ParserShell.getInstance(array, headers).buildAbstractTree();
   }
 
   setTree = () => {
@@ -98,9 +94,8 @@ class App extends Component {
   removeNodesFromTree = (id) => {
     const refPoint = this.state.tree.findIndex(node => node.meta.id === id);
     const skippedNodesFromStart = this.state.tree.slice(0, refPoint + 1);
-    const skippedNodesFromEnd = this.state.tree
-      .slice(refPoint + 1)
-      .filter(node => !node.meta.isChildof.includes(id));
+    const skippedNodesFromEnd = this.state.tree.slice(refPoint + 1).filter(
+      node => !node.meta.isChildof.includes(id));
 
     const tree = [...skippedNodesFromStart, ...skippedNodesFromEnd];
 
@@ -114,20 +109,24 @@ class App extends Component {
 
   format = () => {
     if (this.state.json.length === 0) return false;
-    const json = JSON.stringify(JSON.parse(this.state.json), null, this.state.tabSize);
+    const json = JSON.stringify(
+      JSON.parse(this.state.json), null, this.state.tabSize);
     return this.setState({ json });
-  }
+  };
 
   collapseAll = () => {
-    this.setState(prev => ({ tree: prev.cache }));
-  }
+    this.setState(prev => (
+      { tree: prev.cache }
+    ));
+  };
 
   loadDemo = () => {
     getJson().then((json) => {
-      this.setState({ json: JSON.stringify(json, null, this.state.tabSize) });
+      this.setState(
+        { json: JSON.stringify(json, null, this.state.tabSize) });
       this.setTree();
     });
-  }
+  };
 
   cleanSlate = () => {
     this.setState({
@@ -137,40 +136,38 @@ class App extends Component {
       tree: [],
       cache: []
     });
-  }
+  };
 
   tabSizeChange = (val) => {
     if (val >= 1 && val <= 5) {
       this.setState({ tabSize: parseInt(val) }); // eslint-disable-line
     }
-  }
+  };
 
   loadUrl = (url) => {
     if (validUrl(url)) {
-      fetchRequestedUrl(url)
-        .then((json) => {
-          this.setState({
-            json: JSON.stringify(json, null, this.state.tabSize),
-            urlModalRequest: false,
-            loadUrlError: ''
-          });
-          this.setTree();
-        }).catch(err => this.setState({ loadUrlError: err.message }));
+      fetchRequestedUrl(url).then((json) => {
+        this.setState({
+          json: JSON.stringify(json, null, this.state.tabSize),
+          urlModalRequest: false,
+          loadUrlError: ''
+        });
+        this.setTree();
+      }).catch(err => this.setState({ loadUrlError: err.message }));
     }
-  }
+  };
   modalControll = (state) => {
     this.setState({ urlModalRequest: state });
-  }
+  };
 
   loadLocalStorage = () => {
     const json = localStorage.getItem('store') || JSON.stringify([]);
     this.setState({ json }, this.setTree);
-  }
+  };
 
   copyPath = (id) => {
-    console.log(JSON.stringify(this.state.tree, null, 2));
-    return pathFinder.trace(id, [...this.state.tree]);
-  }
+    console.log(pathFinder.trace([...this.state.tree], id));
+  };
 
   render() {
     return (

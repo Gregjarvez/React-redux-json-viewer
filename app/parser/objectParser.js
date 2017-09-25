@@ -2,7 +2,6 @@ import shortid from 'shortid';
 
 
 const ParserShell = (function () {
-  let instance;
 
   class Parser {
     constructor(json, headers) {
@@ -163,16 +162,13 @@ const ParserShell = (function () {
         });
         model[0].meta.payload.push(...model.slice(1));
       }
-
-
       return model;
     }
   }
 
   return {
     getInstance(json, header) {
-      if (!instance) instance = new Parser(json, header);
-      return instance;
+      return new Parser(json, header);
     }
   };
 }());
