@@ -79,7 +79,6 @@ class App extends Component {
     const tree = [...this.state.tree];
     Array.prototype.splice.apply(tree, [insertionPoint + 1, 0, ...subtree]);
 
-    console.log(tree);
     // eslint-disable-next-line
     const insertionNode = tree[insertionPoint];
     if (!insertionNode.meta.isExpanded) {
