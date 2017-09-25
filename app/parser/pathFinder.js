@@ -15,23 +15,18 @@ const PathFinder = (function () {
   function characters(type) {
     switch (type) {
       case 'Array':
-        return '%arr%';
+        return '';
       case 'Object':
         return '%Ob%';
       default:
         return '';
     }
   }
+
   function path(template) {
     const object = new RegExp(/%Ob%/, 'g');
-    const array = new RegExp(/%arr%[0-9]/, 'g');
-
-    return template.replace(object, '.')
-      .replace(array, (match, charIndex, str) => {
-        const index = str[charIndex + (match.length - 1)];
-        const pos = `[${index}]`;
-        return pos;
-      });
+    const array = new RegExp(/%arr%/, 'g');
+    return template.replace(object, '.');
   }
 
   function composePath(pathObject) {
@@ -39,7 +34,9 @@ const PathFinder = (function () {
     const delimiters = steps.map(node => node.type);
     delimiters.pop(); // removes target delimiter
     const template = steps.reduce((cur, prev, index) => {
-      return cur.concat(`${prev.key}${characters(delimiters[((index - 1) + 1)])}`);
+      const currentDelimiter = delimiters[((index - 1) + 1)];
+      return cur
+        .concat(`${!isNaN(+prev.key) ? `[${prev.key}]` : prev.key}${characters(currentDelimiter)}`);
     }, '');
     console.log(path(template));
   }
@@ -57,6 +54,8 @@ const PathFinder = (function () {
   };
 }());
 
+
+PathFinder.trace(test, 'SJe_ERDBi-');
 
 export default PathFinder;
 
