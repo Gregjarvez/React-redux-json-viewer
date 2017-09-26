@@ -13,4 +13,4 @@ yarn
 ```
 yarn start
 ```
-![json viewer online](https://raw.githubusercontent.com/Gregjarvez/json-viewer/master/json-online-parser.png)
+![json viewer online](https://raw.githubusercontent.com/Gregjarvez/json-viewer/master/screenshot/json-online-parser.png)
