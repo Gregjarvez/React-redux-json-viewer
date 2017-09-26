@@ -80,8 +80,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 if (process.env.NODE_ENV) {
   config.plugins.push(
     new webpack.DefinePlugin({
-      'process.env': {
-        'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+      "process.env": {
+        "NODE_ENV": JSON.stringify(process.env.NODE_ENV)
       }
     }),
     new webpack.optimize.UglifyJsPlugin()
