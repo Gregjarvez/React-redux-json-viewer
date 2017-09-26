@@ -5,6 +5,7 @@
   height: 660px;
   box-sizing: border-box;
   flex-basis: 48%;
+  overflow-x: scroll;
 
   &--isError {
     border: 2px solid $isError;
@@ -17,7 +18,7 @@
 
   &--container {
     height: 650px;
-    width: 600px;
+    width: 100%;
     position: absolute;
     overflow-y: scroll;
     z-index: 8;
@@ -79,9 +80,6 @@
       right: 0.5px;
     }
   }
-
-
-
 
   &--row{
     width: 100%;

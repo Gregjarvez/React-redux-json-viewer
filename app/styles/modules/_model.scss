@@ -17,12 +17,14 @@
   &--path {
     padding-left: 20px;
     transform: translateY(-2px);
+
     &-value {
       background: #eee;
       color: $primary-text-heading;
       font-weight: 400;
       letter-spacing: 1.1px;
       font-size: 12px;
+      padding: .2em;
     }
   }
 

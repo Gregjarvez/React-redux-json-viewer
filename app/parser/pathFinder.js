@@ -1,4 +1,3 @@
-
 const PathFinder = (function () {
   const defaultVarName = 'data';
 
@@ -26,7 +25,7 @@ const PathFinder = (function () {
   function composePath(pathObject) {
     const steps = reducePath(pathObject);
     const delimiters = steps.map(node => node.type);
-    delimiters.pop(); // removes target delimiter
+    // delimiters.pop(); // removes target delimiter
     const template = steps.reduce((cur, prev, index) => {
       const currentDelimiter = delimiters[((index - 1) + 1)];
       return cur
