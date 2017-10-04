@@ -11,9 +11,7 @@ exports[`<Primitives /> renders correctly 1`] = `
       className="model--copy"
       title="copy path to key"
     >
-      <MdNoteAdd
-        onClick={[Function]}
-      />
+      <MdNoteAdd />
     </span>
   </td>
   <td
@@ -42,6 +40,19 @@ exports[`<Primitives /> renders correctly 1`] = `
             className="model--value model--value-number"
           >
             Hello
+          </td>
+          <td>
+            <table
+              className="model--path"
+            >
+              <tbody>
+                <tr>
+                  <td
+                    className="model--path-value"
+                  />
+                </tr>
+              </tbody>
+            </table>
           </td>
         </tr>
       </tbody>
