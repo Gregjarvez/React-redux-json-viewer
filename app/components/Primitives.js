@@ -1,13 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Copy from 'react-icons/lib/md/note-add';
-import { validUrl } from '../parser/demo';
 
 const Primitive = (props) => {
-  function linkify(string) {
-    const url = new String(string);
-    return validUrl(string) ? url.linkify() : string;
-  }
   return (
     <tr className="layout--row">
       <td className="model--panel">
@@ -24,7 +19,7 @@ const Primitive = (props) => {
               <td className={`model--value ${props.meta.type === 'string'
                 ? 'model--value-string'
                 : 'model--value-number'}`}
-              >{ linkify(props.value.toString()) }
+              >{ props.value.toString() }
               </td>
               <td>
                 <table className="model--path">
@@ -54,4 +49,5 @@ Primitive.propTypes = {
     path: PropTypes.any
   }).isRequired,
 };
+
 export default Primitive;

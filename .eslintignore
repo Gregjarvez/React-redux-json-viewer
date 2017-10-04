@@ -4,3 +4,5 @@ webpack.config.js
 *.scss
 *.html
 *.json
+coverage/
+

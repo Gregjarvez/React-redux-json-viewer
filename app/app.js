@@ -21,18 +21,11 @@ class App extends Component {
     loadUrlError: ''
   };
 
-  checkJsonValidity(json) { // eslint-disable-line
-    try {
-      JSON.parse(json);
-      return 'isValid';
-    } catch (error) {
-      return error;
-    }
-  }
 
   setJsonToControllerState = (json) => {
     return this.setState({ json });
   };
+
 
   // eslint-disable-next-line react/sort-comp
   static parseJson(array, headers) {
@@ -173,6 +166,14 @@ class App extends Component {
     this.setState({ json }, this.setTree);
   };
 
+  checkJsonValidity(json) {
+    try {
+      JSON.parse(json);
+      return 'isValid';
+    } catch (error) {
+      return error;
+    }
+  }
 
   render() {
     return (
