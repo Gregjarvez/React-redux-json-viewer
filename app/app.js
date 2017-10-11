@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { Provider, connect } from 'react-redux';
-import PropTypes from 'prop-types';
 
 import store from './redux/store';
 
@@ -14,7 +12,6 @@ import { getJson, fetchRequestedUrl, validUrl } from './parser/demo';
 import PathFinder from './parser/pathFinder';
 
 class App extends Component {
-
   // eslint-disable-next-line react/sort-comp
   static parseJson(array, headers) {
     return ParserShell.getInstance(array, headers).buildAbstractTree();
@@ -107,13 +104,6 @@ class App extends Component {
     });
   };
 
-  format = () => {
-    if (this.state.json.length === 0) return !1;
-    const json = JSON.stringify(
-      JSON.parse(this.state.json), null, this.state.tabSize);
-    return this.setState({ json });
-  };
-
   collapseAll = () => {
     this.setState(prev => (
       { tree: prev.cache }
@@ -176,54 +166,41 @@ class App extends Component {
 
   render() {
     return (
-      <Provider store={store}>
-        <div className="container">
-          <Modal
-            loadUrl={this.loadUrl}
-            modalIsRequested={this.state.urlModalRequest}
-            urlErrorMessage={this.state.urlErrorMessage}
-            closeModal={this.modalControll}
+      <div className="container">
+        <Modal
+          loadUrl={this.loadUrl}
+          modalIsRequested={this.state.urlModalRequest}
+          urlErrorMessage={this.state.urlErrorMessage}
+          closeModal={this.modalControll}
+        />
+        <Navigation
+          tabSize={this.state.tabSize}
+          loadDemo={this.loadDemo}
+          cleanSlate={this.cleanSlate}
+          tabSizeChange={this.tabSizeChange}
+          json={this.state.json}
+          openModal={this.modalControll}
+          loadLocalStorage={this.loadLocalStorage}
+        />
+        <div className="app">
+          <Dumper
+            startParse={this.setTree}
           />
-          <Navigation
-            tabSize={this.state.tabSize}
-            loadDemo={this.loadDemo}
-            cleanSlate={this.cleanSlate}
-            tabSizeChange={this.tabSizeChange}
-            json={this.state.json}
-            openModal={this.modalControll}
-            loadLocalStorage={this.loadLocalStorage}
+          <Modeler
+            tree={this.state.tree}
+            isError={this.state.isError}
+            collapseAll={this.collapseAll}
+            errorMessage={this.state.errorMessage}
+            copyPath={this.copyPath}
+            appendNodesToTree={this.appendNodesToTree}
+            removeNodesFromTree={this.removeNodesFromTree}
           />
-          <div className="app">
-            <Dumper
-              format={this.format}
-              startParse={this.setTree}
-            />
-            <Modeler
-              tree={this.state.tree}
-              isError={this.state.isError}
-              collapseAll={this.collapseAll}
-              errorMessage={this.state.errorMessage}
-              copyPath={this.copyPath}
-              appendNodesToTree={this.appendNodesToTree}
-              removeNodesFromTree={this.removeNodesFromTree}
-            />
-          </div>
         </div>
-      </Provider>
+      </div>
     );
   }
 }
 
-const mapStateToProps = state => (
-  {
-    json: state.json
-  }
-);
 
-
-App.propTypes = {
-  json: PropTypes.string
-};
-
-export default connect(mapStateToProps)(App);
+export default App;
 

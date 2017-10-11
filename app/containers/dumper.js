@@ -10,33 +10,33 @@ import 'brace/theme/textmate';
 import Format from 'react-icons/lib/md/format-line-spacing';
 import Parse from 'react-icons/lib/go/mirror';
 
-import setJson from '../redux/actions/dumper_action';
+import { setJson, format } from '../redux/actions/dumper_action';
 
 const Dumper = (props) => {
   return (
     <div className="layout">
       <div className="layout--setting">
         <span className="layout--icongroup">
-          <Format onClick={props.format} title="format" />
+          <Format onClick={() => props.format(props.tabWidth)} title="format" />
           <Parse onClick={props.startParse} title="Parse Json" />
         </span>
       </div>
       <div>
         <AceEditor
+          width="99%"
+          height="600px"
+          fontSize="13px"
           mode="json"
           theme="textmate"
           name="dumper-editor"
           editorProps={{ $blockScrolling: true }}
-          width="99%"
-          height="600px"
-          focus
-          tabsize={2}
-          highlightActiveLine
-          fontSize="13px"
+          tabsize={props.tabWidth}
           value={props.json}
-          onChange={props.setJsonToControllerState}
+          onChange={props.setJsonToControllerStore}
           showPrintMargin={false}
+          focus
           wrapEnabled
+          highlightActiveLine
         />
       </div>
     </div>
@@ -45,19 +45,26 @@ const Dumper = (props) => {
 
 Dumper.propTypes = {
   json: PropTypes.string,
-  setJsonToControllerState: PropTypes.func.isRequired,
+  tabWidth: PropTypes.number,
+  setJsonToControllerStore: PropTypes.func.isRequired,
   startParse: PropTypes.func.isRequired,
   format: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => (
-  { json: state.json }
+  {
+    json: state.json,
+    tabWidth: state.tabWidth
+  }
 );
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setJsonToControllerState(json) {
+    setJsonToControllerStore(json) {
       dispatch(setJson(json));
+    },
+    format(tabWidth) {
+      dispatch(format(tabWidth));
     }
   };
 };

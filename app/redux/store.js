@@ -1,11 +1,12 @@
 import { createStore } from 'redux';
-import setJson from './reducers/dumper_reducer';
+import jsonTextReducer from './reducers/dumper_reducer';
 
 const INITIALSTATE = Object.freeze({
-  json: ''
+  json: '',
+  tabWidth: 2
 });
 
-const store = createStore(setJson, INITIALSTATE);
+const store = createStore(jsonTextReducer, INITIALSTATE);
 
 export default store;
 
