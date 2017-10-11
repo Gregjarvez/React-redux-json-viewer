@@ -14,19 +14,6 @@ import { getJson, fetchRequestedUrl, validUrl } from './parser/demo';
 import PathFinder from './parser/pathFinder';
 
 class App extends Component {
-  state = {
-    tree: [],
-    cache: [],
-    tabSize: 2,
-    isError: false,
-    errorMessage: '',
-    urlModalRequest: false,
-    urlErrorMessage: ''
-  };
-
-  setJsonToControllerState = (json) => {
-    return this.setState({ json });
-  };
 
   // eslint-disable-next-line react/sort-comp
   static parseJson(array, headers) {
@@ -39,6 +26,17 @@ class App extends Component {
       return node;
     });
   }
+
+  state = {
+    tree: [],
+    cache: [],
+    tabSize: 2,
+    isError: false,
+    errorMessage: '',
+    urlModalRequest: false,
+    urlErrorMessage: ''
+  };
+
 
   setTree = () => {
     const verify = this.checkJsonValidity(this.state.json);
@@ -198,9 +196,7 @@ class App extends Component {
           <div className="app">
             <Dumper
               format={this.format}
-              json={this.props.json}
               startParse={this.setTree}
-              setJsonToControllerState={this.setJsonToControllerState}
             />
             <Modeler
               tree={this.state.tree}

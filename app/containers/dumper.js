@@ -1,5 +1,6 @@
 import React from 'react';
 import AceEditor from 'react-ace';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import brace from 'brace'; // eslint-disable-line no-unused-vars
@@ -9,6 +10,7 @@ import 'brace/theme/textmate';
 import Format from 'react-icons/lib/md/format-line-spacing';
 import Parse from 'react-icons/lib/go/mirror';
 
+import setJson from '../redux/actions/dumper_action';
 
 const Dumper = (props) => {
   return (
@@ -42,10 +44,25 @@ const Dumper = (props) => {
 };
 
 Dumper.propTypes = {
-  setJsonToControllerState: PropTypes.func.isRequired,
   json: PropTypes.string,
+  setJsonToControllerState: PropTypes.func.isRequired,
   startParse: PropTypes.func.isRequired,
   format: PropTypes.func.isRequired
 };
 
-export default Dumper;
+const mapStateToProps = state => (
+  { json: state.json }
+);
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setJsonToControllerState(json) {
+      dispatch(setJson(json));
+    }
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Dumper);

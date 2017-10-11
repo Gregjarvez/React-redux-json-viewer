@@ -5,4 +5,4 @@ webpack.config.js
 *.html
 *.json
 coverage/
-
+screenshot
