@@ -10,7 +10,7 @@ import 'brace/theme/textmate';
 import Format from 'react-icons/lib/md/format-line-spacing';
 import Parse from 'react-icons/lib/go/mirror';
 
-import { setJson, format } from '../redux/actions/dumper_action';
+import { setJson, format, parseLayer } from '../redux/actions/dumper_action';
 
 const Dumper = (props) => {
   return (
@@ -18,7 +18,7 @@ const Dumper = (props) => {
       <div className="layout--setting">
         <span className="layout--icongroup">
           <Format onClick={() => props.format(props.tabWidth)} title="format" />
-          <Parse onClick={props.startParse} title="Parse Json" />
+          <Parse onClick={() => props.parseJson()} title="Parse Json" />
         </span>
       </div>
       <div>
@@ -47,7 +47,7 @@ Dumper.propTypes = {
   json: PropTypes.string,
   tabWidth: PropTypes.number,
   setJsonToControllerStore: PropTypes.func.isRequired,
-  startParse: PropTypes.func.isRequired,
+  parseJson: PropTypes.func.isRequired,
   format: PropTypes.func.isRequired
 };
 
@@ -65,6 +65,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     format(tabWidth) {
       dispatch(format(tabWidth));
+    },
+    parseJson() {
+      dispatch(parseLayer());
     }
   };
 };

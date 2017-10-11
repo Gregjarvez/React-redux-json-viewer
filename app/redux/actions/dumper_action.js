@@ -13,3 +13,9 @@ export const format = tabWidth => (
     payload: tabWidth
   }
 );
+
+export const parseLayer = json => (
+  {
+    type: constants.PARSE_FIRST_LAYER
+  }
+);

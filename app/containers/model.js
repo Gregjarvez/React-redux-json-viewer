@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import Collapse from 'react-icons/lib/ti/arrow-minimise-outline';
 
 import Primitive from '../components/Primitives';
@@ -77,4 +78,13 @@ Modeler.propTypes = {
   copyPath: PropTypes.func
 };
 
-export default Modeler;
+const mapStateToProps = state => (
+  {
+    tree: state.tree,
+    isError: state.isError,
+    errorMessage: state.errorMessage
+  }
+);
+
+
+export default connect(mapStateToProps)(Modeler);

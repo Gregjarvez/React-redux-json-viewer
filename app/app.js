@@ -7,50 +7,15 @@ import Dumper from './containers/dumper';
 import Modeler from './containers/model';
 import Modal from './components/url_modal';
 
-import ParserShell from './parser/objectParser';
 import { getJson, fetchRequestedUrl, validUrl } from './parser/demo';
-import PathFinder from './parser/pathFinder';
 
 class App extends Component {
-  // eslint-disable-next-line react/sort-comp
-  static parseJson(array, headers) {
-    return ParserShell.getInstance(array, headers).buildAbstractTree();
-  }
-
-  static populateWithPath(tree) {
-    return tree.map((node) => {
-      node.meta.path = PathFinder.trace(tree, node.meta.id);
-      return node;
-    });
-  }
 
   state = {
-    tree: [],
-    cache: [],
-    tabSize: 2,
     isError: false,
     errorMessage: '',
     urlModalRequest: false,
     urlErrorMessage: ''
-  };
-
-
-  setTree = () => {
-    const verify = this.checkJsonValidity(this.state.json);
-    if (verify === 'isValid') {
-      const tree = App.populateWithPath(App.parseJson(this.state.json, true));
-      return this.setState({
-        tree,
-        isError: false,
-        errorMessage: '',
-        cache: tree
-      });
-    }
-    return this.setState({
-      tree: [],
-      isError: true,
-      errorMessage: verify.message
-    });
   };
 
   appendNodesToTree = (payload, id, margin, ...rest) => {
@@ -155,15 +120,6 @@ class App extends Component {
     this.setState({ json }, this.setTree);
   };
 
-  checkJsonValidity(json) {
-    try {
-      JSON.parse(json);
-      return 'isValid';
-    } catch (error) {
-      return error;
-    }
-  }
-
   render() {
     return (
       <div className="container">
@@ -183,9 +139,7 @@ class App extends Component {
           loadLocalStorage={this.loadLocalStorage}
         />
         <div className="app">
-          <Dumper
-            startParse={this.setTree}
-          />
+          <Dumper />
           <Modeler
             tree={this.state.tree}
             isError={this.state.isError}
