@@ -1,6 +1,8 @@
 /* eslint-disable no-undef */
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+
 
 class Modal extends React.Component {
   componentDidMount() {
@@ -31,8 +33,8 @@ class Modal extends React.Component {
             or do not have CORS enabled cannot be loaded.
           </p>
           {
-            this.props.urlError.trim().length > 1 &&
-            <p className="modal--text-error">{this.props.urlError}</p>
+            this.props.urlErrorMessage.trim().length > 1 &&
+            <p className="modal--text-error">{this.props.urlErrorMessage}</p>
           }
           <div className="modal--input">
             <input type="text" ref={(input) => { this.textInput = input; }} />
@@ -48,7 +50,8 @@ Modal.propTypes = {
   loadUrl: PropTypes.func.isRequired,
   closeModal: PropTypes.func.isRequired,
   modalIsRequested: PropTypes.bool,
-  urlError: PropTypes.string
+  urlErrorMessage: PropTypes.string
 };
+
 
 export default Modal;

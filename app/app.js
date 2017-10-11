@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import { Provider, connect } from 'react-redux';
+import PropTypes from 'prop-types';
+
+import store from './redux/store';
 
 import Navigation from './components/nav';
 import Dumper from './containers/dumper';
@@ -11,21 +15,18 @@ import PathFinder from './parser/pathFinder';
 
 class App extends Component {
   state = {
-    json: '',
-    isError: false,
-    errorMessage: '',
     tree: [],
     cache: [],
     tabSize: 2,
+    isError: false,
+    errorMessage: '',
     urlModalRequest: false,
-    loadUrlError: ''
+    urlErrorMessage: ''
   };
-
 
   setJsonToControllerState = (json) => {
     return this.setState({ json });
   };
-
 
   // eslint-disable-next-line react/sort-comp
   static parseJson(array, headers) {
@@ -109,7 +110,7 @@ class App extends Component {
   };
 
   format = () => {
-    if (this.state.json.length === 0) return false;
+    if (this.state.json.length === 0) return !1;
     const json = JSON.stringify(
       JSON.parse(this.state.json), null, this.state.tabSize);
     return this.setState({ json });
@@ -151,10 +152,10 @@ class App extends Component {
         this.setState({
           json: JSON.stringify(json, null, this.state.tabSize),
           urlModalRequest: false,
-          loadUrlError: ''
+          urlErrorMessage: ''
         });
         this.setTree();
-      }).catch(err => this.setState({ loadUrlError: err.message }));
+      }).catch(err => this.setState({ urlErrorMessage: err.message }));
     }
   };
   modalControll = (state) => {
@@ -177,43 +178,56 @@ class App extends Component {
 
   render() {
     return (
-      <div className="container">
-        <Modal
-          loadUrl={this.loadUrl}
-          modalIsRequested={this.state.urlModalRequest}
-          urlError={this.state.loadUrlError}
-          closeModal={this.modalControll}
-        />
-        <Navigation
-          tabSize={this.state.tabSize}
-          loadDemo={this.loadDemo}
-          cleanSlate={this.cleanSlate}
-          tabSizeChange={this.tabSizeChange}
-          json={this.state.json}
-          openModal={this.modalControll}
-          loadLocalStorage={this.loadLocalStorage}
-        />
-        <div className="app">
-          <Dumper
-            format={this.format}
+      <Provider store={store}>
+        <div className="container">
+          <Modal
+            loadUrl={this.loadUrl}
+            modalIsRequested={this.state.urlModalRequest}
+            urlErrorMessage={this.state.urlErrorMessage}
+            closeModal={this.modalControll}
+          />
+          <Navigation
+            tabSize={this.state.tabSize}
+            loadDemo={this.loadDemo}
+            cleanSlate={this.cleanSlate}
+            tabSizeChange={this.tabSizeChange}
             json={this.state.json}
-            startParse={this.setTree}
-            setJsonToControllerState={this.setJsonToControllerState}
+            openModal={this.modalControll}
+            loadLocalStorage={this.loadLocalStorage}
           />
-          <Modeler
-            tree={this.state.tree}
-            isError={this.state.isError}
-            collapseAll={this.collapseAll}
-            errorMessage={this.state.errorMessage}
-            copyPath={this.copyPath}
-            appendNodesToTree={this.appendNodesToTree}
-            removeNodesFromTree={this.removeNodesFromTree}
-          />
+          <div className="app">
+            <Dumper
+              format={this.format}
+              json={this.props.json}
+              startParse={this.setTree}
+              setJsonToControllerState={this.setJsonToControllerState}
+            />
+            <Modeler
+              tree={this.state.tree}
+              isError={this.state.isError}
+              collapseAll={this.collapseAll}
+              errorMessage={this.state.errorMessage}
+              copyPath={this.copyPath}
+              appendNodesToTree={this.appendNodesToTree}
+              removeNodesFromTree={this.removeNodesFromTree}
+            />
+          </div>
         </div>
-      </div>
+      </Provider>
     );
   }
 }
 
-export default App;
+const mapStateToProps = state => (
+  {
+    json: state.json
+  }
+);
+
+
+App.propTypes = {
+  json: PropTypes.string
+};
+
+export default connect(mapStateToProps)(App);
 
