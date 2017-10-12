@@ -141,10 +141,7 @@ class App extends Component {
         <div className="app">
           <Dumper />
           <Modeler
-            tree={this.state.tree}
-            isError={this.state.isError}
             collapseAll={this.collapseAll}
-            errorMessage={this.state.errorMessage}
             copyPath={this.copyPath}
             appendNodesToTree={this.appendNodesToTree}
             removeNodesFromTree={this.removeNodesFromTree}

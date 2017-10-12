@@ -31,7 +31,7 @@ function parseLayer(state = {}) {
   };
 }
 
-const jsonTextReducer = (state = {}, action) => {
+const dumperReducer = (state = {}, action) => {
   switch (action.type) {
     case constants.SET_JSON:
       return { ...state, json: action.payload };
@@ -44,4 +44,4 @@ const jsonTextReducer = (state = {}, action) => {
   }
 };
 
-export default jsonTextReducer;
+export default dumperReducer;
