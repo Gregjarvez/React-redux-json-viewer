@@ -8,9 +8,15 @@ export function parseJson(array, headers) {
 export function checkJsonValidity(json) {
   try {
     JSON.parse(json);
-    return 'isValid';
+    return {
+      error: false,
+      errorMessage: ''
+    };
   } catch (error) {
-    return error;
+    return {
+      error: true,
+      errorMessage: error.message
+    };
   }
 }
 
@@ -19,6 +25,16 @@ export function populateWithPath(tree) {
     node.meta.path = PathFinder.trace(tree, node.meta.id);
     return node;
   });
+}
+
+export function toJsonString(json, width) {
+  const stringify = JSON.stringify(
+    JSON.parse(json),
+    null,
+    width
+  );
+  console.log(stringify);
+  return stringify;
 }
 
 function processJsonToViewable(value, meta = false) {

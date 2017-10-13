@@ -3,7 +3,7 @@ import AceEditor from 'react-ace';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import brace from 'brace'; // eslint-disable-line no-unused-vars
+import brace from 'brace';
 import 'brace/mode/json';
 import 'brace/theme/textmate';
 
@@ -12,13 +12,17 @@ import Parse from 'react-icons/lib/go/mirror';
 
 import { setJson, format, parseLayer } from '../redux/actions/dumper_action';
 
+
 const Dumper = (props) => {
   return (
     <div className="layout">
       <div className="layout--setting">
         <span className="layout--icongroup">
-          <Format onClick={() => props.format(props.tabWidth)} title="format" />
-          <Parse onClick={() => props.parseJson()} title="Parse Json" />
+          <Format onClick={() => props.format(4)} title="format" />
+          <Parse
+            onClick={() => props.parseJson(props.json)}
+            title="Parse Json"
+          />
         </span>
       </div>
       <div>
@@ -29,9 +33,8 @@ const Dumper = (props) => {
           mode="json"
           theme="textmate"
           name="dumper-editor"
-          editorProps={{ $blockScrolling: true }}
-          tabsize={props.tabWidth}
           value={props.json}
+          editorProps={{ $blockScrolling: true }}
           onChange={props.setJsonToControllerStore}
           showPrintMargin={false}
           focus
@@ -45,8 +48,13 @@ const Dumper = (props) => {
 
 Dumper.propTypes = {
   json: PropTypes.string,
-  tabWidth: PropTypes.number,
   setJsonToControllerStore: PropTypes.func.isRequired,
+  parseFail: PropTypes.shape({
+    error: PropTypes.bool,
+    errorMessage: PropTypes.string
+  }),
+  success: PropTypes.func,
+  reset: PropTypes.func,
   parseJson: PropTypes.func.isRequired,
   format: PropTypes.func.isRequired
 };
@@ -54,7 +62,7 @@ Dumper.propTypes = {
 const mapStateToProps = state => (
   {
     json: state.json,
-    tabWidth: state.tabWidth
+    parseFail: state.parseFail
   }
 );
 
@@ -66,8 +74,8 @@ const mapDispatchToProps = (dispatch) => {
     format(tabWidth) {
       dispatch(format(tabWidth));
     },
-    parseJson() {
-      dispatch(parseLayer());
+    parseJson(json) {
+      dispatch(parseLayer(json));
     }
   };
 };

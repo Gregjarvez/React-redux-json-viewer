@@ -12,8 +12,6 @@ import { getJson, fetchRequestedUrl, validUrl } from './parser/demo';
 class App extends Component {
 
   state = {
-    isError: false,
-    errorMessage: '',
     urlModalRequest: false,
     urlErrorMessage: ''
   };

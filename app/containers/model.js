@@ -38,9 +38,8 @@ class Modeler extends React.Component {
         />
       );
     });
-
     return (
-      <div className={`layout ${this.props.isError ? 'layout--isError' : ''}`}>
+      <div className={`layout ${this.props.parseFail.error ? 'layout--isError' : ''}`}>
         <div className="layout--setting layout--setting-isabsolute">
           <span title="collapse all">
             <Collapse
@@ -52,9 +51,9 @@ class Modeler extends React.Component {
         </div>
         <div
           className={`layout--errorhandler
-           ${this.props.isError && 'layout--errorhandler-showing'}`}
+           ${this.props.parseFail.error && 'layout--errorhandler-showing'}`}
         >
-          {'Unable to parser json. '.concat(this.props.errorMessage).concat(' ☹️')}
+          {'Unable to parser json. '.concat(this.props.parseFail.errorMessage).concat(' ☹️')}
         </div>
         <div className="layout--container">
           <table className="layout--embedded">
@@ -72,8 +71,10 @@ Modeler.propTypes = {
   tree: PropTypes.array,
   appendNodesToTree: PropTypes.func.isRequired,
   removeNodesFromTree: PropTypes.func.isRequired,
-  isError: PropTypes.bool,
-  errorMessage: PropTypes.string,
+  parseFail: PropTypes.shape({
+    error: PropTypes.bool,
+    errorMessage: PropTypes.string
+  }),
   collapseAll: PropTypes.func.isRequired,
   copyPath: PropTypes.func
 };
@@ -81,10 +82,8 @@ Modeler.propTypes = {
 const mapStateToProps = state => (
   {
     tree: state.tree,
-    isError: state.isError,
-    errorMessage: state.errorMessage
+    parseFail: state.parseFail,
   }
 );
-
 
 export default connect(mapStateToProps)(Modeler);

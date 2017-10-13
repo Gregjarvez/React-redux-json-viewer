@@ -1,7 +1,12 @@
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import rootReducer from './reducers';
+import { logger, inspectJson } from './middleware';
 
-const store = createStore(rootReducer);
+const middleware = applyMiddleware(logger, inspectJson);
+const store = createStore(rootReducer, middleware);
+
+window.store = store;
+
 
 export default store;
 
