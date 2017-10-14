@@ -49,12 +49,6 @@ const Dumper = (props) => {
 Dumper.propTypes = {
   json: PropTypes.string,
   setJsonToControllerStore: PropTypes.func.isRequired,
-  parseFail: PropTypes.shape({
-    error: PropTypes.bool,
-    errorMessage: PropTypes.string
-  }),
-  success: PropTypes.func,
-  reset: PropTypes.func,
   parseJson: PropTypes.func.isRequired,
   format: PropTypes.func.isRequired
 };

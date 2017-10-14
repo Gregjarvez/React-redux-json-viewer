@@ -6,7 +6,7 @@ const treeReducer = (state = [], action) => {
     case constants.PARSE_FIRST_LAYER:
       return processJsonToViewable(action.payload, true);
     case constants.RESET_TREE:
-      return state;
+      return [];
     default:
       return state;
   }

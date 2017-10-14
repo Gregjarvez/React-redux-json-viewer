@@ -4,28 +4,33 @@ import constants from './constants';
 export const inspectJson = store => next => (action) => {
   if (action.type === constants.PARSE_FIRST_LAYER) {
     const maybeError = checkJsonValidity(store.getState().json);
-    if (!maybeError.error) {
-      next(action);
-    } else {
-      const action = {
+    if (maybeError.error) {
+      const debouncedAction = {
         type: constants.PARSE_FAILED,
         payload: {
           error: maybeError.error,
           errorMessage: maybeError.errorMessage
         }
       };
-      next(action);
+      return next(debouncedAction);
     }
-  } else {
-    next(action);
   }
+  return next(action);
 };
 
+export const resetMiddleWare = store => next => (action) => {
+  if (action.payload && action.payload.error) {
+    return next({
+      type: constants.RESET_TREE
+    });
+  }
+  return next(action);
+};
 
 export const logger = store => next => (action) => {
   console.group('store');
   console.log(store.getState());
-  console.log(store.action);
+  console.log(action);
   console.groupEnd('store');
   next(action);
 };

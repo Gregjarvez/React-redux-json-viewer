@@ -1,8 +1,8 @@
 import { createStore, applyMiddleware } from 'redux';
 import rootReducer from './reducers';
-import { logger, inspectJson } from './middleware';
+import { logger, inspectJson, resetMiddleWare } from './middleware';
 
-const middleware = applyMiddleware(logger, inspectJson);
+const middleware = applyMiddleware(inspectJson, resetMiddleWare, logger);
 const store = createStore(rootReducer, middleware);
 
 window.store = store;
