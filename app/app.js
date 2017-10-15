@@ -12,43 +12,9 @@ import { getJson, fetchRequestedUrl, validUrl } from './parser/demo';
 class App extends Component {
 
   state = {
+    errorMessage: '',
     urlModalRequest: false,
     urlErrorMessage: ''
-  };
-
-  appendNodesToTree = (payload, id, margin, ...rest) => {
-    const [payloadIsParsed, refnumber, childof] = rest;
-    if (payload.length === 0) return;
-
-    let subtree,    // eslint-disable-line
-      insertionPoint;
-
-    if (!payloadIsParsed) {
-      subtree = App.parseJson(JSON.stringify(...payload)).map((each) => {
-        each.meta.mleft = margin + 20;
-        each.meta.isChildof.push(id, ...childof);
-        return each;
-      });
-
-      insertionPoint = this.state.tree.findIndex(each => each.meta.id === id);
-    } else {
-      subtree = payload;
-      insertionPoint = refnumber;
-    }
-    // todo reopen previously opened objects or array
-
-    const tree = [...this.state.tree];
-    Array.prototype.splice.apply(tree, [insertionPoint + 1, 0, ...subtree]);
-
-    // eslint-disable-next-line
-    const insertionNode = tree[insertionPoint];
-    if (!insertionNode.meta.isExpanded) {
-      insertionNode.meta.isExpanded = true;
-      insertionNode.meta.payload = subtree;
-      insertionNode.meta.payloadIsParsed = true;
-      insertionNode.meta.insertionPoint = insertionPoint;
-      this.setState({ tree: App.populateWithPath(tree) });
-    }
   };
 
   removeNodesFromTree = (id) => {
@@ -140,7 +106,6 @@ class App extends Component {
           <Dumper />
           <Modeler
             collapseAll={this.collapseAll}
-            copyPath={this.copyPath}
             appendNodesToTree={this.appendNodesToTree}
             removeNodesFromTree={this.removeNodesFromTree}
           />

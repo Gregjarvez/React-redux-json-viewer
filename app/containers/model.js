@@ -6,9 +6,9 @@ import Collapse from 'react-icons/lib/ti/arrow-minimise-outline';
 import Primitive from '../components/Primitives';
 import TypeObject from '../components/isTypeObject';
 import { resetTree } from '../redux/actions/dumper_action';
+import { appendToTree } from '../redux/actions/model_actions';
 
 class Modeler extends React.Component {
-
   isOfTypePrimitive(each) {
     const isPrimitive = ['number', 'string', 'boolean'].includes(
       each.meta.type);
@@ -24,7 +24,6 @@ class Modeler extends React.Component {
             Qey={each.Qey}
             value={each.value}
             meta={each.meta}
-            copyPath={this.props.copyPath}
           />
         );
       }
@@ -35,8 +34,6 @@ class Modeler extends React.Component {
           contentCount={each.contentCount.toString()}
           meta={each.meta}
           appendNodesToTree={this.props.appendNodesToTree}
-          removeNodesFromTree={this.props.removeNodesFromTree}
-          copyPath={this.props.copyPath}
         />
       );
     });
@@ -75,14 +72,12 @@ class Modeler extends React.Component {
 
 Modeler.propTypes = {
   tree: PropTypes.array,
-  appendNodesToTree: PropTypes.func.isRequired,
-  removeNodesFromTree: PropTypes.func.isRequired,
   parseFail: PropTypes.shape({
     error: PropTypes.bool,
     errorMessage: PropTypes.string,
   }),
+  appendNodesToTree: PropTypes.func,
   collapseAll: PropTypes.func.isRequired,
-  copyPath: PropTypes.func,
 };
 
 const mapStateToProps = state => (
@@ -96,6 +91,9 @@ const mapDispatchToProps = dispatch => (
   {
     reset() {
       dispatch(resetTree());
+    },
+    appendNodesToTree(meta) {
+      dispatch(appendToTree(meta));
     }
   }
 );
