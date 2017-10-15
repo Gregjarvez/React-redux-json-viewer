@@ -1,5 +1,5 @@
 import constants from '../constants';
-import processJsonToViewable from './util';
+import processJsonToViewable, { populateWithPath } from './util';
 import { appendNodesToViewableTree, removeNodesFromViewableTree } from './tree_support';
 
 const treeReducer = (state = [], action) => {

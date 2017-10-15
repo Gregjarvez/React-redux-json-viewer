@@ -40,17 +40,16 @@ export function toJsonString(json, width) {
   return stringify;
 }
 
-export function marginate(each, margin, childof, id) {
-  each.meta.mleft = margin + 20;
-  each.meta.isChildof.push(id, ...childof);
-  return each;
+export function marginate(node, margin, childof, id) {
+  node.meta.mleft = margin + 20;
+  node.meta.isChildof.push(id, ...childof);
+  return node;
 }
 
-export function tagNodeAsCompleted(node, subtree, insertionPoint) {
+export function tagNodeAsCompleted(node, subtree) {
   node.meta.isExpanded = true;
   node.meta.payload = subtree;
   node.meta.payloadIsParsed = true;
-  node.meta.insertionPoint = insertionPoint;
 }
 
 export default function processJsonToViewable(value, meta = false) {

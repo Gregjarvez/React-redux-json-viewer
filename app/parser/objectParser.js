@@ -109,7 +109,6 @@ const ParserShell = (function () {
           mleft: 4,
           payload: [],
           isExpanded: true,
-          insertionPoint: 0,
           isChildof: [],
           isRoot: true,
           path: ''
