@@ -12,7 +12,11 @@ const errorReducer = (state = {
         errorMessage: action.payload.errorMessage
       };
     case constants.PARSE_SUCCESS:
-      return state;
+      return {
+        ...state,
+        error: false,
+        errorMessage: ''
+      };
     default:
       return state;
   }

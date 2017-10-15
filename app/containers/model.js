@@ -5,11 +5,13 @@ import Collapse from 'react-icons/lib/ti/arrow-minimise-outline';
 
 import Primitive from '../components/Primitives';
 import TypeObject from '../components/isTypeObject';
+import { resetTree } from '../redux/actions/dumper_action';
 
 class Modeler extends React.Component {
+
   isOfTypePrimitive(each) {
-    const isPrimitive = ['number', 'string', 'boolean']
-      .includes(each.meta.type);
+    const isPrimitive = ['number', 'string', 'boolean'].includes(
+      each.meta.type);
     return isPrimitive;
   }
 
@@ -39,7 +41,10 @@ class Modeler extends React.Component {
       );
     });
     return (
-      <div className={`layout ${this.props.parseFail.error ? 'layout--isError' : ''}`}>
+      <div className={`layout ${this.props.parseFail.error
+        ? 'layout--isError'
+        : ''}`}
+      >
         <div className="layout--setting layout--setting-isabsolute">
           <span title="collapse all">
             <Collapse
@@ -53,7 +58,8 @@ class Modeler extends React.Component {
           className={`layout--errorhandler
            ${this.props.parseFail.error && 'layout--errorhandler-showing'}`}
         >
-          {'Unable to parser json. '.concat(this.props.parseFail.errorMessage).concat(' ☹️')}
+          { 'Unable to parser json. '.concat(this.props.parseFail.errorMessage)
+            .concat(' ☹️') }
         </div>
         <div className="layout--container">
           <table className="layout--embedded">
@@ -73,10 +79,10 @@ Modeler.propTypes = {
   removeNodesFromTree: PropTypes.func.isRequired,
   parseFail: PropTypes.shape({
     error: PropTypes.bool,
-    errorMessage: PropTypes.string
+    errorMessage: PropTypes.string,
   }),
   collapseAll: PropTypes.func.isRequired,
-  copyPath: PropTypes.func
+  copyPath: PropTypes.func,
 };
 
 const mapStateToProps = state => (
@@ -86,4 +92,14 @@ const mapStateToProps = state => (
   }
 );
 
-export default connect(mapStateToProps)(Modeler);
+const mapDispatchToProps = dispatch => (
+  {
+    reset() {
+      dispatch(resetTree());
+    }
+  }
+);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Modeler);

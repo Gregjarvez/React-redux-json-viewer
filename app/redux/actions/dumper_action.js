@@ -27,7 +27,7 @@ export const parseSuccess = () => (
   }
 );
 
-export const resetTree = json => (
+export const resetTree = () => (
   {
     type: constants.RESET_TREE,
   }

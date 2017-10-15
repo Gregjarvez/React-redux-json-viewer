@@ -2,25 +2,35 @@ import React from 'react';
 import AceEditor from 'react-ace';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-
-import brace from 'brace';
 import 'brace/mode/json';
 import 'brace/theme/textmate';
 
 import Format from 'react-icons/lib/md/format-line-spacing';
 import Parse from 'react-icons/lib/go/mirror';
+import Brace from 'brace'; // eslint-disable-line
 
-import { setJson, format, parseLayer } from '../redux/actions/dumper_action';
-
+import {
+  format,
+  parseLayer,
+  parseSuccess,
+  setJson,
+} from '../redux/actions/dumper_action';
 
 const Dumper = (props) => {
+  function determineAction() {
+    Promise.all([
+      props.success(),
+      props.parseJson(props.json)
+    ])
+      .then((results) => { results = null; });
+  }
   return (
     <div className="layout">
       <div className="layout--setting">
         <span className="layout--icongroup">
           <Format onClick={() => props.format(4)} title="format" />
           <Parse
-            onClick={() => props.parseJson(props.json)}
+            onClick={() => determineAction()}
             title="Parse Json"
           />
         </span>
@@ -48,6 +58,7 @@ const Dumper = (props) => {
 
 Dumper.propTypes = {
   json: PropTypes.string,
+  success: PropTypes.func,
   setJsonToControllerStore: PropTypes.func.isRequired,
   parseJson: PropTypes.func.isRequired,
   format: PropTypes.func.isRequired
@@ -70,6 +81,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     parseJson(json) {
       dispatch(parseLayer(json));
+    },
+    success() {
+      dispatch(parseSuccess());
     }
   };
 };
