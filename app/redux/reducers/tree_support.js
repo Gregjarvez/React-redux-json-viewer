@@ -40,7 +40,3 @@ export const appendNodesToViewableTree = (state, payload) => {
   return tree;
 };
 
-
-export function removeNodeFromViewableTree() {
-
-}
