@@ -24,7 +24,7 @@ const TypeObject = (props) => {
                     onClick={() => props.appendNodesToTree(props.meta)}
                   /> : <ToggleDown
                     className="model--toggler"
-                    onClick={() => props.removeNodesFromTree(props.meta.id)}
+                    onClick={() => props.removeNodesFromTree(props.meta.insertionPoint)}
                   />
                 }
               </td>

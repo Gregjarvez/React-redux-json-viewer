@@ -17,22 +17,6 @@ class App extends Component {
     urlErrorMessage: ''
   };
 
-  removeNodesFromTree = (id) => {
-    const refPoint = this.state.tree.findIndex(node => node.meta.id === id);
-    const skippedNodesFromStart = this.state.tree.slice(0, refPoint + 1);
-    const skippedNodesFromEnd = this.state.tree.slice(refPoint + 1).filter(
-      node => !node.meta.isChildof.includes(id));
-
-    const tree = [...skippedNodesFromStart, ...skippedNodesFromEnd];
-
-    const ref = tree[refPoint]; // eslint-disable-line
-    ref.meta.isExpanded = false;
-
-    this.setState({
-      tree
-    });
-  };
-
   collapseAll = () => {
     this.setState(prev => (
       { tree: prev.cache }
@@ -104,11 +88,7 @@ class App extends Component {
         />
         <div className="app">
           <Dumper />
-          <Modeler
-            collapseAll={this.collapseAll}
-            appendNodesToTree={this.appendNodesToTree}
-            removeNodesFromTree={this.removeNodesFromTree}
-          />
+          <Modeler collapseAll={this.collapseAll} />
         </div>
       </div>
     );

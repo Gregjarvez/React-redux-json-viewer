@@ -40,3 +40,13 @@ export const appendNodesToViewableTree = (state, payload) => {
   return tree;
 };
 
+
+export function removeNodesFromViewableTree(state, refPoint) {
+  const skippedNodesFromStart = state.slice(0, refPoint + 1);
+  const skippedNodesFromEnd = state.slice(refPoint + 1).filter(
+    node => !node.meta.isChildof.includes(state[refPoint].meta.id));
+
+  const tree = [...skippedNodesFromStart, ...skippedNodesFromEnd];
+  tree[refPoint].meta.isExpanded = false;
+  return tree;
+}

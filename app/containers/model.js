@@ -5,8 +5,7 @@ import Collapse from 'react-icons/lib/ti/arrow-minimise-outline';
 
 import Primitive from '../components/Primitives';
 import TypeObject from '../components/isTypeObject';
-import { resetTree } from '../redux/actions/dumper_action';
-import { appendToTree } from '../redux/actions/model_actions';
+import { appendToTree, removeFromNode } from '../redux/actions/model_actions';
 
 class Modeler extends React.Component {
   isOfTypePrimitive(each) {
@@ -34,6 +33,7 @@ class Modeler extends React.Component {
           contentCount={each.contentCount.toString()}
           meta={each.meta}
           appendNodesToTree={this.props.appendNodesToTree}
+          removeNodesFromTree={this.props.removeNodesFromTree}
         />
       );
     });
@@ -77,6 +77,7 @@ Modeler.propTypes = {
     errorMessage: PropTypes.string,
   }),
   appendNodesToTree: PropTypes.func,
+  removeNodesFromTree: PropTypes.func,
   collapseAll: PropTypes.func.isRequired,
 };
 
@@ -89,11 +90,11 @@ const mapStateToProps = state => (
 
 const mapDispatchToProps = dispatch => (
   {
-    reset() {
-      dispatch(resetTree());
-    },
     appendNodesToTree(meta) {
       dispatch(appendToTree(meta));
+    },
+    removeNodesFromTree(id) {
+      dispatch(removeFromNode(id));
     }
   }
 );

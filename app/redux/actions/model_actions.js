@@ -23,7 +23,7 @@ export const appendToTree = ({
 
 export const removeFromNode = id => (
   {
-    type: constants.APPEND_TO_TREE,
+    type: constants.REMOVE_FROM_TREE,
     payload: id
   }
 );
