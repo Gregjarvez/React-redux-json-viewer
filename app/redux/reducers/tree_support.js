@@ -11,7 +11,7 @@ export const appendNodesToViewableTree = (state, payload) => {
   const {
     load, id, margin,
     payloadIsParsed,
-    isChildOf } = payload;
+    isChildof } = payload;
 
   if (payload.length === 0) return state;
 
@@ -20,12 +20,11 @@ export const appendNodesToViewableTree = (state, payload) => {
 
   if (!payloadIsParsed) {
     subtree = parseJson(JSON.stringify(...load))
-      .map(node => marginate(node, margin, isChildOf, id));
+      .map(node => marginate(node, margin, isChildof, id));
 
   } else {
     subtree = load;
   }
-
 
   // todo reopen previously opened objects or array
 
@@ -39,13 +38,18 @@ export const appendNodesToViewableTree = (state, payload) => {
   return populateWithPath(tree);
 };
 
-
 export function removeNodesFromViewableTree(state, id) {
   const refPoint = state.findIndex(node => node.meta.id === id);
 
   const tree = [...state];
-  splice.apply(tree, [refPoint + 1, tree[refPoint].meta.payload.length]);
-  tree[refPoint].meta.isExpanded = false;
+  const count = tree.filter(node => node.meta.isChildof.includes(id)).length;
+  console.log(count);
+  splice.apply(
+    tree,
+    [refPoint + 1, count]
+  );
 
+  tree[refPoint].meta.isExpanded = false;
   return tree;
 }
+

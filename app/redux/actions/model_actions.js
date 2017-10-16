@@ -6,7 +6,7 @@ export const appendToTree = ({
   mleft: margin,
   payloadIsParsed,
   insertionPoint,
-  isChildOf
+  isChildof
 }) => (
   {
     type: constants.APPEND_TO_TREE,
@@ -16,7 +16,7 @@ export const appendToTree = ({
       margin,
       payloadIsParsed,
       insertionPoint,
-      isChildOf
+      isChildof
     }
   }
 );

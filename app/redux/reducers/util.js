@@ -21,7 +21,6 @@ export function checkJsonValidity(json) {
   }
 }
 
-
 export function populateWithPath(tree) {
   return tree.map((node) => {
     node.meta.path = PathFinder.trace(tree, node.meta.id);
@@ -42,6 +41,7 @@ export function toJsonString(json, width) {
 
 export function marginate(node, margin, childof, id) {
   node.meta.mleft = margin + 20;
+  console.log(childof);
   node.meta.isChildof.push(id, ...childof);
   return node;
 }
