@@ -28,8 +28,10 @@ export const removeFromNode = id => (
   }
 );
 
-export const collapseAll = () => (
+export const collapseAll = json => (
   {
-    type: constants.COLLAPSE_ALL
+    type: constants.COLLAPSE_ALL,
+    payload: json
   }
 );
+

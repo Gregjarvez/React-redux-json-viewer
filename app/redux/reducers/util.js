@@ -28,6 +28,11 @@ export function populateWithPath(tree) {
   });
 }
 
+export function closeTypeObject(node) {
+  if (node.meta.type === 'Object' || node.meta.type === 'Array') {
+    node.meta.isExpanded = false;
+  }
+}
 
 export function toJsonString(json, width) {
   const stringify = JSON.stringify(

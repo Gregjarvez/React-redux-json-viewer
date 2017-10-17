@@ -5,7 +5,7 @@ import Collapse from 'react-icons/lib/ti/arrow-minimise-outline';
 
 import Primitive from '../components/Primitives';
 import TypeObject from '../components/isTypeObject';
-import { appendToTree, removeFromNode } from '../redux/actions/model_actions';
+import { appendToTree, removeFromNode, collapseAll } from '../redux/actions/model_actions';
 
 class Modeler extends React.Component {
   isOfTypePrimitive(each) {
@@ -47,7 +47,7 @@ class Modeler extends React.Component {
             <Collapse
               className="layout--collapse"
               title="collapse all"
-              onClick={this.props.collapseAll}
+              onClick={() => this.props.collapseAll(this.props.json)}
             />
           </span>
         </div>
@@ -72,19 +72,21 @@ class Modeler extends React.Component {
 
 Modeler.propTypes = {
   tree: PropTypes.array,
+  json: PropTypes.string,
   parseFail: PropTypes.shape({
     error: PropTypes.bool,
     errorMessage: PropTypes.string,
   }),
   appendNodesToTree: PropTypes.func,
   removeNodesFromTree: PropTypes.func,
-  collapseAll: PropTypes.func.isRequired,
+  collapseAll: PropTypes.func,
 };
 
 const mapStateToProps = state => (
   {
     tree: state.tree,
     parseFail: state.parseFail,
+    json: state.json
   }
 );
 
@@ -95,6 +97,9 @@ const mapDispatchToProps = dispatch => (
     },
     removeNodesFromTree(id) {
       dispatch(removeFromNode(id));
+    },
+    collapseAll(json) {
+      dispatch(collapseAll(json));
     }
   }
 );

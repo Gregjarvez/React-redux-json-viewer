@@ -2,7 +2,8 @@ import {
   parseJson,
   marginate,
   tagNodeAsCompleted,
-  populateWithPath
+  populateWithPath,
+  closeTypeObject
 } from './util';
 
 const splice = Array.prototype.splice;
@@ -11,7 +12,8 @@ export const appendNodesToViewableTree = (state, payload) => {
   const {
     load, id, margin,
     payloadIsParsed,
-    isChildof } = payload;
+    isChildof
+  } = payload;
 
   if (payload.length === 0) return state;
 
@@ -19,9 +21,9 @@ export const appendNodesToViewableTree = (state, payload) => {
   const refPoint = state.findIndex(node => node.meta.id === id);
 
   if (!payloadIsParsed) {
-    subtree = parseJson(JSON.stringify(...load))
-      .map(node => marginate(node, margin, isChildof, id));
-
+    subtree =
+      parseJson(JSON.stringify(...load)).map(
+        node => marginate(node, margin, isChildof, id));
   } else {
     subtree = load;
   }
@@ -42,11 +44,13 @@ export function removeNodesFromViewableTree(state, id) {
   const refPoint = state.findIndex(node => node.meta.id === id);
 
   const tree = [...state];
-  const count = tree.filter(node => node.meta.isChildof.includes(id)).length;
-  console.log(count);
+  const count = tree
+    .filter(node => node.meta.isChildof.includes(id))
+    .map(closeTypeObject);
+
   splice.apply(
     tree,
-    [refPoint + 1, count]
+    [refPoint + 1, count.length]
   );
 
   tree[refPoint].meta.isExpanded = false;

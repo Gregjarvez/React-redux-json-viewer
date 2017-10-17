@@ -1,4 +1,5 @@
 import shortid from 'shortid';
+import test from '../testJsonArray.json';
 
 const ParserShell = (function () {
 
@@ -173,4 +174,5 @@ const ParserShell = (function () {
   };
 }());
 
+// ParserShell.getInstance(test, true).buildAbstractTree()
 export default ParserShell;
