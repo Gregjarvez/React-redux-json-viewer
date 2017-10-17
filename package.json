@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --open",
-    "lint": "eslint **/*.{js,jsx} --quiet",
+    "lint": "eslint --quiet **/*.js",
     "lint:fix": "eslint --fix *.js",
     "test": "NODE_ENV=test jest",
     "test:update": "NODE_ENV=test jest -u",
@@ -17,7 +17,7 @@
       "jest-serializer-enzyme"
     ]
   },
-  "pre-commit": "lint --ignore=node_modules",
+  "pre-commit": "lint",
   "keywords": [],
   "author": "Gregory Assasie",
   "license": "ISC",

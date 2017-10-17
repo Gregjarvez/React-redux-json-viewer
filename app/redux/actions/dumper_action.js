@@ -26,9 +26,3 @@ export const parseSuccess = () => (
     type: constants.PARSE_SUCCESS,
   }
 );
-
-export const resetTree = () => (
-  {
-    type: constants.RESET_TREE,
-  }
-);

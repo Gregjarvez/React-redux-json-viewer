@@ -35,3 +35,9 @@ export const collapseAll = json => (
   }
 );
 
+export const reset = () => (
+  {
+    type: constants.RESET_TREE,
+  }
+);
+

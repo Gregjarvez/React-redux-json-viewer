@@ -12,6 +12,8 @@ const treeReducer = (state = [], action) => {
       return removeNodesFromViewableTree(state, action.payload);
     case constants.COLLAPSE_ALL:
       return processJsonToViewable(action.payload, true);
+    case constants.RESET_TREE:
+      return [];
     default:
       return state;
   }

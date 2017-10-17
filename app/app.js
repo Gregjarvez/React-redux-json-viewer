@@ -80,9 +80,7 @@ class App extends Component {
         <Navigation
           tabSize={this.state.tabSize}
           loadDemo={this.loadDemo}
-          cleanSlate={this.cleanSlate}
           tabSizeChange={this.tabSizeChange}
-          json={this.state.json}
           openModal={this.modalControll}
           loadLocalStorage={this.loadLocalStorage}
         />
