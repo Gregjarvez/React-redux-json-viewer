@@ -28,7 +28,7 @@ const Dumper = (props) => {
     <div className="layout">
       <div className="layout--setting">
         <span className="layout--icongroup">
-          <Format onClick={() => props.format(4)} title="format" />
+          <Format onClick={() => props.format(props.tab)} title="format" />
           <Parse
             onClick={() => determineAction()}
             title="Parse Json"
@@ -61,13 +61,15 @@ Dumper.propTypes = {
   success: PropTypes.func,
   setJsonToControllerStore: PropTypes.func.isRequired,
   parseJson: PropTypes.func.isRequired,
-  format: PropTypes.func.isRequired
+  format: PropTypes.func.isRequired,
+  tab: PropTypes.number
 };
 
 const mapStateToProps = state => (
   {
     json: state.json,
-    parseFail: state.parseFail
+    parseFail: state.parseFail,
+    tab: state.tabWidth
   }
 );
 

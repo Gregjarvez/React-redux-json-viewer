@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { setJson, parseSuccess } from '../redux/actions/dumper_action';
 import { reset } from '../redux/actions/model_actions';
-
+import { setTabWidth } from '../redux/actions/navigation';
 
 class Navigation extends React.Component {
   state = {
@@ -29,6 +29,7 @@ class Navigation extends React.Component {
   };
 
   render() {
+    console.log(this.state.isOpen);
     return (
       <ul className="navigation">
         <li className="navigation--logo">JSON Viewer Online</li>
@@ -54,13 +55,15 @@ class Navigation extends React.Component {
             <li>
               <span>Tab Size</span>
               <input
-                type="number"
+                type="range"
                 max="5"
                 min="1"
                 step="1"
                 className="navigation--tabsize"
-                value={this.props.tabSize}
-                onChange={e => this.props.tabSizeChange(e.target.value)}
+                value={this.props.tabWidth}
+                onChange={(e) => {
+                  this.props.tabSizeChange(+e.target.value);
+                }}
               />
             </li>
             <li onClick={() => this.saveToLocalStorage(this.props.json)}>Save
@@ -83,7 +86,7 @@ Navigation.propTypes = {
   tabSizeChange: PropTypes.func.isRequired,
   loadLocalStorage: PropTypes.func.isRequired,
   openModal: PropTypes.func.isRequired,
-  tabSize: PropTypes.number,
+  tabWidth: PropTypes.number,
   json: PropTypes.string
 };
 
@@ -97,12 +100,15 @@ const mapDispatchToProps = (dispatch) => {
         dispatch(parseSuccess())
       ])
         .then((voidResults) => { voidResults = null; });
+    },
+    tabSizeChange(width) {
+      dispatch(setTabWidth(width));
     }
   };
 };
 
 const mapStateToProps = state => ({
-
+  tabWidth: state.tabWidth
 });
 
 export default connect(

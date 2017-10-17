@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 
-import store from './redux/store';
-
 import Navigation from './components/nav';
 import Dumper from './containers/dumper';
 import Modeler from './containers/model';
@@ -17,34 +15,12 @@ class App extends Component {
     urlErrorMessage: ''
   };
 
-  collapseAll = () => {
-    this.setState(prev => (
-      { tree: prev.cache }
-    ));
-  };
-
   loadDemo = () => {
     getJson().then((json) => {
       this.setState(
         { json: JSON.stringify(json, null, this.state.tabSize) });
       this.setTree();
     });
-  };
-
-  cleanSlate = () => {
-    this.setState({
-      json: '',
-      isError: false,
-      errorMessage: '',
-      tree: [],
-      cache: []
-    });
-  };
-
-  tabSizeChange = (val) => {
-    if (val >= 1 && val <= 5) {
-      this.setState({ tabSize: parseInt(val) }); // eslint-disable-line
-    }
   };
 
   loadUrl = (url) => {
@@ -80,13 +56,12 @@ class App extends Component {
         <Navigation
           tabSize={this.state.tabSize}
           loadDemo={this.loadDemo}
-          tabSizeChange={this.tabSizeChange}
           openModal={this.modalControll}
           loadLocalStorage={this.loadLocalStorage}
         />
         <div className="app">
           <Dumper />
-          <Modeler collapseAll={this.collapseAll} />
+          <Modeler />
         </div>
       </div>
     );
