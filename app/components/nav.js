@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { parseSuccess, setJson, parseLayer } from '../redux/actions/dumper_action';
 import { reset } from '../redux/actions/model_actions';
-import { setTabWidth, loadDemo, saveJsonToLocalStorage, loadLocalStorage } from '../redux/actions/navigation';
+import { setTabWidth, loadDemo, saveJsonToLocalStorage, loadLocalStorage, togglerModal } from '../redux/actions/navigation';
 
 class Navigation extends React.Component {
   state = {
@@ -60,7 +60,7 @@ class Navigation extends React.Component {
             <li onClick={this.props.saveJsonToLocalStorage}>Save
               Json
             </li>
-            <li onClick={() => this.props.openModal(true)}>Load URL</li>
+            <li onClick={() => this.props.openModal()}>Load URL</li>
             <li onClick={this.props.loadLocalStorage}>Load
               localStorage
             </li>
@@ -106,13 +106,16 @@ const mapDispatchToProps = (dispatch) => {
         }).then(() => {
           dispatch(parseLayer(store.getState().json));
         });
+    },
+    openModal() {
+      dispatch(togglerModal());
     }
   };
 };
 
 const mapStateToProps = state => (
   {
-    tabWidth: state.tabWidth
+    tabWidth: state.tabWidth,
   }
 );
 

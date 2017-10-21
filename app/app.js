@@ -28,10 +28,6 @@ class App extends Component {
     }
   };
 
-  modalControll = (state) => {
-    this.setState({ urlModalRequest: state });
-  };
-
   render() {
     return (
       <div className="container">
@@ -39,9 +35,8 @@ class App extends Component {
           loadUrl={this.loadUrl}
           modalIsRequested={this.state.urlModalRequest}
           urlErrorMessage={this.state.urlErrorMessage}
-          closeModal={this.modalControll}
         />
-        <Navigation openModal={this.modalControll} />
+        <Navigation />
         <div className="app">
           <Dumper />
           <Modeler />
