@@ -7,13 +7,11 @@ import 'brace/theme/textmate';
 
 import Format from 'react-icons/lib/md/format-line-spacing';
 import Parse from 'react-icons/lib/go/mirror';
-import Brace from 'brace'; // eslint-disable-line
-
 import {
   format,
   parseLayer,
   parseSuccess,
-  setJson,
+  setJson
 } from '../redux/actions/dumper_action';
 
 const Dumper = (props) => {
@@ -21,9 +19,9 @@ const Dumper = (props) => {
     Promise.all([
       props.success(),
       props.parseJson(props.json)
-    ])
-      .then((results) => { results = null; });
+    ]).then((results) => { results = null; });
   }
+
   return (
     <div className="layout">
       <div className="layout--setting">

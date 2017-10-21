@@ -1,11 +1,11 @@
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions,no-undef */
 import React from 'react';
 import ToggleDown from 'react-icons/lib/fa/angle-down';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { setJson, parseSuccess } from '../redux/actions/dumper_action';
+import { parseSuccess, setJson, parseLayer } from '../redux/actions/dumper_action';
 import { reset } from '../redux/actions/model_actions';
-import { setTabWidth } from '../redux/actions/navigation';
+import { setTabWidth, loadDemo, saveJsonToLocalStorage, loadLocalStorage } from '../redux/actions/navigation';
 
 class Navigation extends React.Component {
   state = {
@@ -20,16 +20,7 @@ class Navigation extends React.Component {
     });
   };
 
-  saveToLocalStorage = (json) => {
-    if ('localStorage' in window && typeof json === 'string') {
-      return localStorage.setItem('store', json || JSON.stringify(
-        { data: null }, null, 2));
-    }
-    return alert('local storage not supported by your current Browser');
-  };
-
   render() {
-    console.log(this.state.isOpen);
     return (
       <ul className="navigation">
         <li className="navigation--logo">JSON Viewer Online</li>
@@ -66,11 +57,11 @@ class Navigation extends React.Component {
                 }}
               />
             </li>
-            <li onClick={() => this.saveToLocalStorage(this.props.json)}>Save
+            <li onClick={this.props.saveJsonToLocalStorage}>Save
               Json
             </li>
             <li onClick={() => this.props.openModal(true)}>Load URL</li>
-            <li onClick={() => this.props.loadLocalStorage()}>Load
+            <li onClick={this.props.loadLocalStorage}>Load
               localStorage
             </li>
           </ul>
@@ -87,9 +78,8 @@ Navigation.propTypes = {
   loadLocalStorage: PropTypes.func.isRequired,
   openModal: PropTypes.func.isRequired,
   tabWidth: PropTypes.number,
-  json: PropTypes.string
+  saveJsonToLocalStorage: PropTypes.func
 };
-
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -98,18 +88,33 @@ const mapDispatchToProps = (dispatch) => {
         dispatch(setJson('')),
         dispatch(reset()),
         dispatch(parseSuccess())
-      ])
-        .then((voidResults) => { voidResults = null; });
+      ]).then((voidResults) => { voidResults = null; });
     },
     tabSizeChange(width) {
       dispatch(setTabWidth(width));
+    },
+    loadDemo() {
+      dispatch(loadDemo());
+    },
+    saveJsonToLocalStorage() {
+      dispatch(saveJsonToLocalStorage());
+    },
+    loadLocalStorage(json) {
+      Promise.resolve(json)
+        .then(() => {
+          dispatch(loadLocalStorage());
+        }).then(() => {
+          dispatch(parseLayer(store.getState().json));
+        });
     }
   };
 };
 
-const mapStateToProps = state => ({
-  tabWidth: state.tabWidth
-});
+const mapStateToProps = state => (
+  {
+    tabWidth: state.tabWidth
+  }
+);
 
 export default connect(
   mapStateToProps,

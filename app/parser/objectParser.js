@@ -6,6 +6,7 @@ const ParserShell = (function () {
   class Parser {
     constructor(json, headers) {
       this.json = json;
+      // this.json = JSON.stringify(json, null, 2); /* ? */
       this.headers = headers || false;
     }
 

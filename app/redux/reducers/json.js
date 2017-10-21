@@ -1,5 +1,5 @@
 import constants from '../constants';
-import { toJsonString } from './util';
+import { toJsonString, saveJsonToLocalStorage } from './util';
 
 const jsonReducer = (state = '', action) => {
   switch (action.type) {
@@ -8,6 +8,8 @@ const jsonReducer = (state = '', action) => {
     case constants.FORMAT_JSON:
       if (state.length === 0) return state;
       return toJsonString(state, action.payload);
+    case constants.SAVE_TO_LOCALSTORAGE:
+      return saveJsonToLocalStorage(state);
     default:
       return state;
   }

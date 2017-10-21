@@ -5,7 +5,7 @@ import Dumper from './containers/dumper';
 import Modeler from './containers/model';
 import Modal from './components/url_modal';
 
-import { getJson, fetchRequestedUrl, validUrl } from './parser/demo';
+import { fetchRequestedUrl, validUrl } from './parser/demo';
 
 class App extends Component {
 
@@ -13,14 +13,6 @@ class App extends Component {
     errorMessage: '',
     urlModalRequest: false,
     urlErrorMessage: ''
-  };
-
-  loadDemo = () => {
-    getJson().then((json) => {
-      this.setState(
-        { json: JSON.stringify(json, null, this.state.tabSize) });
-      this.setTree();
-    });
   };
 
   loadUrl = (url) => {
@@ -35,13 +27,9 @@ class App extends Component {
       }).catch(err => this.setState({ urlErrorMessage: err.message }));
     }
   };
+
   modalControll = (state) => {
     this.setState({ urlModalRequest: state });
-  };
-
-  loadLocalStorage = () => {
-    const json = localStorage.getItem('store') || JSON.stringify([]);
-    this.setState({ json }, this.setTree);
   };
 
   render() {
@@ -53,12 +41,7 @@ class App extends Component {
           urlErrorMessage={this.state.urlErrorMessage}
           closeModal={this.modalControll}
         />
-        <Navigation
-          tabSize={this.state.tabSize}
-          loadDemo={this.loadDemo}
-          openModal={this.modalControll}
-          loadLocalStorage={this.loadLocalStorage}
-        />
+        <Navigation openModal={this.modalControll} />
         <div className="app">
           <Dumper />
           <Modeler />
@@ -67,7 +50,6 @@ class App extends Component {
     );
   }
 }
-
 
 export default App;
 

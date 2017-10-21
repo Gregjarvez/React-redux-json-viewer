@@ -57,6 +57,17 @@ export function tagNodeAsCompleted(node, subtree) {
   node.meta.payloadIsParsed = true;
 }
 
+export const saveJsonToLocalStorage = (state) => {
+  if ('localStorage' in window && typeof state === 'string') {
+    localStorage.setItem('json', state || JSON.stringify(
+      { data: { empty: true } }, null, 2));
+    return state;
+  }
+  alert('local storage not supported by your current Browser');
+  return state;
+};
+
+
 export default function processJsonToViewable(value, meta = false) {
   return populateWithPath(parseJson(value, meta));
 }
