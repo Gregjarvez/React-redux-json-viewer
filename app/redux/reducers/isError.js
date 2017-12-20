@@ -7,7 +7,6 @@ const errorReducer = (state = {
   switch (action.type) {
     case constants.PARSE_FAILED:
       return {
-        ...state,
         error: action.payload.error,
         errorMessage: action.payload.errorMessage
       };
