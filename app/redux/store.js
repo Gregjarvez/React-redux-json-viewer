@@ -6,16 +6,12 @@ import { logger, inspectJson } from './middleware';
 
 const middleware = applyMiddleware(thunk, inspectJson, logger);
 
-// noinspection JSUnresolvedVariable
 const store = createStore(rootReducer, compose(
   middleware,
   typeof window === 'object' &&
   window.devToolsExtension !== 'undefined' ?
-    window.devToolsExtension() : f => f
+    window.devToolsExtension() : void 0
 ));
-
-window.store = store;
-
 
 export default store;
 
