@@ -3,17 +3,8 @@ import constants from './constants';
 
 export const inspectJson = store => next => (action) => {
   if (action.type === constants.PARSE_FIRST_LAYER) {
-    const maybeError = checkJsonValidity(store.getState().json);
-    if (maybeError.error) {
-      const debouncedAction = {
-        type: constants.PARSE_FAILED,
-        payload: {
-          error: maybeError.error,
-          errorMessage: maybeError.errorMessage
-        }
-      };
-      return next(debouncedAction);
-    }
+    const status = checkJsonValidity(store.getState().json);
+    status.error && next({type: constants.PARSE_FAILED});
   }
   return next(action);
 };
