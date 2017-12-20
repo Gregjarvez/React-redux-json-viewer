@@ -4,6 +4,7 @@ import ToggleDown from 'react-icons/lib/fa/angle-down';
 import ToggleLeft from 'react-icons/lib/fa/angle-right';
 import Copy from 'react-icons/lib/md/note-add';
 
+
 const TypeObject = (props) => {
   return (
     <tr className="layout--row">
@@ -20,14 +21,7 @@ const TypeObject = (props) => {
                 {
                   !props.meta.isExpanded ? <ToggleLeft
                     className="model--toggler"
-                    onClick={() => props.appendNodesToTree(
-                      props.meta.payload,
-                      props.meta.id,
-                      props.meta.mleft,
-                      props.meta.payloadIsParsed,
-                      props.meta.insertionPoint,
-                      props.meta.isChildof
-                    )}
+                    onClick={() => props.appendNodesToTree(props.meta)}
                   /> : <ToggleDown
                     className="model--toggler"
                     onClick={() => props.removeNodesFromTree(props.meta.id)}
@@ -63,8 +57,8 @@ TypeObject.propTypes = {
   meta: PropTypes.object,
   contentCount: PropTypes.string,
   Qey: PropTypes.string.isRequired,
-  appendNodesToTree: PropTypes.func.isRequired,
-  removeNodesFromTree: PropTypes.func.isRequired
+  appendNodesToTree: PropTypes.func,
+  removeNodesFromTree: PropTypes.func
 };
 
 export default TypeObject;

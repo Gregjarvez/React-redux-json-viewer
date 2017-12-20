@@ -1,10 +1,12 @@
 import shortid from 'shortid';
+import test from '../testJsonArray.json';
 
 const ParserShell = (function () {
 
   class Parser {
     constructor(json, headers) {
       this.json = json;
+      // this.json = JSON.stringify(json, null, 2); /* ? */
       this.headers = headers || false;
     }
 
@@ -109,7 +111,6 @@ const ParserShell = (function () {
           mleft: 4,
           payload: [],
           isExpanded: true,
-          insertionPoint: 0,
           isChildof: [],
           isRoot: true,
           path: ''
@@ -174,4 +175,5 @@ const ParserShell = (function () {
   };
 }());
 
+// ParserShell.getInstance(test, true).buildAbstractTree()
 export default ParserShell;

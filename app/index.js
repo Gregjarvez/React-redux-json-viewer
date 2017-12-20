@@ -1,11 +1,11 @@
 import React from 'react';
 import { render } from 'react-dom';
-import App from './app';
-
+import Container from './entry';
 import './styles/style.scss';
 
+
 const Renderer = () => {
-  render(<App />, document.getElementById('root'));
+  render(<Container />, document.getElementById('root'));
 };
 
 Renderer();
