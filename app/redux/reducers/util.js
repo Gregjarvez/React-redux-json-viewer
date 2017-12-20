@@ -23,8 +23,9 @@ export function checkJsonValidity(json) {
 
 export function populateWithPath(tree) {
   return tree.map((node) => {
-    node.meta.path = PathFinder.trace(tree, node.meta.id);
-    return node;
+    return Object.assign(node, {
+      path: PathFinder.trace(tree, node.meta.id)
+    });
   });
 }
 
@@ -35,18 +36,19 @@ export function closeTypeObject(node) {
 }
 
 export function toJsonString(json, width) {
-  const stringify = JSON.stringify(
+  const stringified = JSON.stringify(
     JSON.parse(json),
     null,
     width
   );
-  return stringify;
+  return stringified;
 }
 
 export function marginate(node, margin, childof, id) {
-  node.meta.mleft = margin + 20;
-  node.meta.isChildof.push(id, ...childof);
-  return node;
+  return Object.assign(node, {
+    mleft: margin + 20,
+    isChildof: [...node.meta.isChildof, id, ...childof]
+  });
 }
 
 export function tagNodeAsCompleted(node, subtree) {
