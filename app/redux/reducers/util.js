@@ -40,13 +40,11 @@ export function toJsonString(json, width) {
     null,
     width
   );
-  console.log(stringify);
   return stringify;
 }
 
 export function marginate(node, margin, childof, id) {
   node.meta.mleft = margin + 20;
-  console.log(childof);
   node.meta.isChildof.push(id, ...childof);
   return node;
 }
