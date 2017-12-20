@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 
 import Navigation from './components/nav';
 import Dumper from './containers/dumper';
@@ -7,7 +7,7 @@ import Modal from './components/url_modal';
 
 import { fetchRequestedUrl, validUrl } from './parser/demo';
 
-class App extends Component {
+class App extends PureComponent {
   
   render() {
     return (
