@@ -50,9 +50,11 @@ export function marginate(node, margin, childof, id) {
 }
 
 export function tagNodeAsCompleted(node, subtree) {
-  node.meta.isExpanded = true;
-  node.meta.payload = subtree;
-  node.meta.payloadIsParsed = true;
+  node.meta = Object.assign(node.meta, {
+    isExpanded: true,
+    payload: subtree,
+    payloadIsParsed: true
+  })
 }
 
 export const saveJsonToLocalStorage = (state) => {
