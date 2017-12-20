@@ -49,10 +49,8 @@ export const loadUrl = (url) => {
   return (dispatch) => {
     if (validUrl(url)) {
       return fetchRequestedUrl(url)
-        .then((json) => {
-          dispatch(setJson(JSON.stringify(json, null, 2)));
-          return Promise.resolve(null)
-            .then(onlyAsyncActions => dispatch(togglerModal()));
+        .then((json) => dispatch(setJson(JSON.stringify(json, null, 2)))
+        .then(() => dispatch(togglerModal()));
         })
         .catch(err => dispatch(urlLoadFail(err)));
     }
