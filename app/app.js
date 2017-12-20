@@ -31,11 +31,6 @@ class App extends Component {
   render() {
     return (
       <div className="container">
-        <Modal
-          loadUrl={this.loadUrl}
-          modalIsRequested={this.state.urlModalRequest}
-          urlErrorMessage={this.state.urlErrorMessage}
-        />
         <Navigation />
         <div className="app">
           <Dumper />
