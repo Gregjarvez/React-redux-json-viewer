@@ -2,5 +2,5 @@ node_modules/
 webpack.config.js
 *.scss
 *.html
-*.json
+/docs
 screenshot
