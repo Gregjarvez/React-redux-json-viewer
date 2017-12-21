@@ -1,7 +1,7 @@
 ## Getting Started
 - Clone the repo
 ```
-git clone https://github.com/Gregjarvez/json-viewer.git
+git clone https://github.com/Gregjarvez/React-redux-json-viewer.git
 ```
 
 - Install dependencies
