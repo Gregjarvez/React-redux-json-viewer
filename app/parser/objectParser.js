@@ -1,8 +1,6 @@
 import shortid from 'shortid';
-import test from '../testJsonArray.json';
 
 const ParserShell = (function () {
-
   class Parser {
     constructor(json, headers) {
       this.json = json;

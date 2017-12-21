@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import 'brace/mode/json';
 import 'brace/theme/textmate';
-
 import Format from 'react-icons/lib/md/format-line-spacing';
 import Parse from 'react-icons/lib/go/mirror';
 import {
@@ -12,14 +11,14 @@ import {
   parseLayer,
   parseSuccess,
   setJson
-} from '../redux/actions/dumper_action';
+} from '../redux/actions/dumper';
 
 const Dumper = (props) => {
   function determineAction() {
-    Promise.all([
+    return Promise.all([
       props.success(),
       props.parseJson(props.json)
-    ]).then((results) => { results = null; });
+    ]);
   }
 
   return (
@@ -71,22 +70,12 @@ const mapStateToProps = state => (
   }
 );
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    setJsonToControllerStore(json) {
-      dispatch(setJson(json));
-    },
-    format(tabWidth) {
-      dispatch(format(tabWidth));
-    },
-    parseJson(json) {
-      dispatch(parseLayer(json));
-    },
-    success() {
-      dispatch(parseSuccess());
-    }
-  };
-};
+const mapDispatchToProps = dispatch => ({
+  setJsonToControllerStore: json => dispatch(setJson(json)),
+  format: tabWidth => dispatch(format(tabWidth)),
+  parseJson: json => dispatch(parseLayer(json)),
+  success: () => dispatch(parseSuccess()),
+});
 
 export default connect(
   mapStateToProps,

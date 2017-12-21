@@ -1,5 +1,5 @@
-import Parser from '../../parser/objectParser';
-import PathFinder from '../../parser/pathFinder';
+import Parser from '../../../parser/objectParser';
+import PathFinder from '../../../parser/pathFinder';
 
 export function parseJson(array, headers) {
   return Parser.getInstance(array, headers).buildAbstractTree();
@@ -45,10 +45,11 @@ export function toJsonString(json, width) {
 }
 
 export function marginate(node, margin, childof, id) {
-  return Object.assign(node, {
+  node.meta = Object.assign(node.meta, {
     mleft: margin + 20,
     isChildof: [...node.meta.isChildof, id, ...childof]
   });
+  return node;
 }
 
 export function tagNodeAsCompleted(node, subtree) {
@@ -56,7 +57,7 @@ export function tagNodeAsCompleted(node, subtree) {
     isExpanded: true,
     payload: subtree,
     payloadIsParsed: true
-  })
+  });
 }
 
 export const saveJsonToLocalStorage = (state) => {

@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Collapse from 'react-icons/lib/ti/arrow-minimise-outline';
 
 import Primitive from '../components/Primitives';
 import TypeObject from '../components/isTypeObject';
-import { appendToTree, removeFromNode, collapseAll } from '../redux/actions/model_actions';
+import {
+  appendToTree, collapseAll,
+  removeFromNode
+} from '../redux/actions/model';
 
-class Modeler extends React.Component {
+class Modeler extends Component {
   isOfTypePrimitive(each) {
     const isPrimitive = ['number', 'string', 'boolean'].includes(
       each.meta.type);
@@ -52,8 +55,8 @@ class Modeler extends React.Component {
           </span>
         </div>
         <div
-          className={`layout--errorhandler
-           ${this.props.parseFail.error && 'layout--errorhandler-showing'}`}
+          className={`layout--errorhandler ${this.props.parseFail.error
+                                             && 'layout--errorhandler-showing'}`}
         >
           { 'Unable to parser json. '.concat(this.props.parseFail.errorMessage)
             .concat(' ☹️') }
@@ -75,34 +78,25 @@ Modeler.propTypes = {
   json: PropTypes.string,
   parseFail: PropTypes.shape({
     error: PropTypes.bool,
-    errorMessage: PropTypes.string,
+    errorMessage: PropTypes.string
   }),
   appendNodesToTree: PropTypes.func,
   removeNodesFromTree: PropTypes.func,
-  collapseAll: PropTypes.func,
+  collapseAll: PropTypes.func
 };
 
-const mapStateToProps = state => (
-  {
-    tree: state.tree,
-    parseFail: state.parseFail,
-    json: state.json
-  }
-);
+const mapStateToProps = state => ({
+  tree: state.tree,
+  parseFail: state.parseFail,
+  json: state.json
+});
 
-const mapDispatchToProps = dispatch => (
-  {
-    appendNodesToTree(meta) {
-      dispatch(appendToTree(meta));
-    },
-    removeNodesFromTree(id) {
-      dispatch(removeFromNode(id));
-    },
-    collapseAll(json) {
-      dispatch(collapseAll(json));
-    }
-  }
-);
+const mapDispatchToProps = dispatch => ({
+  appendNodesToTree: meta => dispatch(appendToTree(meta)),
+  removeNodesFromTree: id => dispatch(removeFromNode(id)),
+  collapseAll: json => dispatch(collapseAll(json))
+});
+
 export default connect(
   mapStateToProps,
   mapDispatchToProps

@@ -1,5 +1,5 @@
 import constants from '../constants';
-import { toJsonString, saveJsonToLocalStorage } from './util';
+import { toJsonString, saveJsonToLocalStorage } from './UTILS/util';
 
 const jsonReducer = (state = '', action) => {
   switch (action.type) {

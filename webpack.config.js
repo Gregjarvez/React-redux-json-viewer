@@ -2,6 +2,8 @@ const webpack = require('webpack');
 const path = require('path');
 const extractCssPlugins = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+
 
  const config = {
   context  : __dirname,

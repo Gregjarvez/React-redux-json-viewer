@@ -7,8 +7,8 @@ import { togglerModal, loadUrl } from '../redux/actions/navigation';
 
 class Modal extends React.Component {
   componentDidMount() {
-    document.querySelector('.modal').addEventListener('click', (e) => {
-      if (!e.target.classList.contains('modal')) {
+    document.querySelector('.model').addEventListener('click', (e) => {
+      if (!e.target.classList.contains('model')) {
         return !1;
       }
       return this.props.togglerModal();
@@ -27,7 +27,7 @@ class Modal extends React.Component {
   render() {
     const { modal_isOpened: modalIsOpened, urlErrorMessage } = this.props.modalState;
     return (
-      <div className={`modal ${modalIsOpened ? 'modal--requested' : ''}`}>
+      <div className={`modal ${modalIsOpened ? 'model--requested' : ''}`}>
         <div className="modal--container">
           <p className="modal--text">
             Enter a public url. Urls which need authentication
