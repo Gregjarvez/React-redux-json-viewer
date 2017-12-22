@@ -21,20 +21,13 @@ class Modeler extends Component {
     const layout = this.props.tree.map((each) => {
       if (this.isOfTypePrimitive(each)) {
         return (
-          <Primitive
-            key={each.meta.id}
-            Qey={each.Qey}
-            value={each.value}
-            meta={each.meta}
-          />
+          <Primitive key={each.meta.id} {...each} />
         );
       }
       return (
         <TypeObject
           key={each.meta.id}
-          Qey={each.Qey}
-          contentCount={each.contentCount.toString()}
-          meta={each.meta}
+          {...each}
           appendNodesToTree={this.props.appendNodesToTree}
           removeNodesFromTree={this.props.removeNodesFromTree}
         />

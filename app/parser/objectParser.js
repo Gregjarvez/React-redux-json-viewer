@@ -1,23 +1,19 @@
+/* eslint-disable */
 import shortid from 'shortid';
+const is = Object.is
 
-const ParserShell = (function () {
+const ParserShell = (function ParseShell() {
   class Parser {
     constructor(json, headers) {
       this.json = json;
-      // this.json = JSON.stringify(json, null, 2); /* ? */
       this.headers = headers || false;
     }
 
-    starter = () => {
-      return JSON.parse(this.json) instanceof Array ? [] : {};
-    };
-
     static size(value) {
-      if (value === null) return 'null';
-      return Object.keys(value).length;
+      return is(value, null) ? 'null' :  Object.keys(value).length;
     }
 
-    static whatType(value) {
+    static dataType(value) {
       const isPrimitive = [
         'number', 'string', 'boolean'
       ].includes(typeof value);
@@ -32,6 +28,17 @@ const ParserShell = (function () {
       return value instanceof Array ? 'Array' : 'Object';
     }
 
+    static nodeTypeBase(type) {
+      return {
+        type,
+        id: shortid.generate(),
+        mleft: 38,
+        isChildof: [],
+        isRoot: false,
+        path: ''
+      };
+    }
+
     static nodeType(type, iteratee) {
       const types = {
         primitive(iteratee) {
@@ -40,38 +47,25 @@ const ParserShell = (function () {
           return {
             Qey: key,
             value,
-            meta: {
-              type: typeof value,
-              id: shortid.generate(),
-              mleft: 38,
-              isChildof: [],
-              isRoot: false,
-              path: ''
-            }
+            meta: Parser.nodeTypeBase(typeof value)
           };
         },
 
         object(iteratee) {
           const [key, value] = iteratee;
           const type = Parser.determineInstance(value);
+          const content = type === 'Array' ? value.length : Parser.size(value);
 
           return {
             Qey: key,
-            contentCount: type === 'Array' ? value.length : Parser.size(value),
-            meta: {
-              type,
-              isExpandable: !!(
-                type === 'Array' ? value.length : Parser.size(value)
-              ),
+            contentCount: content.toString(),
+            meta: Object.assign(Parser.nodeTypeBase(type), {
+              isExpandable: !!content,
               isExpanded: false,
-              id: shortid.generate(),
               payloadIsParsed: false,
               payload: [],
               insertionPoint: null,
-              mleft: 38,
-              isChildof: [],
-              path: ''
-            }
+            })
           };
         }
       };
@@ -82,82 +76,73 @@ const ParserShell = (function () {
       return Object.entries(parsedJson);
     }
 
-    compose2(fn1, fn2) {
+    compose(fn1, fn2) {
       return function (value) {
         return fn2(fn1(value));
       };
     }
 
     buildAbstractTree = () => {
-      const raw = this.compose2(Parser.converter, Parser.toObjectEntries);
-      const structure = raw(this.json);
-      const tree = this.traverse(structure);
-      return tree;
+      const raw = this.compose(Parser.converter, Parser.toObjectEntries);
+      return this.traverse(raw(this.json));
     };
 
     header = (objectEntries) => {
-      const baseInstance = this.starter();
+      const baseInstance = JSON.parse(this.json) instanceof Array ? [] : {};
       const type = Parser.determineInstance(baseInstance);
 
       return {
         Qey: type,
-        contentCount: objectEntries.length,
-        meta: {
-          type,
-          id: shortid.generate(),
-          payloadIsParsed: true,
+        contentCount: objectEntries.length.toString(),
+        meta: Object.assign(Parser.nodeTypeBase(type), {
           mleft: 4,
+          payloadIsParsed: true,
           payload: [],
           isExpanded: true,
-          isChildof: [],
           isRoot: true,
           path: ''
-        }
+        })
       };
     };
 
     static hasLength(value) {
-      if (Parser.determineInstance(value) === 'Object') {
-        return Parser.size(value);
-      }
-      return value.length;
+      return Parser.determineInstance(value) === 'Object' ?
+                Parser.size(value) : value.length
     }
 
-
     traverse(objectEntries) {
-      var model = []; // eslint-disable-line
-      if (this.headers) {
-        const start = this.header(objectEntries);
-        model.push(start);
-      }
+      let model = [];
+      const headers = this.headers && model.push(this.header(objectEntries));
 
 
       for (let i = 0; i < objectEntries.length; i += 1) {
-        if (objectEntries.length === 0) break;
-        const processing = objectEntries[i];
-        const [, value] = processing;
-        const whatType = Parser.whatType(value);
 
-        if (whatType === 'primitive') {
-          const build = Parser.nodeType('primitive', processing);
-          model.push(build);
+        if (objectEntries.length === 0) {
+          break;
         }
 
-        if (whatType === 'object') {
-          const build = Parser.nodeType('object', processing);
+        const bluePrint = objectEntries[i];
+        const [, value] = bluePrint;
+        const type = Parser.dataType(value);
+
+        if (type === 'primitive') {
+          model.push(Parser.nodeType('primitive', bluePrint));
+        }
+
+        if (type === 'object') {
+          const build = Parser.nodeType('object', bluePrint);
+
           if (Parser.hasLength(value) && value !== null) {
             build.meta.payload.push(value);
           }
+
           model.push(build);
         }
       }
 
-      if (this.headers) {
+      if (headers) {
         model = model.map((each, index) => {
-          if (index !== 0) {
-            each.meta.isChildof.push(model[0].meta.id);
-            return each;
-          }
+          (index !== 0) && each.meta.isChildof.push(model[0].meta.id);
           return each;
         });
         model[0].meta.payload.push(...model.slice(1));
@@ -173,5 +158,4 @@ const ParserShell = (function () {
   };
 }());
 
-// ParserShell.getInstance(test, true).buildAbstractTree()
 export default ParserShell;

@@ -1,4 +1,5 @@
-const PathFinder = (function () {
+/* eslint-disable */
+const PathFinder = (function PathFinder() {
   const defaultVarName = 'data';
 
   function reducePath(pathObject) {
@@ -9,38 +10,39 @@ const PathFinder = (function () {
   }
 
   function characters(type) {
-    switch (type) {
-      case 'Object':
-        return '%Ob%';
-      default:
-        return '';
-    }
+    return type === 'Object' ? '%Ob%' : '';
   }
 
   function path(template) {
-    const object = new RegExp(/%Ob%/, 'g');
-    return template.replace(object, '.');
+    return template.replace(/%Ob%/g, '.');
   }
 
   function composePath(pathObject) {
     const steps = reducePath(pathObject);
     const delimiters = steps.map(node => node.type);
     delimiters.pop(); // removes target delimiter
+
     const template = steps.reduce((cur, prev, index) => {
       const currentDelimiter = delimiters[((index - 1) + 1)];
-      return cur
-        .concat(`${!isNaN(+prev.key) ? `[${prev.key}]` : prev.key}${characters(currentDelimiter)}`);
+      const symbol = `${!isNaN(+prev.key) ? `[${prev.key}]` : prev.key}`;
+      const separator = characters(currentDelimiter);
+
+      return cur.concat(symbol, separator);
     }, '');
     return path(template);
   }
 
   function trace(tree, targetId) {
     const targetNode = tree.find(node => node.meta.id === targetId);
-    const targetNodeRelationsIds = targetNode.meta.isChildof;
-    const relationsNodes = tree.filter(node => targetNodeRelationsIds.includes(node.meta.id));
-    const includesTarget = [...relationsNodes, targetNode];
+    const {isChildof: parents} = targetNode.meta;
+
+    const includesTarget = [
+      ...tree.filter(node => parents.includes(node.meta.id)),
+      targetNode
+    ];
     return composePath(includesTarget);
   }
+
   return {
     trace
   };

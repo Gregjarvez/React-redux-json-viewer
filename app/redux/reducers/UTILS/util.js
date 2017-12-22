@@ -23,9 +23,10 @@ export function checkJsonValidity(json) {
 
 export function populateWithPath(tree) {
   return tree.map((node) => {
-    return Object.assign(node, {
+    node.meta = Object.assign(node.meta, {
       path: PathFinder.trace(tree, node.meta.id)
     });
+    return node;
   });
 }
 
