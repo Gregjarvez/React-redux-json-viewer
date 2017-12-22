@@ -1,7 +1,7 @@
+/* eslint-disable */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Collapse from 'react-icons/lib/ti/arrow-minimise-outline';
 
 import Primitive from '../components/Primitives';
 import TypeObject from '../components/isTypeObject';
@@ -11,48 +11,43 @@ import {
 } from '../redux/actions/model';
 
 class Modeler extends Component {
-  isOfTypePrimitive(each) {
-    const isPrimitive = ['number', 'string', 'boolean'].includes(
+  static primitive(each) {
+    return ['number', 'string', 'boolean'].includes(
       each.meta.type);
-    return isPrimitive;
+  }
+  get typeObjectMethods() {
+    const { appendNodesToTree, removeNodesFromTree } = this.props;
+    return {
+      appendNodesToTree,
+      removeNodesFromTree
+    };
   }
 
   render() {
-    const layout = this.props.tree.map((each) => {
-      if (this.isOfTypePrimitive(each)) {
-        return (
-          <Primitive key={each.meta.id} {...each} />
-        );
-      }
-      return (
+    const { json, parseFail, collapseAll } = this.props;
+    const layout = this.props.tree.map((contruct) => {
+      return Modeler.primitive(contruct) ?
+        <Primitive key={contruct.meta.id} {...contruct} /> :
         <TypeObject
-          key={each.meta.id}
-          {...each}
-          appendNodesToTree={this.props.appendNodesToTree}
-          removeNodesFromTree={this.props.removeNodesFromTree}
-        />
-      );
+          key={contruct.meta.id}
+          {...contruct}
+          {...this.typeObjectMethods(this.props)}
+        />;
     });
+
     return (
-      <div className={`layout ${this.props.parseFail.error
-        ? 'layout--isError'
-        : ''}`}
-      >
+      <div className={`layout ${parseFail.error ? 'layout--isError' : ''}`}>
         <div className="layout--setting layout--setting-isabsolute">
-          <span title="collapse all">
-            <Collapse
-              className="layout--collapse"
-              title="collapse all"
-              onClick={() => this.props.collapseAll(this.props.json)}
-            />
-          </span>
+          <div className="layout--collapse" onClick={() => collapseAll(json)}>
+              Collapse All
+          </div>
         </div>
         <div
-          className={`layout--errorhandler ${this.props.parseFail.error
-                                             && 'layout--errorhandler-showing'}`}
+          className={
+            `layout--errorhandler
+             ${parseFail.error && 'layout--errorhandler-showing'}`}
         >
-          { 'Unable to parser json. '.concat(this.props.parseFail.errorMessage)
-            .concat(' ☹️') }
+          { `Unable to parser json.${parseFail.errorMessage}` }
         </div>
         <div className="layout--container">
           <table className="layout--embedded">

@@ -12,7 +12,6 @@
     border: 2px solid $isError;
   }
 
-
   &--embedded {
     margin-top: 55px;
   }
@@ -37,8 +36,8 @@
     font-size: 13px;
     font-weight: 400;
     text-align: center;
-    transform: translateX(-30%) ;
-    transition:  top 400ms ease;
+    transform: translateX(-30%);
+    transition: top 400ms ease;
     opacity: 0;
 
     &:first-of-type {
@@ -52,11 +51,13 @@
     }
   }
 
-  &--collapse{
-    font-size: 1em;
+  &--collapse {
+    font-size: .875em;
+    padding: 7px;
+    color: white;
   }
 
-  &--setting{
+  &--setting {
     display: flex;
     flex-direction: row;
     padding: .5rem;
@@ -82,7 +83,7 @@
     }
   }
 
-  &--row{
+  &--row {
     width: 100%;
     padding: .3rem;
 
