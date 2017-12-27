@@ -16,19 +16,16 @@
 
   &--path {
     padding-left: 20px;
-    transform: translateY(-2px);
 
     &-value {
       background: #F8F8F8;
       color: $primary-text-heading;
-      font-weight: 400;
       letter-spacing: 1.1px;
       font-size: 12px;
-      padding: .2em;
     }
   }
 
-  &--icongroup{
+  &--icongroup {
     display: flex;
     justify-content: space-between;
   }
@@ -36,20 +33,6 @@
   &--inline {
     display: inline-block;
     width: -30px;
-  }
-
-  &--toggler {
-    font-size: .878rem;
-    font-weight: 500;
-    color: $primary-text-heading;
-    vertical-align: middle;
-    transform: translate(-5px, -1.9px);
-    cursor: pointer;
-    padding: .1em;
-
-    &:hover {
-     background: #ddd;
-    }
   }
 
   &--key {
@@ -60,18 +43,10 @@
   }
 
   &--value {
-    display: inline-block;
     text-align: left;
+    padding-left: .6em;
     font-size: $key-value-font;
     font-weight: 400;
-
-    &:focus {
-      outline: none;
-      box-sizing: border-box;
-      border: 1px solid $been-edited;
-      border-radius: 3px;
-
-    }
 
     &-string {
       color: $dummy-green;
@@ -95,4 +70,24 @@
     }
   }
 
+  &--arrow {
+    display: inline-block;
+    padding: .25em;
+    margin-right: 1em;
+    border: 2px solid $been-edited;
+    border-top: 0;
+    border-left: 0;
+    background-color: transparent;
+    cursor: pointer;
+  }
+
+  &--arrowdown {
+    @extend .model--arrow;
+    transform: rotate(45deg);
+  }
+
+  &--arrowright {
+    @extend .model--arrow;
+    transform: rotate(-45deg);
+  }
 }

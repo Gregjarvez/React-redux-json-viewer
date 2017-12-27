@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -15,6 +14,7 @@ class Modeler extends Component {
     return ['number', 'string', 'boolean'].includes(
       each.meta.type);
   }
+
   get typeObjectMethods() {
     const { appendNodesToTree, removeNodesFromTree } = this.props;
     return {
@@ -23,37 +23,34 @@ class Modeler extends Component {
     };
   }
 
-  render() {
-    const { json, parseFail, collapseAll } = this.props;
-    const layout = this.props.tree.map((contruct) => {
+  get layout() {
+    return this.props.tree.map((contruct) => {
       return Modeler.primitive(contruct) ?
         <Primitive key={contruct.meta.id} {...contruct} /> :
         <TypeObject
           key={contruct.meta.id}
           {...contruct}
-          {...this.typeObjectMethods(this.props)}
+          {...this.typeObjectMethods}
         />;
     });
+  }
+
+  render() {
+    const { json, parseFail, collapseAll } = this.props;
 
     return (
       <div className={`layout ${parseFail.error ? 'layout--isError' : ''}`}>
-        <div className="layout--setting layout--setting-isabsolute">
-          <div className="layout--collapse" onClick={() => collapseAll(json)}>
+        <div className="layout--setting">
+          <button className="layout--text" onClick={() => collapseAll(json)}>
               Collapse All
-          </div>
+          </button>
         </div>
-        <div
-          className={
-            `layout--errorhandler
-             ${parseFail.error && 'layout--errorhandler-showing'}`}
-        >
-          { `Unable to parser json.${parseFail.errorMessage}` }
+        <div className={`layout--errorhandler ${parseFail.error ? 'layout--errorhandler-showing' : ''}`}>
+          { `${parseFail.errorMessage}` }
         </div>
         <div className="layout--container">
-          <table className="layout--embedded">
-            <tbody>
-              { layout }
-            </tbody>
+          <table>
+            <tbody>{ Modeler.layout }</tbody>
           </table>
         </div>
       </div>

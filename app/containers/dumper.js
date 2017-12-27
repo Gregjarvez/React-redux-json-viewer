@@ -4,33 +4,32 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import 'brace/mode/json';
 import 'brace/theme/textmate';
-import Format from 'react-icons/lib/md/format-line-spacing';
-import Parse from 'react-icons/lib/go/mirror';
 import {
-  format,
-  parseLayer,
-  parseSuccess,
-  setJson
+  format, parseLayer, parseSuccess,
+  setJson,
 } from '../redux/actions/dumper';
 
-const Dumper = (props) => {
+const Dumper = ({
+  json, tab,
+  format,
+  parseJson,
+  setJsonToControllerStore,
+}) => {
   function determineAction() {
     return Promise.all([
-      props.success(),
-      props.parseJson(props.json)
+      parseJson(json),
     ]);
   }
 
   return (
     <div className="layout">
       <div className="layout--setting">
-        <span className="layout--icongroup">
-          <Format onClick={() => props.format(props.tab)} title="format" />
-          <Parse
-            onClick={() => determineAction()}
-            title="Parse Json"
-          />
-        </span>
+        <button className="layout--text" onClick={() => format(tab)}>
+            Format
+        </button>
+        <button className="layout--text" onClick={() => determineAction()}>
+            Process
+        </button>
       </div>
       <div>
         <AceEditor
@@ -40,9 +39,8 @@ const Dumper = (props) => {
           mode="json"
           theme="textmate"
           name="dumper-editor"
-          value={props.json}
-          editorProps={{ $blockScrolling: true }}
-          onChange={props.setJsonToControllerStore}
+          value={json}
+          onChange={setJsonToControllerStore}
           showPrintMargin={false}
           focus
           wrapEnabled
@@ -55,29 +53,30 @@ const Dumper = (props) => {
 
 Dumper.propTypes = {
   json: PropTypes.string,
-  success: PropTypes.func,
   setJsonToControllerStore: PropTypes.func.isRequired,
   parseJson: PropTypes.func.isRequired,
   format: PropTypes.func.isRequired,
-  tab: PropTypes.number
+  tab: PropTypes.number,
 };
 
 const mapStateToProps = state => (
   {
     json: state.json,
     parseFail: state.parseFail,
-    tab: state.tabWidth
+    tab: state.tabWidth,
   }
 );
 
-const mapDispatchToProps = dispatch => ({
-  setJsonToControllerStore: json => dispatch(setJson(json)),
-  format: tabWidth => dispatch(format(tabWidth)),
-  parseJson: json => dispatch(parseLayer(json)),
-  success: () => dispatch(parseSuccess()),
-});
+const mapDispatchToProps = dispatch => (
+  {
+    setJsonToControllerStore: json => dispatch(setJson(json)),
+    format: tabWidth => dispatch(format(tabWidth)),
+    parseJson: json => dispatch(parseLayer(json)),
+    success: () => dispatch(parseSuccess()),
+  }
+);
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(Dumper);

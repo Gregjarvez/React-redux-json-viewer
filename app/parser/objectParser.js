@@ -3,6 +3,7 @@ import shortid from 'shortid';
 const is = Object.is
 
 const ParserShell = (function ParseShell() {
+
   class Parser {
     constructor(json, headers) {
       this.json = json;

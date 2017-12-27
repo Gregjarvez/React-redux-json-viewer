@@ -1,16 +1,30 @@
 const webpack = require('webpack');
 const path = require('path');
 const extractCssPlugins = require('extract-text-webpack-plugin');
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-
- const config = {
-  context  : __dirname,
-  devtool  : 'cheap-eval-source-map',
-  entry    : [
+const hotReloadEntries = () => {
+ return process.env.NODE_ENV === 'production' ? [] : [
     'react-hot-loader/patch',
     'webpack-dev-server/client?http://localhost:8080',
     'webpack/hot/only-dev-server',
+  ]
+}
+
+const hotModulePlugins = () => {
+  return process.env.NODE_ENV === 'production' ? [] :  [
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NamedModulesPlugin(),
+  ]
+}
+
+ const config = {
+  context  : __dirname,
+  devtool  : 'cheap-module-eval-source-map',
+  entry    : [
+  ...hotReloadEntries(),
     './app/index.js'
   ],
   output   : {
@@ -67,26 +81,17 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
     ]
   },
   plugins  : [
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NamedModulesPlugin(),
+    ...hotModulePlugins(),
     new extractCssPlugins('style.css'),
+    new webpack.DefinePlugin({
+      "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV)
+    }),
+    // new BundleAnalyzerPlugin(),
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: './app/index.html'
     })
   ]
 };
-
-
-if (process.env.NODE_ENV) {
-  config.plugins.push(
-    new webpack.DefinePlugin({
-      "process.env": {
-        "NODE_ENV": JSON.stringify('production')
-      }
-    }),
-    new webpack.optimize.UglifyJsPlugin()
-  )
-}
 
 module.exports = config;

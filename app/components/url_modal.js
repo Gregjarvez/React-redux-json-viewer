@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -7,8 +6,8 @@ import { togglerModal, loadUrl } from '../redux/actions/navigation';
 
 class Modal extends React.Component {
   componentDidMount() {
-    document.querySelector('.model').addEventListener('click', (e) => {
-      if (!e.target.classList.contains('model')) {
+    document.querySelector('.modal').addEventListener('click', (e) => {
+      if (!e.target.classList.contains('modal')) {
         return !1;
       }
       return this.props.togglerModal();
@@ -25,9 +24,9 @@ class Modal extends React.Component {
   }
 
   render() {
-    const { modal_isOpened: modalIsOpened, urlErrorMessage } = this.props.modalState;
+    const { modal_isOpened: opened, urlErrorMessage } = this.props.modalState;
     return (
-      <div className={`modal ${modalIsOpened ? 'model--requested' : ''}`}>
+      <div className={`modal ${opened ? 'modal--requested' : ''}`}>
         <div className="modal--container">
           <p className="modal--text">
             Enter a public url. Urls which need authentication
@@ -53,22 +52,14 @@ Modal.propTypes = {
   togglerModal: PropTypes.func
 };
 
-function mapStateToProps(state) {
-  return {
-    modalState: state.modalState,
-  };
-}
+const mapStateToProps = state => ({
+  modalState: state.modalState,
+});
 
-function mapDispatchToProps(dispatch) {
-  return {
-    togglerModal() {
-      dispatch(togglerModal());
-    },
-    loadUrl(url) {
-      dispatch(loadUrl(url));
-    }
-  };
-}
+const mapDispatchToProps = dispatch => ({
+  togglerModal: () => dispatch(togglerModal()),
+  loadUrl: url => dispatch(loadUrl(url))
+});
 
 export default connect(
   mapStateToProps,

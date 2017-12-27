@@ -13,7 +13,7 @@
   }
 
   &--embedded {
-    margin-top: 55px;
+    margin-top: 3em;
   }
 
   &--container {
@@ -51,36 +51,22 @@
     }
   }
 
-  &--collapse {
-    font-size: .875em;
-    padding: 7px;
-    color: white;
-  }
-
   &--setting {
     display: flex;
     flex-direction: row;
     padding: .5rem;
     background: #2C3E50;
     box-sizing: border-box;
+  }
 
-    > span:first-of-type {
-      display: flex;
-      color: white;
-      padding: 7px;
-      cursor: pointer;
-      justify-content: space-between;
-      width: 60px;
-      font-size: 1.2em;
-    }
-
-    &-isabsolute {
-      position: absolute;
-      z-index: 9;
-      width: 100%;
-      top: 0;
-      right: 0.5px;
-    }
+  &--text {
+    font-size: .875em;
+    padding: 7px;
+    margin-right: 5px;
+    letter-spacing: 2px;
+    cursor: pointer;
+    color: #2C3E50;
+    cursor: pointer;
   }
 
   &--row {

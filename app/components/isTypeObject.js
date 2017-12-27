@@ -1,46 +1,43 @@
+/* eslint-disable */
 import React from 'react';
 import PropTypes from 'prop-types';
-import ToggleDown from 'react-icons/lib/fa/angle-down';
-import ToggleLeft from 'react-icons/lib/fa/angle-right';
-import Copy from 'react-icons/lib/md/note-add';
+import Toggler from './toggler';
 
+const TypeObject = ({
+  meta, appendNodesToTree, removeNodesFromTree, ...rest
+}) => {
 
-const TypeObject = (props) => {
+  const type = () => (
+    meta.type === 'Object'
+      ? `{ ${rest.contentCount} }`
+      : `[ ${rest.contentCount} ]`
+  );
+
   return (
     <tr className="layout--row">
       <td className="model--panel">
-        <span className="model--copy" title="copy path to key">
-          <Copy />
+        <span className="model--copy" role="img" aria-label="copy">
+          &#128203;
         </span>
       </td>
       <td className="model--key model--key-isObject">
-        <table style={{ marginLeft: `${props.meta.mleft}px` }}>
+        <table style={{ marginLeft: `${meta.mleft}px` }}>
           <tbody>
             <tr>
               <td>
-                {
-                  !props.meta.isExpanded ? <ToggleLeft
-                    className="model--toggler"
-                    onClick={() => props.appendNodesToTree(props.meta)}
-                  /> : <ToggleDown
-                    className="model--toggler"
-                    onClick={() => props.removeNodesFromTree(props.meta.id)}
-                  />
-                }
+                <Toggler
+                  meta={meta}
+                  appendNodesToTree={appendNodesToTree}
+                  removeNodesFromTree={removeNodesFromTree}
+                />
               </td>
-              <td>{ props.Qey }</td>
-              <td
-                className="model--value model--value-object"
-                title="Type array"
-              >{ props.meta.type === 'Object'
-                  ? `{ ${props.contentCount} }`
-                  : `[ ${props.contentCount} ]` }
-              </td>
+              <td>{ rest.Qey }</td>
+              <td className="model--value model--value-object">{ type() }</td>
               <td>
                 <table className="model--path">
                   <tbody>
                     <tr>
-                      <td className="model--path-value">{ props.meta.path }</td>
+                      <td className="model--path-value">{ meta.path }</td>
                     </tr>
                   </tbody>
                 </table>

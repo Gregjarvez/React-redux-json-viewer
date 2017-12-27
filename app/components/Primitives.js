@@ -1,13 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Copy from 'react-icons/lib/md/note-add';
 
 const Primitive = (props) => {
   return (
     <tr className="layout--row">
       <td className="model--panel">
-        <span className="model--copy" title="copy path to key">
-          <Copy />
+        <span className="model--copy" role="img" aria-label="copy">
+          &#128203;
         </span>
       </td>
       <td className="model--key">
