@@ -14,5 +14,4 @@ yarn
 yarn start
 ```
 - Preview 
-[json-viewer](https://gregjarvez.github.io/React-redux-json-viewer/)
 ![json viewer online](https://raw.githubusercontent.com/Gregjarvez/json-viewer/master/screenshot/json-online-parser.png)
