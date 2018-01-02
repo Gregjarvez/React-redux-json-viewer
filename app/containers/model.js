@@ -50,7 +50,7 @@ class Modeler extends Component {
         </div>
         <div className="layout--container">
           <table>
-            <tbody>{ Modeler.layout }</tbody>
+            <tbody>{ this.layout }</tbody>
           </table>
         </div>
       </div>
