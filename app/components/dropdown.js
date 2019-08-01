@@ -3,10 +3,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const DropDown = ({
-  isOpen, toggleDropDown,
+  isOpen,
   openModal,
-  tabSizeChange, loadLocalStorage,
-  saveJsonToLocalStorage, tabWidth
+  toggleDropDown,
+  tabSizeChange,
+  loadLocalStorage,
+  saveJsonToLocalStorage,
+  tabWidth,
 }) => {
   return (
     <ul
@@ -17,12 +20,12 @@ const DropDown = ({
       <li>
         <span>Tab Size</span>
         <input
-          type="range"
           max="5"
           min="1"
           step="1"
-          className="navigation--tabsize"
+          type="range"
           value={tabWidth}
+          className="navigation--tabsize"
           onChange={({ target }) => tabSizeChange(+target.value)}
         />
       </li>
@@ -30,7 +33,6 @@ const DropDown = ({
       <li onClick={openModal}>Load URL</li>
       <li onClick={loadLocalStorage}>Load localStorage</li>
     </ul>
-
   );
 };
 
@@ -41,8 +43,7 @@ DropDown.propTypes = {
   tabSizeChange: PropTypes.func,
   saveJsonToLocalStorage: PropTypes.func,
   tabWidth: PropTypes.number,
-  loadLocalStorage: PropTypes.func
+  loadLocalStorage: PropTypes.func,
 };
-
 
 export default DropDown;

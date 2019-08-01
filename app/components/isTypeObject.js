@@ -4,14 +4,15 @@ import PropTypes from 'prop-types';
 import Toggler from './toggler';
 
 const TypeObject = ({
-  meta, appendNodesToTree, removeNodesFromTree, ...rest
+  meta,
+  appendNodesToTree,
+  removeNodesFromTree,
+  ...rest
 }) => {
-
-  const type = () => (
+  const type = () =>
     meta.type === 'Object'
       ? `{ ${rest.contentCount} }`
-      : `[ ${rest.contentCount} ]`
-  );
+      : `[ ${rest.contentCount} ]`;
 
   return (
     <tr className="layout--row">
@@ -31,13 +32,13 @@ const TypeObject = ({
                   removeNodesFromTree={removeNodesFromTree}
                 />
               </td>
-              <td>{ rest.Qey }</td>
-              <td className="model--value model--value-object">{ type() }</td>
+              <td>{rest.Qey}</td>
+              <td className="model--value model--value-object">{type()}</td>
               <td>
                 <table className="model--path">
                   <tbody>
                     <tr>
-                      <td className="model--path-value">{ meta.path }</td>
+                      <td className="model--path-value">{meta.path}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -55,7 +56,7 @@ TypeObject.propTypes = {
   contentCount: PropTypes.string,
   Qey: PropTypes.string.isRequired,
   appendNodesToTree: PropTypes.func,
-  removeNodesFromTree: PropTypes.func
+  removeNodesFromTree: PropTypes.func,
 };
 
 export default TypeObject;
