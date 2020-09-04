@@ -50,7 +50,7 @@
     "jest-serializer-enzyme": "^1.0.0",
     "jsdom-quokka-plugin": "^1.0.6",
     "json-loader": "^0.5.7",
-    "node-sass": "4.12.0",
+    "node-sass": "4.13.1",
     "pre-commit": "^1.2.2",
     "react-addons-perf": "^15.4.2",
     "react-test-renderer": "^15.6.1",
