@@ -63,7 +63,7 @@
   "dependencies": {
     "axios": "^0.16.2",
     "brace": "^0.10.0",
-    "lodash": "^4.17.4",
+    "lodash": "^4.17.21",
     "normalize-scss": "^7.0.0",
     "preact": "^8.2.7",
     "preact-compat": "^3.17.0",
